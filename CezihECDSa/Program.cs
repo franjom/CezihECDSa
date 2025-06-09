@@ -139,10 +139,28 @@ namespace CezihECDSa
 
                 if (provider.Certificate != null)
                 {
+                    var thumb = provider.Certificate.Thumbprint;
+
+                    if (string.IsNullOrWhiteSpace(thumb))
+                    {
+                        return;
+                    }
+
+                    // we take the cert from store because the one returned by Pkcs11X509Store doesn't have a PK
+                    var store = new X509Store();
+                    store.Open(OpenFlags.ReadOnly);
+                    var certs = store.Certificates.Find(X509FindType.FindByThumbprint, thumb, false);
+                    if (certs.Count <= 0)
+                    {
+                        return;
+                    }
+
+                    provider.Certificate = certs[0];
+
                     var doc = new XmlDocument();
                     doc.LoadXml(xml);
 
-                    provider.SignXml(doc, Guid.NewGuid().ToString("N"));
+                    provider.SignXml(doc, "PO123456");
                 }
             }
         }
