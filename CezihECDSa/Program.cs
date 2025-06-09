@@ -63,6 +63,7 @@ namespace CezihECDSa
 
             // provide your actual PIN here
             IPinProvider pinProvider = new PinProvider("123456");
+            AsymmetricAlgorithm algorithm;
 
             // this is for mock data
             var provider = new XmlDigitalSignatureProvider();
@@ -120,6 +121,15 @@ namespace CezihECDSa
                                 {
                                     provider.Certificate = certificate.Info.ParsedCertificate;
 
+                                    if (certificate.Info.ParsedCertificate.IsEcdsaCertificate())
+                                    {
+                                        algorithm = certificate.GetECDsaPrivateKey();
+                                    }
+                                    else
+                                    {
+                                        algorithm = certificate.GetRSAPrivateKey();
+                                    }
+
                                     var subject = certificate.Info.ParsedCertificate.Subject; // X509Certificate2 cert
                                     var match = Regex.Match(subject, @"SERIALNUMBER\s*=\s*PNOHR-(\d{11})");
 
@@ -147,6 +157,8 @@ namespace CezihECDSa
                     }
 
                     // we take the cert from store because the one returned by Pkcs11X509Store doesn't have a PK
+                    // and also to be compliant with exisint IK interface implementation... if you don't need to be compliant
+                    // you can use algorithm that was created above
                     var store = new X509Store();
                     store.Open(OpenFlags.ReadOnly);
                     var certs = store.Certificates.Find(X509FindType.FindByThumbprint, thumb, false);

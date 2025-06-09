@@ -2,7 +2,7 @@
 
 namespace ECDSa.Helper
 {
-    internal static class X509Certificate2Extensions
+    public static class X509Certificate2Extensions
     {
         public static bool IsEcdsaCertificate(this X509Certificate2 cert)
         {
