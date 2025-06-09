@@ -157,7 +157,7 @@ namespace CezihECDSa
                     }
 
                     // we take the cert from store because the one returned by Pkcs11X509Store doesn't have a PK
-                    // and also to be compliant with exisint IK interface implementation... if you don't need to be compliant
+                    // and also to be compliant with existing IK interface implementation... if you don't need to be compliant
                     // you can use algorithm that was created above
                     var store = new X509Store();
                     store.Open(OpenFlags.ReadOnly);
