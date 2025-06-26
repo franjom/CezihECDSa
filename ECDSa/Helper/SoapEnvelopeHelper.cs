@@ -1,8 +1,5 @@
 ﻿using ECDSa.Helper.Xml;
 using System;
-using System.Linq;
-using System.Numerics;
-using System.Runtime.ConstrainedExecution;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
