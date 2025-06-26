@@ -122,7 +122,7 @@ namespace ECDSa.Helper
             XmlElement signature;
             if (cert.IsEcdsaCertificate())
             {
-                signature = SignXmlWithECDSA(cert, soapDoc, id);
+                signature = SignWithECDSA(cert, soapDoc, id);
             }
             else
             {
@@ -154,7 +154,7 @@ namespace ECDSa.Helper
             }
         }
 
-        private static XmlElement SignXmlWithECDSA(X509Certificate2 cert, XmlDocument soapDoc, string id)
+        private static XmlElement SignWithECDSA(X509Certificate2 cert, XmlDocument soapDoc, string id)
         {
             using (var pk = cert.GetECDsaPrivateKey())
             {
