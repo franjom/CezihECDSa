@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace ECDSa.Helper.Soap
+namespace ECDSa.Helper.Soap._1_2
 {
     public class WsError
     {

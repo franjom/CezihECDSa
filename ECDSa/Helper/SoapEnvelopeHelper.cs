@@ -11,8 +11,8 @@ namespace ECDSa.Helper
     public static class SoapEnvelopeHelper
     {
         // @formatter:off
-        private static readonly string SoapNs12 = "http://www.w3.org/2003/05/soap-envelope";
-        private static readonly string SoapNs11 = "http://schemas.xmlsoap.org/soap/envelope/";
+        public const string SoapNs12 = "http://www.w3.org/2003/05/soap-envelope";
+        public const string SoapNs11 = "http://schemas.xmlsoap.org/soap/envelope/";
         private static readonly string SoapAddr = "http://www.w3.org/2005/08/addressing";
         private static readonly string WsseNs = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd";
         private static readonly string WsuNs = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd";

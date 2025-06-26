@@ -8,7 +8,9 @@
         {
             get
             {
-                return !string.IsNullOrWhiteSpace(Content) && Content.Contains("http://www.w3.org/2003/05/soap-envelope");
+                return !string.IsNullOrWhiteSpace(Content) &&
+                       (Content.Contains(SoapEnvelopeHelper.SoapNs11)
+                        || Content.Contains(SoapEnvelopeHelper.SoapNs12));
             }
         }
 

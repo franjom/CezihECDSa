@@ -2,7 +2,7 @@
 using CezihECDSa.Wsdl.PrijavaZarazne;
 using CezihECDSa.Wsdl.PrijavaZarazneUpdate;
 using ECDSa.Helper;
-using ECDSa.Helper.Soap;
+using ECDSa.Helper.Soap._1_2;
 using System;
 using System.Linq;
 using System.Net.Http;
@@ -13,7 +13,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
-using RegistryResponseType = CezihECDSa.Wsdl.PrijavaZarazne.RegistryResponseType;
 
 namespace CezihECDSa.SoapClients.PrijavaZarazne
 {
@@ -172,7 +171,7 @@ namespace CezihECDSa.SoapClients.PrijavaZarazne
         private Result<DocumentRepository_ProvideAndRegisterDocumentSetbResponse> ProcessProvideAndRegisterResponse(
             SoapRequestResult result)
         {
-            return ProcessSoapResponse<RegistryResponseType, DocumentRepository_ProvideAndRegisterDocumentSetbResponse>(
+            return ProcessSoapResponse<CezihECDSa.Wsdl.PrijavaZarazne.RegistryResponseType, DocumentRepository_ProvideAndRegisterDocumentSetbResponse>(
                 result,
                 body => new DocumentRepository_ProvideAndRegisterDocumentSetbResponse(body));
         }
@@ -193,7 +192,7 @@ namespace CezihECDSa.SoapClients.PrijavaZarazne
             {
                 var envDoc = new XmlDocument();
                 envDoc.LoadXml(result.Content);
-                var envelope = SoapSerializer.Instance.Deserialize<Envelope>(envDoc);
+                var envelope = SoapSerializer.Instance.Deserialize<Envelope12>(envDoc);
                 var errors = envelope.Body?.Fault?.Detail?.Errors;
 
                 if (errors != null && errors.Count > 0)
@@ -226,7 +225,7 @@ namespace CezihECDSa.SoapClients.PrijavaZarazne
             }
         }
 
-        public async Task<SoapRequestResult> SendRequestAsync(string xmlString, string soapAction,
+        private async Task<SoapRequestResult> SendRequestAsync(string xmlString, string soapAction,
             X509Certificate2 cert, Uri uri, CancellationToken ct)
         {
             var request = CreateSoapRequest(xmlString, soapAction, cert, uri);
@@ -236,7 +235,7 @@ namespace CezihECDSa.SoapClients.PrijavaZarazne
             }
         }
 
-        public SoapRequestResult SendRequest(string xmlString, string soapAction,
+        private SoapRequestResult SendRequest(string xmlString, string soapAction,
             X509Certificate2 cert, Uri uri)
         {
             var request = CreateSoapRequest(xmlString, soapAction, cert, uri);

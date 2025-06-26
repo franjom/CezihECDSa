@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace ECDSa.Helper.Soap
+namespace ECDSa.Helper.Soap._1_2
 {
-    public class FaultDetail
+    public class FaultDetail12
     {
-        public FaultDetail()
+        public FaultDetail12()
         {
             Errors = new List<WsError>();
         }
