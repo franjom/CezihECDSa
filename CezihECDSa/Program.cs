@@ -9,6 +9,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
+using CezihECDSa.SoapClients.PrijavaZarazne;
+using CezihECDSa.Wsdl.PrijavaZarazne;
 
 namespace CezihECDSa
 {
@@ -169,10 +171,94 @@ namespace CezihECDSa
 
                     provider.Certificate = certs[0];
 
-                    var doc = new XmlDocument();
-                    doc.LoadXml(xml);
+                    //var doc = new XmlDocument();
+                    //doc.LoadXml(xml);
 
-                    provider.SignXml(doc, "PO123456");
+                    //provider.SignXml(doc, "PO123456");
+
+                    var opts = new PrijavaZarazneOptions
+                    {
+                        BaseUri = new Uri("https://certws.cezih.hr:48443"),
+                        Timeout = TimeSpan.FromSeconds(30)
+                    };
+
+                    var prijavaZarazneClient = new PrijavaZarazneClient(opts, provider.Certificate);
+
+                    var extrinsicObjId = $"urn:uuid:{Guid.NewGuid():N}";
+                    var response = prijavaZarazneClient.DocumentRepository_ProvideAndRegisterDocumentSetb(
+                        new DocumentRepository_ProvideAndRegisterDocumentSetbRequest(
+                            new ProvideAndRegisterDocumentSetRequestType
+                            {
+                                SubmitObjectsRequest = new SubmitObjectsRequest
+                                {
+                                    id = $"urn:uuid:{Guid.NewGuid():N}",
+                                    comment = "Test comment",
+                                    RegistryObjectList = new[]
+                                    {
+                                        new ExtrinsicObjectType
+                                        {
+                                            id = extrinsicObjId,
+                                            mimeType = "text/xml",
+                                            objectType = $"urn:uuid:{Guid.NewGuid():N}",
+                                            status = "urn:oasis:names:tc:ebxml-regrep:StatusType:Approved",
+                                            Slot = new[]
+                                            {
+                                                new SlotType1
+                                                {
+                                                    name = "creationTime",
+                                                    ValueList = new ValueListType
+                                                    {
+                                                        Value = new[]
+                                                        {
+                                                            DateTime.Now.ToString("yyyyMMddHHmmss")
+                                                        }
+                                                    }
+                                                },
+                                                new SlotType1
+                                                {
+                                                    name = "languageCode",
+                                                    ValueList = new ValueListType
+                                                    {
+                                                        Value = new[]
+                                                        {
+                                                            "hr-HR"
+                                                        }
+                                                    }
+                                                },
+                                                new SlotType1
+                                                {
+                                                    name = "serviceStartTime",
+                                                    ValueList = new ValueListType
+                                                    {
+                                                        Value = new[]
+                                                        {
+                                                            DateTime.Now.ToString("yyyyMMddHHmmss")
+                                                        }
+                                                    }
+                                                },
+                                                new SlotType1
+                                                {
+                                                    name = "serviceStopTime",
+                                                    ValueList = new ValueListType
+                                                    {
+                                                        Value = new[]
+                                                        {
+                                                            DateTime.Now.ToString("yyyyMMddHHmmss")
+                                                        }
+                                                    }
+                                                },
+                                            }
+                                        }
+                                    }
+                                },
+                                Document = new[]
+                                {
+                                    new ProvideAndRegisterDocumentSetRequestTypeDocument
+                                    {
+                                        Value = Array.Empty<byte>()
+                                    }
+                                }
+                            }));
                 }
             }
         }
