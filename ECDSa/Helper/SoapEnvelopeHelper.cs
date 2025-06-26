@@ -1,10 +1,14 @@
-﻿using System;
+﻿using ECDSa.Helper.Xml;
+using System;
+using System.Linq;
+using System.Numerics;
+using System.Runtime.ConstrainedExecution;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
-using ECDSa.Helper.Xml;
 
 namespace ECDSa.Helper
 {
@@ -119,42 +123,13 @@ namespace ECDSa.Helper
             header.AppendChild(msgId);
 
             XmlElement signature;
-            using (var pk = cert.GetECDsaPrivateKey())
+            if (cert.IsEcdsaCertificate())
             {
-                var signedXml = new WsSignedXml(soapDoc)
-                {
-                    SigningKey = pk
-                };
-
-                var bodyRef = new Reference($"#{id}")
-                {
-                    DigestMethod = SignedXml.XmlDsigSHA384Url
-                };
-                bodyRef.AddTransform(new XmlDsigExcC14NTransform());
-                signedXml.AddReference(bodyRef);
-
-                //var tsRef = new Reference("#_0")
-                //{
-                //    DigestMethod = SignedXml.XmlDsigSHA384Url
-                //};
-                //tsRef.AddTransform(new XmlDsigExcC14NTransform());
-                //signedXml.AddReference(tsRef);
-
-                var keyInfo = new KeyInfo();
-                var strElement = soapDoc.CreateElement("wsse", "SecurityTokenReference", WsseNs);
-                var refElement = soapDoc.CreateElement("wsse", "Reference", WsseNs);
-
-                refElement.SetAttribute("URI", "#_kt");
-                refElement.SetAttribute("ValueType", ValueType);
-                strElement.AppendChild(refElement);
-                keyInfo.AddClause(new KeyInfoNode(strElement));
-                signedXml.KeyInfo = keyInfo;
-
-                signedXml.SignedInfo.CanonicalizationMethod = SignedXml.XmlDsigExcC14NTransformUrl;
-                signedXml.SignedInfo.SignatureMethod = SignatureAlgorithm.XmlDsigECDSaSha384Url;
-
-                signedXml.ComputeSignature();
-                signature = signedXml.GetXml();
+                signature = SignXmlWithECDSA(cert, soapDoc, id);
+            }
+            else
+            {
+                signature = SignWithRsa(cert, soapDoc, id);
             }
 
             var importedSignature = soapDoc.ImportNode(signature, true);
@@ -168,6 +143,62 @@ namespace ECDSa.Helper
 
                 return sb.ToString();
             }
+        }
+
+        private static XmlElement SignWithRsa(X509Certificate2 cert, XmlDocument soapDoc, string id)
+        {
+            using (var pk = cert.GetRSAPrivateKey())
+            {
+                var isLegacy = cert.SignatureAlgorithm.Value == SignatureAlgorithm.Sha1Rsa;
+                var signatureMethod = isLegacy ? SignedXml.XmlDsigRSASHA1Url : SignedXml.XmlDsigRSASHA384Url;
+                var digestMethod = isLegacy ? SignedXml.XmlDsigSHA1Url : SignedXml.XmlDsigSHA384Url;
+
+                return SignXml(soapDoc, id, pk, signatureMethod, digestMethod);
+            }
+        }
+
+        private static XmlElement SignXmlWithECDSA(X509Certificate2 cert, XmlDocument soapDoc, string id)
+        {
+            using (var pk = cert.GetECDsaPrivateKey())
+            {
+                const string signatureMethod = SignatureAlgorithm.XmlDsigECDSaSha384Url;
+                const string digestMethod = SignedXml.XmlDsigSHA384Url;
+
+                return SignXml(soapDoc, id, pk, signatureMethod, digestMethod);
+            }
+        }
+
+        private static XmlElement SignXml(XmlDocument soapDoc, string id, AsymmetricAlgorithm pk,
+            string signatureMethod, string digestMethod)
+        {
+            var signedXml = new WsSignedXml(soapDoc)
+            {
+                SigningKey = pk
+            };
+
+            var reference = new Reference($"#{id}")
+            {
+                DigestMethod = digestMethod
+            };
+            reference.AddTransform(new XmlDsigExcC14NTransform());
+            signedXml.AddReference(reference);
+
+            var keyInfo = new KeyInfo();
+
+            var strElement = soapDoc.CreateElement("wsse", "SecurityTokenReference", WsseNs);
+            var refElement = soapDoc.CreateElement("wsse", "Reference", WsseNs);
+
+            refElement.SetAttribute("URI", "#_kt");
+            refElement.SetAttribute("ValueType", ValueType);
+            strElement.AppendChild(refElement);
+            keyInfo.AddClause(new KeyInfoNode(strElement));
+            signedXml.KeyInfo = keyInfo;
+
+            signedXml.SignedInfo.CanonicalizationMethod = SignedXml.XmlDsigExcC14NTransformUrl;
+            signedXml.SignedInfo.SignatureMethod = signatureMethod;
+
+            signedXml.ComputeSignature();
+            return signedXml.GetXml();
         }
 
         public static XmlDocument GetSoapBody12Contents(string soapResponseString)
