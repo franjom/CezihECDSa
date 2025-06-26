@@ -112,7 +112,7 @@ namespace ECDSa.Helper
             to.InnerText = url;
 
             var msgId = soapDoc.CreateElement("addr", "MessageID", SoapAddr);
-            msgId.InnerText = $"urn:uuid:{Guid.NewGuid():N}";
+            msgId.InnerText = $"urn:uuid:{Guid.NewGuid():D}";
 
             header.AppendChild(security);
             header.AppendChild(action);
