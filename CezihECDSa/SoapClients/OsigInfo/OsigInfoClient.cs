@@ -1,14 +1,10 @@
-﻿using CezihECDSa.Soap;
-using CezihECDSa.Wsdl.OsigInfo;
+﻿using CezihECDSa.Wsdl.OsigInfo;
 using ECDSa.Helper;
-using ECDSa.Helper.Soap._1_1;
+using ECDSa.Helper.Soap;
 using System;
-using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace CezihECDSa.SoapClients.OsigInfo
@@ -88,15 +84,20 @@ namespace CezihECDSa.SoapClients.OsigInfo
             CancellationToken ct = default);
     }
 
-    public sealed class OsigInfoClient : IOsigInfoClient
+    public sealed class OsigInfoClient : SoapClientBase, IOsigInfoClient
     {
         private readonly OsigInfoOptions _options;
         private readonly X509Certificate2 _cert;
 
-        public OsigInfoClient(OsigInfoOptions options, X509Certificate2 cert)
+        public OsigInfoClient(OsigInfoOptions options, X509Certificate2 cert) : base(SoapVersion.Soap11)
         {
             _options = options;
             _cert = cert;
+        }
+
+        protected override TimeSpan DefaultTimeout
+        {
+            get { return _options.Timeout ?? TimeSpan.FromSeconds(15); }
         }
 
         public Result<chosenDoctorResponseChosenDoctorOutput> chosenDoctor(string oibOsobe)
@@ -503,60 +504,60 @@ namespace CezihECDSa.SoapClients.OsigInfo
         #endregion
 
 
-        private static Result<osigInfoForDoctorResponseOsigInfoForDoctorOutput[]> ProcessOsigInfoForDoctorResponse(
+        private Result<osigInfoForDoctorResponseOsigInfoForDoctorOutput[]> ProcessOsigInfoForDoctorResponse(
             SoapRequestResult result)
         {
-            return ProcessSoapResponse<OsigInfoForDoctorResponse, osigInfoForDoctorResponseOsigInfoForDoctorOutput[]>(
+            return ProcessResponse<OsigInfoForDoctorResponse, osigInfoForDoctorResponseOsigInfoForDoctorOutput[]>(
                 result,
                 body => body.Output);
         }
 
-        private static Result<osigInfoForBISResponseOsigInfoForBISOutput[]> ProcessOsigInfoForBisResponse(
+        private Result<osigInfoForBISResponseOsigInfoForBISOutput[]> ProcessOsigInfoForBisResponse(
             SoapRequestResult result)
         {
-            return ProcessSoapResponse<OsigInfoForBisResponse, osigInfoForBISResponseOsigInfoForBISOutput[]>(
+            return ProcessResponse<OsigInfoForBisResponse, osigInfoForBISResponseOsigInfoForBISOutput[]>(
                 result,
                 body => body.Output);
         }
 
-        private static Result<osigInfoForSKZZResponseOsigInfoForSKZZOutput> ProcessOsigInfoForSKZZResponse(
+        private Result<osigInfoForSKZZResponseOsigInfoForSKZZOutput> ProcessOsigInfoForSKZZResponse(
             SoapRequestResult result)
         {
-            return ProcessSoapResponse<OsigInfoForSKZZResponse, osigInfoForSKZZResponseOsigInfoForSKZZOutput>(
+            return ProcessResponse<OsigInfoForSKZZResponse, osigInfoForSKZZResponseOsigInfoForSKZZOutput>(
                 result,
                 body => body.Output);
         }
 
-        private static Result<osigInfoForPharmacyResponseOsigInfoForPharmacyOutput> ProcessOsigInfoForPharmacyResponse(
+        private Result<osigInfoForPharmacyResponseOsigInfoForPharmacyOutput> ProcessOsigInfoForPharmacyResponse(
             SoapRequestResult result)
         {
-            return ProcessSoapResponse<OsigInfoForPharmacyResponse,
+            return ProcessResponse<OsigInfoForPharmacyResponse,
                 osigInfoForPharmacyResponseOsigInfoForPharmacyOutput>(
                 result,
                 body => body.Output);
         }
 
-        private static Result<infoGlavarinaResponseGlavarina[]> ProcessInfoGlavarinaResponse(SoapRequestResult result)
+        private Result<infoGlavarinaResponseGlavarina[]> ProcessInfoGlavarinaResponse(SoapRequestResult result)
         {
-            return ProcessSoapResponse<InfoGlavarinaCheckResponse,
+            return ProcessResponse<InfoGlavarinaCheckResponse,
                 infoGlavarinaResponseGlavarina[]>(
                 result,
                 body => body.Output);
         }
 
-        private static Result<chosenDoctorResponseChosenDoctorOutput> ProcessChosenDoctorResponse(
+        private Result<chosenDoctorResponseChosenDoctorOutput> ProcessChosenDoctorResponse(
             SoapRequestResult result)
         {
-            return ProcessSoapResponse<ChosenDoctorResponse,
+            return ProcessResponse<ChosenDoctorResponse,
                 chosenDoctorResponseChosenDoctorOutput>(
                 result,
                 body => body.Output);
         }
 
-        private static Result<orthopedicAidCheckResponseOrthopedicAidCheckOutput> ProcessOrtopedicAidResponse(
+        private Result<orthopedicAidCheckResponseOrthopedicAidCheckOutput> ProcessOrtopedicAidResponse(
             SoapRequestResult result)
         {
-            return ProcessSoapResponse<OrtopedicAidCheckResponse,
+            return ProcessResponse<OrtopedicAidCheckResponse,
                 orthopedicAidCheckResponseOrthopedicAidCheckOutput>(
                 result,
                 body => body.Output);
@@ -570,137 +571,6 @@ namespace CezihECDSa.SoapClients.OsigInfo
                 namespaces.Add("", "http://www.hzzo-net.hr/");
 
                 return namespaces;
-            }
-        }
-
-        private SoapRequestResult SendRequest(string xmlString, string soapAction,
-            X509Certificate2 cert, Uri uri)
-        {
-            var request = CreateSoapRequest(xmlString, soapAction, uri);
-            using (var client = CreateHttpClient(cert))
-            {
-                return SendSyncInternal(request, client);
-            }
-        }
-
-        private async Task<SoapRequestResult> SendRequestAsync(string xmlString, string soapAction,
-            X509Certificate2 cert, Uri uri, CancellationToken ct)
-        {
-            var request = CreateSoapRequest(xmlString, soapAction, uri);
-            using (var client = CreateHttpClient(cert))
-            {
-                return await SendAsyncInternal(request, client, ct);
-            }
-        }
-
-        private static Result<TResponse> ProcessSoapResponse<TBody, TResponse>(SoapRequestResult result,
-            Func<TBody, TResponse> responseFactory)
-        {
-            if (!result.IsSuccessStatusCode && result.IsXml)
-            {
-                var envDoc = new XmlDocument();
-                envDoc.LoadXml(result.Content);
-                var envelope = SoapSerializer.Instance.Deserialize<Envelope11>(envDoc);
-                var error = envelope.Body?.Fault?.FaultString;
-
-                if (!string.IsNullOrWhiteSpace(error))
-                {
-                    return new ErrorMessage(error);
-                }
-
-                return new ErrorMessage("Response is not a valid XML document.");
-            }
-
-            if (!result.IsSuccessStatusCode)
-            {
-                return new ErrorMessage(result.Content);
-            }
-
-            var bodyDoc = SoapEnvelopeHelper.GetSoapBody11Contents(result.Content);
-            var body = SoapSerializer.Instance.Deserialize<TBody>(bodyDoc);
-            return responseFactory(body);
-        }
-
-        private static HttpRequestMessage CreateSoapRequest(string xmlString, string soapAction, Uri uri)
-        {
-            var soapEnvelope = SoapEnvelopeHelper.CreateSoap11Envelope(xmlString);
-
-            var httpRequest = new HttpRequestMessage(HttpMethod.Post, uri)
-            {
-                Content = new StringContent(soapEnvelope, Encoding.UTF8, "text/xml")
-            };
-
-            httpRequest.Headers.Add("SOAPAction", soapAction);
-            httpRequest.Headers.UserAgent.ParseAdd($"OpenCezih.NET");
-            httpRequest.Headers.AcceptEncoding.ParseAdd("gzip,deflate");
-
-            return httpRequest;
-        }
-
-        private HttpClient CreateHttpClient(X509Certificate2 cert)
-        {
-            var handler = new HttpClientHandler
-            {
-                ClientCertificates = { cert },
-#if DEBUG
-                ServerCertificateCustomValidationCallback = delegate { return true; }
-#endif
-            };
-
-            var client = new HttpClient(handler)
-            {
-                Timeout = _options.Timeout.GetValueOrDefault()
-            };
-
-            return client;
-        }
-
-        private static async Task<SoapRequestResult> SendAsyncInternal(HttpRequestMessage request, HttpClient client,
-            CancellationToken ct)
-        {
-            try
-            {
-                using (var response = await client.SendAsync(request, ct))
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    return new SoapRequestResult
-                    {
-                        IsSuccessStatusCode = response.IsSuccessStatusCode,
-                        Content = content
-                    };
-                }
-            }
-            catch (Exception ex)
-            {
-                return new SoapRequestResult
-                {
-                    IsSuccessStatusCode = false,
-                    Content = ex.Message
-                };
-            }
-        }
-
-        private static SoapRequestResult SendSyncInternal(HttpRequestMessage request, HttpClient client)
-        {
-            try
-            {
-                using (var response = client.SendAsync(request).GetAwaiter().GetResult())
-                {
-                    var content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-                    return new SoapRequestResult
-                    {
-                        IsSuccessStatusCode = response.IsSuccessStatusCode,
-                        Content = content
-                    };
-                }
-            }
-            catch (Exception ex)
-            {
-                return new SoapRequestResult
-                {
-                    IsSuccessStatusCode = false,
-                    Content = ex.Message
-                };
             }
         }
     }

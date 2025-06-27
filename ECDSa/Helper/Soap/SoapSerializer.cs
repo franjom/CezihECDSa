@@ -5,9 +5,9 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace CezihECDSa.Soap
+namespace ECDSa.Helper.Soap
 {
-    internal sealed class SoapSerializer
+    public sealed class SoapSerializer
     {
         private static readonly Lazy<SoapSerializer> _instance = new Lazy<SoapSerializer>(() => new SoapSerializer());
 

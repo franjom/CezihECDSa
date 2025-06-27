@@ -109,7 +109,7 @@
     <Compile Include="SoapClients\OsigInfo\OsigInfoOptions.cs" />
     <Compile Include="SoapClients\PrijavaZarazne\PrijavaZarazneClient.cs" />
     <Compile Include="SoapClients\PrijavaZarazne\PrijavaZarazneOptions.cs" />
-    <Compile Include="Soap\SoapSerializer.cs" />
+    <Compile Include="Wsdl\CezdlihWsdl.cs" />
     <Compile Include="Wsdl\OsigInfoWsdl.cs" />
     <Compile Include="Wsdl\PrijavaZarazneUpdateWsdl.cs" />
     <Compile Include="Wsdl\PrijavaZarazneWsdl.cs" />
@@ -124,6 +124,8 @@
       <Name>ECDSa</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="SoapClients\Cezdlih\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
