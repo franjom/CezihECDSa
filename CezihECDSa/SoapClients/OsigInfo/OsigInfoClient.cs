@@ -261,7 +261,13 @@ namespace CezihECDSa.SoapClients.OsigInfo
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendRequest(xml, "osigInfoForDoctor", _cert, uri);
+                var result = SendRequest(new SoapOptions
+                {
+                    Certificate = _cert,
+                    SoapAction = "osigInfoForDoctor",
+                    Uri = uri,
+                    XmlString = xml
+                });
 
                 return ProcessOsigInfoForDoctorResponse(result);
             }
@@ -279,7 +285,13 @@ namespace CezihECDSa.SoapClients.OsigInfo
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendRequestAsync(xml, "osigInfoForDoctor", _cert, uri, ct);
+                var result = await SendRequestAsync(new SoapOptions
+                {
+                    Certificate = _cert,
+                    SoapAction = "osigInfoForDoctor",
+                    Uri = uri,
+                    XmlString = xml
+                }, ct);
 
                 return ProcessOsigInfoForDoctorResponse(result);
             }
@@ -297,7 +309,13 @@ namespace CezihECDSa.SoapClients.OsigInfo
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendRequest(xml, "osigInfoForPharmacy", _cert, uri);
+                var result = SendRequest(new SoapOptions
+                {
+                    Certificate = _cert,
+                    SoapAction = "osigInfoForPharmacy",
+                    Uri = uri,
+                    XmlString = xml
+                });
 
                 return ProcessOsigInfoForPharmacyResponse(result);
             }
@@ -315,7 +333,13 @@ namespace CezihECDSa.SoapClients.OsigInfo
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendRequestAsync(xml, "osigInfoForPharmacy", _cert, uri, ct);
+                var result = await SendRequestAsync(new SoapOptions
+                {
+                    Certificate = _cert,
+                    SoapAction = "osigInfoForPharmacy",
+                    Uri = uri,
+                    XmlString = xml
+                }, ct);
 
                 return ProcessOsigInfoForPharmacyResponse(result);
             }
@@ -332,7 +356,13 @@ namespace CezihECDSa.SoapClients.OsigInfo
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendRequest(xml, "osigInfoForSKZZ", _cert, uri);
+                var result = SendRequest(new SoapOptions
+                {
+                    Certificate = _cert,
+                    SoapAction = "osigInfoForSKZZ",
+                    Uri = uri,
+                    XmlString = xml
+                });
 
                 return ProcessOsigInfoForSKZZResponse(result);
             }
@@ -350,7 +380,13 @@ namespace CezihECDSa.SoapClients.OsigInfo
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendRequestAsync(xml, "osigInfoForSKZZ", _cert, uri, ct);
+                var result = await SendRequestAsync(new SoapOptions
+                {
+                    Certificate = _cert,
+                    SoapAction = "osigInfoForSKZZ",
+                    Uri = uri,
+                    XmlString = xml
+                }, ct);
 
                 return ProcessOsigInfoForSKZZResponse(result);
             }
@@ -367,7 +403,13 @@ namespace CezihECDSa.SoapClients.OsigInfo
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendRequest(xml, "osigInfoForBIS", _cert, uri);
+                var result = SendRequest(new SoapOptions
+                {
+                    Certificate = _cert,
+                    SoapAction = "osigInfoForBIS",
+                    Uri = uri,
+                    XmlString = xml
+                });
 
                 return ProcessOsigInfoForBisResponse(result);
             }
@@ -385,7 +427,13 @@ namespace CezihECDSa.SoapClients.OsigInfo
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendRequestAsync(xml, "osigInfoForBIS", _cert, uri, ct);
+                var result = await SendRequestAsync(new SoapOptions
+                {
+                    Certificate = _cert,
+                    SoapAction = "osigInfoForBIS",
+                    Uri = uri,
+                    XmlString = xml
+                }, ct);
 
                 return ProcessOsigInfoForBisResponse(result);
             }
@@ -402,7 +450,13 @@ namespace CezihECDSa.SoapClients.OsigInfo
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendRequest(xml, "infoGlavarina", _cert, uri);
+                var result = SendRequest(new SoapOptions
+                {
+                    Certificate = _cert,
+                    SoapAction = "infoGlavarina",
+                    Uri = uri,
+                    XmlString = xml
+                });
 
                 return ProcessInfoGlavarinaResponse(result);
             }
@@ -420,7 +474,13 @@ namespace CezihECDSa.SoapClients.OsigInfo
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendRequestAsync(xml, "infoGlavarina", _cert, uri, ct);
+                var result = await SendRequestAsync(new SoapOptions
+                {
+                    Certificate = _cert,
+                    SoapAction = "infoGlavarina",
+                    Uri = uri,
+                    XmlString = xml
+                }, ct);
 
                 return ProcessInfoGlavarinaResponse(result);
             }
@@ -437,7 +497,13 @@ namespace CezihECDSa.SoapClients.OsigInfo
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendRequest(xml, "chosenDoctor", _cert, uri);
+                var result = SendRequest(new SoapOptions
+                {
+                    Certificate = _cert,
+                    SoapAction = "chosenDoctor",
+                    Uri = uri,
+                    XmlString = xml
+                });
 
                 return ProcessChosenDoctorResponse(result);
             }
@@ -455,7 +521,13 @@ namespace CezihECDSa.SoapClients.OsigInfo
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendRequestAsync(xml, "chosenDoctor", _cert, uri, ct);
+                var result = await SendRequestAsync(new SoapOptions
+                {
+                    Certificate = _cert,
+                    SoapAction = "chosenDoctor",
+                    Uri = uri,
+                    XmlString = xml
+                }, ct);
 
                 return ProcessChosenDoctorResponse(result);
             }
@@ -473,7 +545,13 @@ namespace CezihECDSa.SoapClients.OsigInfo
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendRequest(xml, "orthopedicAidCheck", _cert, uri);
+                var result = SendRequest(new SoapOptions
+                {
+                    Certificate = _cert,
+                    SoapAction = "orthopedicAidCheck",
+                    Uri = uri,
+                    XmlString = xml
+                });
 
                 return ProcessOrtopedicAidResponse(result);
             }
@@ -491,7 +569,13 @@ namespace CezihECDSa.SoapClients.OsigInfo
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendRequestAsync(xml, "orthopedicAidCheck", _cert, uri, ct);
+                var result = await SendRequestAsync(new SoapOptions
+                {
+                    Certificate = _cert,
+                    SoapAction = "orthopedicAidCheck",
+                    Uri = uri,
+                    XmlString = xml
+                }, ct);
 
                 return ProcessOrtopedicAidResponse(result);
             }
@@ -568,7 +652,7 @@ namespace CezihECDSa.SoapClients.OsigInfo
             get
             {
                 var namespaces = new XmlSerializerNamespaces();
-                namespaces.Add("", "http://www.hzzo-net.hr/");
+                namespaces.Add("hzzo", "http://www.hzzo-net.hr/");
 
                 return namespaces;
             }

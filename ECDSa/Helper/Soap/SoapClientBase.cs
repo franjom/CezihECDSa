@@ -50,6 +50,18 @@ namespace ECDSa.Helper.Soap
         protected Result<TResponse> ProcessResponse<TBody, TResponse>(SoapRequestResult result,
             Func<TBody, TResponse> responseFactory)
         {
+            if (result.IsSoap11)
+            {
+                return ProcessSoap11Response(result, responseFactory);
+            }
+
+            if (result.IsSoap12)
+            {
+                return ProcessSoap12Response(result, responseFactory);
+            }
+
+            // fallback to _soapVersion
+
             if (_soapVersion == SoapVersion.Soap12)
             {
                 return ProcessSoap12Response(result, responseFactory);
@@ -58,89 +70,154 @@ namespace ECDSa.Helper.Soap
             return ProcessSoap11Response(result, responseFactory);
         }
 
-        protected Task<SoapRequestResult> SendRequestAsync(string xmlString, string soapAction,
-            X509Certificate2 cert, Uri uri, CancellationToken ct)
+        protected Task<SoapRequestResult> SendRequestAsync(SoapOptions options, CancellationToken ct)
         {
             if (_soapVersion == SoapVersion.Soap12)
             {
-                return SendRequest12Async(xmlString, soapAction, cert, uri, ct);
+                return SendRequest12Async(options, ct);
             }
 
-            return SendRequest11Async(xmlString, soapAction, cert, uri, ct);
+            return SendRequest11Async(options, ct);
         }
 
-        protected SoapRequestResult SendRequest(string xmlString, string soapAction,
-            X509Certificate2 cert, Uri uri)
+        protected Task<SoapRequestResult> SendSignedRequestAsync(SoapOptions options, CancellationToken ct)
         {
             if (_soapVersion == SoapVersion.Soap12)
             {
-                return SendRequest12(xmlString, soapAction, cert, uri);
+                return SendSignedRequest12Async(options, ct);
             }
 
-            return SendRequest11(xmlString, soapAction, cert, uri);
+            return SendSignedRequest11Async(options, ct);
         }
 
-        private async Task<SoapRequestResult> SendRequest11Async(string xmlString, string soapAction,
-            X509Certificate2 cert, Uri uri, CancellationToken ct)
+        protected SoapRequestResult SendRequest(SoapOptions options)
         {
-            var request = CreateSoap11Request(xmlString, soapAction, uri);
-            using (var client = CreateHttpClient(cert))
+            if (_soapVersion == SoapVersion.Soap12)
             {
-                return await SendAsyncInternal(request, client, ct);
+                return SendRequest12(options);
             }
+
+            return SendRequest11(options);
         }
 
-        private async Task<SoapRequestResult> SendRequest12Async(string xmlString, string soapAction,
-            X509Certificate2 cert, Uri uri, CancellationToken ct)
+        protected SoapRequestResult SendSignedRequest(SoapOptions options)
         {
-            var request = CreateSoap12Request(xmlString, soapAction, cert, uri);
-            using (var client = CreateHttpClient(cert))
+            if (_soapVersion == SoapVersion.Soap12)
             {
-                return await SendAsyncInternal(request, client, ct);
+                return SendSignedRequest12(options);
             }
+
+            return SendSignedRequest11(options);
         }
 
-        private SoapRequestResult SendRequest11(string xmlString, string soapAction,
-            X509Certificate2 cert, Uri uri)
+        private SoapRequestResult SendRequest11(SoapOptions options)
         {
-            var request = CreateSoap11Request(xmlString, soapAction, uri);
-            using (var client = CreateHttpClient(cert))
+            var request = CreateSoap11Request(options);
+            using (var client = CreateHttpClient(options.Certificate))
             {
                 return SendSyncInternal(request, client);
             }
         }
 
-        private SoapRequestResult SendRequest12(string xmlString, string soapAction,
-            X509Certificate2 cert, Uri uri)
+        private async Task<SoapRequestResult> SendRequest11Async(SoapOptions options, CancellationToken ct)
         {
-            var request = CreateSoap12Request(xmlString, soapAction, cert, uri);
-            using (var client = CreateHttpClient(cert))
+            var request = CreateSoap11Request(options);
+            using (var client = CreateHttpClient(options.Certificate))
+            {
+                return await SendAsyncInternal(request, client, ct);
+            }
+        }
+
+        private SoapRequestResult SendSignedRequest11(SoapOptions options)
+        {
+            var request = CreateSoap11SignedRequest(options);
+            using (var client = CreateHttpClient(options.Certificate))
             {
                 return SendSyncInternal(request, client);
+            }
+        }
+
+        private Task<SoapRequestResult> SendSignedRequest11Async(SoapOptions options, CancellationToken ct)
+        {
+            var request = CreateSoap11SignedRequest(options);
+            using (var client = CreateHttpClient(options.Certificate))
+            {
+                return SendAsyncInternal(request, client, ct);
+            }
+        }
+
+        private SoapRequestResult SendRequest12(SoapOptions options)
+        {
+            var request = CreateSoap12Request(options);
+            using (var client = CreateHttpClient(options.Certificate))
+            {
+                return SendSyncInternal(request, client);
+            }
+        }
+
+        private async Task<SoapRequestResult> SendRequest12Async(SoapOptions options, CancellationToken ct)
+        {
+            var request = CreateSoap12Request(options);
+            using (var client = CreateHttpClient(options.Certificate))
+            {
+                return await SendAsyncInternal(request, client, ct);
+            }
+        }
+
+        private SoapRequestResult SendSignedRequest12(SoapOptions options)
+        {
+            var request = CreateSignedSoap12Request(options);
+            using (var client = CreateHttpClient(options.Certificate))
+            {
+                return SendSyncInternal(request, client);
+            }
+        }
+
+        private Task<SoapRequestResult> SendSignedRequest12Async(SoapOptions options, CancellationToken ct)
+        {
+            var request = CreateSignedSoap12Request(options);
+            using (var client = CreateHttpClient(options.Certificate))
+            {
+                return SendAsyncInternal(request, client, ct);
             }
         }
 
         private static Result<TResponse> ProcessSoap11Response<TBody, TResponse>(SoapRequestResult result,
             Func<TBody, TResponse> responseFactory)
         {
-            if (!result.IsSuccessStatusCode && result.IsXml)
+            if (!result.IsSuccessStatusCode)
+            {
+                if (!result.IsXml)
+                {
+                    return new ErrorMessage(result.Content);
+                }
+
+                var envDoc = new XmlDocument();
+                envDoc.LoadXml(result.Content);
+                var envelope = SoapSerializer.Instance.Deserialize<Envelope11>(envDoc);
+                var error = envelope.Body?.Fault?.FaultString;
+
+                if (!string.IsNullOrEmpty(error))
+                {
+                    result.IsFault = true;
+                    return new ErrorMessage(error);
+                }
+
+                return new ErrorMessage(result.Content);
+            }
+
+            if (result.IsXml)
             {
                 var envDoc = new XmlDocument();
                 envDoc.LoadXml(result.Content);
                 var envelope = SoapSerializer.Instance.Deserialize<Envelope11>(envDoc);
                 var error = envelope.Body?.Fault?.FaultString;
 
-                if (!string.IsNullOrWhiteSpace(error))
+                if (!string.IsNullOrEmpty(error))
                 {
+                    result.IsFault = true;
                     return new ErrorMessage(error);
                 }
-
-                return new ErrorMessage("Response is not a valid XML document.");
-            }
-
-            if (!result.IsSuccessStatusCode)
-            {
-                return new ErrorMessage(result.Content);
             }
 
             var bodyDoc = SoapEnvelopeHelper.GetSoapBody11Contents(result.Content);
@@ -151,7 +228,28 @@ namespace ECDSa.Helper.Soap
         private static Result<TResponse> ProcessSoap12Response<TBody, TResponse>(SoapRequestResult result,
             Func<TBody, TResponse> responseFactory)
         {
-            if (!result.IsSuccessStatusCode && result.IsXml)
+            if (!result.IsSuccessStatusCode)
+            {
+                if (!result.IsXml)
+                {
+                    return new ErrorMessage(result.Content);
+                }
+
+                var envDoc = new XmlDocument();
+                envDoc.LoadXml(result.Content);
+                var envelope = SoapSerializer.Instance.Deserialize<Envelope12>(envDoc);
+                var errors = envelope.Body?.Fault?.Detail?.Errors;
+
+                if (errors != null && errors.Count > 0)
+                {
+                    result.IsFault = true;
+                    return errors.Select(o => new ErrorMessage(o.Description)).ToList();
+                }
+
+                return new ErrorMessage(result.Content);
+            }
+
+            if (result.IsXml)
             {
                 var envDoc = new XmlDocument();
                 envDoc.LoadXml(result.Content);
@@ -159,14 +257,10 @@ namespace ECDSa.Helper.Soap
                 var errors = envelope.Body?.Fault?.Detail?.Errors;
 
                 if (errors != null && errors.Count > 0)
+                {
+                    result.IsFault = true;
                     return errors.Select(o => new ErrorMessage(o.Description)).ToList();
-
-                return new ErrorMessage("Response is not a valid XML document.");
-            }
-
-            if (!result.IsSuccessStatusCode)
-            {
-                return new ErrorMessage(result.Content);
+                }
             }
 
             var bodyDoc = SoapEnvelopeHelper.GetSoapBody12Contents(result.Content);
@@ -174,33 +268,67 @@ namespace ECDSa.Helper.Soap
             return responseFactory(body);
         }
 
-        private static HttpRequestMessage CreateSoap11Request(string xmlString, string soapAction, Uri uri)
+        private static HttpRequestMessage CreateSoap11Request(SoapOptions options)
         {
-            var soapEnvelope = SoapEnvelopeHelper.CreateSoap11Envelope(xmlString);
+            var soapEnvelope = SoapEnvelopeHelper.CreateSoap11Envelope(options);
 
-            var httpRequest = new HttpRequestMessage(HttpMethod.Post, uri)
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, options.Uri)
             {
                 Content = new StringContent(soapEnvelope, Encoding.UTF8, "text/xml")
             };
 
-            httpRequest.Headers.Add("SOAPAction", soapAction);
+            httpRequest.Headers.Add("SOAPAction", options.SoapAction);
             httpRequest.Headers.UserAgent.ParseAdd($"OpenCezih.NET");
             httpRequest.Headers.AcceptEncoding.ParseAdd("gzip,deflate");
 
             return httpRequest;
         }
 
-        private static HttpRequestMessage CreateSoap12Request(string xmlString, string soapAction,
-            X509Certificate2 cert, Uri uri)
+        private static HttpRequestMessage CreateSoap11SignedRequest(SoapOptions options)
         {
-            var soapEnvelope = SoapEnvelopeHelper.CreateSoap12SignedEnvelope(
-                xmlString,
-                soapAction,
-                uri.ToString(),
-                cert
-            );
+            var soapEnvelope = SoapEnvelopeHelper.CreateSoap11SignedEnvelope(options);
+            var request = new HttpRequestMessage(HttpMethod.Post, options.Uri)
+            {
+                Content = new StringContent(soapEnvelope, Encoding.UTF8, "text/xml")
+            };
+            request.Headers.Add("SOAPAction", options.SoapAction);
+            request.Headers.UserAgent.ParseAdd("OpenCezih.NET");
+            request.Headers.AcceptEncoding.ParseAdd("gzip,deflate");
+            return request;
+        }
 
-            var request = new HttpRequestMessage(HttpMethod.Post, uri)
+        private static HttpRequestMessage CreateSoap12Request(SoapOptions options)
+        {
+            var soapEnvelope = SoapEnvelopeHelper.CreateSoap12Envelope(options);
+
+            var request = new HttpRequestMessage(HttpMethod.Post, options.Uri)
+            {
+                Content = new StringContent(soapEnvelope, Encoding.UTF8, "text/xml")
+            };
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/soap+xml")
+            {
+                CharSet = Encoding.UTF8.WebName
+            };
+            request.Content.Headers.ContentType.Parameters.Add(
+                new NameValueHeaderValue("action", $"\"{options.SoapAction}\""));
+
+            request.Headers.UserAgent.ParseAdd("OpenCezih.NET");
+            request.Headers.AcceptEncoding.ParseAdd("gzip,deflate");
+            return request;
+        }
+
+        private static HttpRequestMessage CreateSignedSoap12Request(SoapOptions options)
+        {
+            var soapEnvelope = SoapEnvelopeHelper.CreateSoap12SignedEnvelope(options);
+
+            //var soapEnvelope = SoapEnvelopeHelper.CreateSoap12SignedEnvelope(
+            //    options.XmlString,
+            //    options.SoapAction,
+            //    options.Uri.ToString(),
+            //    options.Certificate
+            //);
+
+            var request = new HttpRequestMessage(HttpMethod.Post, options.Uri)
             {
                 Content = new StringContent(soapEnvelope, Encoding.UTF8)
             };
@@ -210,7 +338,7 @@ namespace ECDSa.Helper.Soap
                 CharSet = Encoding.UTF8.WebName
             };
             request.Content.Headers.ContentType.Parameters.Add(
-                new NameValueHeaderValue("action", $"\"{soapAction}\""));
+                new NameValueHeaderValue("action", $"\"{options.SoapAction}\""));
 
             request.Headers.UserAgent.ParseAdd("OpenCezih.NET");
             request.Headers.AcceptEncoding.ParseAdd("gzip,deflate");
@@ -235,6 +363,11 @@ namespace ECDSa.Helper.Soap
             }
             catch (Exception ex)
             {
+                while (ex.InnerException != null)
+                {
+                    ex = ex.InnerException;
+                }
+
                 return new SoapRequestResult
                 {
                     IsSuccessStatusCode = false,
@@ -259,6 +392,11 @@ namespace ECDSa.Helper.Soap
             }
             catch (Exception ex)
             {
+                while (ex.InnerException != null)
+                {
+                    ex = ex.InnerException;
+                }
+
                 return new SoapRequestResult
                 {
                     IsSuccessStatusCode = false,

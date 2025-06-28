@@ -1,17 +1,25 @@
-﻿using ECDSa;
+﻿using CezihECDSa.Logging;
+using CezihECDSa.SoapClients.Cezdlih;
+using CezihECDSa.SoapClients.OsigInfo;
+using CezihECDSa.SoapClients.PrijavaZarazne;
+using CezihECDSa.Wsdl;
+using CezihECDSa.Wsdl.PrijavaZarazne;
+using ECDSa;
 using ECDSa.ECDSa;
 using ECDSa.Helper;
 using Net.Pkcs11Interop.X509Store;
 using System;
+using System.IdentityModel.Policy;
 using System.IO;
+using System.Net.Security;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
+using System.ServiceModel.Security;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
-using CezihECDSa.SoapClients.OsigInfo;
-using CezihECDSa.SoapClients.PrijavaZarazne;
-using CezihECDSa.Wsdl.PrijavaZarazne;
 
 namespace CezihECDSa
 {
@@ -61,6 +69,17 @@ namespace CezihECDSa
 
             // good to go
 
+            //var cert = ReadFromSoftCert();
+            var cert = ReadFromEcdsaCard();
+
+            //TestXmlSigning(cert);
+            //TestOsigInfo(cert);
+            //TestPrijavaZarazne(cert);
+            //TestECezdlih(cert);
+        }
+
+        private static X509Certificate2 ReadFromEcdsaCard()
+        {
             var programFilesPath = Environment.GetEnvironmentVariable("ProgramW6432");
             var akdeidPath = GetSafePath(programFilesPath, AkdEidPath);
 
@@ -68,9 +87,7 @@ namespace CezihECDSa
             IPinProvider pinProvider = new PinProvider("123456");
             AsymmetricAlgorithm algorithm;
 
-            // this is for mock data
-            var provider = new XmlDigitalSignatureProvider();
-
+            X509Certificate2 cert = null;
             using (var pkcs11Store = new Pkcs11X509Store(akdeidPath, pinProvider))
             {
                 // Show general information about the loaded library
@@ -122,8 +139,7 @@ namespace CezihECDSa
                                 if ((keyUsageExtension.KeyUsages & X509KeyUsageFlags.DigitalSignature) ==
                                     X509KeyUsageFlags.DigitalSignature)
                                 {
-                                    provider.Certificate = certificate.Info.ParsedCertificate;
-
+                                    cert = certificate.Info.ParsedCertificate;
                                     if (certificate.Info.ParsedCertificate.IsEcdsaCertificate())
                                     {
                                         algorithm = certificate.GetECDsaPrivateKey();
@@ -150,143 +166,251 @@ namespace CezihECDSa
                     }
                 }
 
-                if (provider.Certificate != null)
+                if (cert == null)
                 {
-                    var thumb = provider.Certificate.Thumbprint;
-
-                    if (string.IsNullOrWhiteSpace(thumb))
-                    {
-                        return;
-                    }
-
-                    // we take the cert from store because the one returned by Pkcs11X509Store doesn't have a PK
-                    // and also to be compliant with existing IK interface implementation... if you don't need to be compliant
-                    // you can use algorithm that was created above
-                    var store = new X509Store();
-                    store.Open(OpenFlags.ReadOnly);
-                    var certs = store.Certificates.Find(X509FindType.FindByThumbprint, thumb, false);
-                    if (certs.Count <= 0)
-                    {
-                        return;
-                    }
-
-                    provider.Certificate = certs[0];
-
-                    //var doc = new XmlDocument();
-                    //doc.LoadXml(xml);
-
-                    //provider.SignXml(doc, "PO123456");
-
-                    var opts = new PrijavaZarazneOptions
-                    {
-                        BaseUri = new Uri("https://certws.cezih.hr:48443"),
-                        Timeout = TimeSpan.FromSeconds(30)
-                    };
-
-                    var prijavaZarazneClient = new PrijavaZarazneClient(opts, provider.Certificate);
-
-                    var extrinsicObjId = $"urn:uuid:{Guid.NewGuid():N}";
-                    var response = prijavaZarazneClient.DocumentRepository_ProvideAndRegisterDocumentSetb(
-                        new DocumentRepository_ProvideAndRegisterDocumentSetbRequest(
-                            new ProvideAndRegisterDocumentSetRequestType
-                            {
-                                SubmitObjectsRequest = new SubmitObjectsRequest
-                                {
-                                    id = $"urn:uuid:{Guid.NewGuid():N}",
-                                    comment = "Test comment",
-                                    RegistryObjectList = new[]
-                                    {
-                                        new ExtrinsicObjectType
-                                        {
-                                            id = extrinsicObjId,
-                                            mimeType = "text/xml",
-                                            objectType = $"urn:uuid:{Guid.NewGuid():N}",
-                                            status = "urn:oasis:names:tc:ebxml-regrep:StatusType:Approved",
-                                            Slot = new[]
-                                            {
-                                                new SlotType1
-                                                {
-                                                    name = "creationTime",
-                                                    ValueList = new ValueListType
-                                                    {
-                                                        Value = new[]
-                                                        {
-                                                            DateTime.Now.ToString("yyyyMMddHHmmss")
-                                                        }
-                                                    }
-                                                },
-                                                new SlotType1
-                                                {
-                                                    name = "languageCode",
-                                                    ValueList = new ValueListType
-                                                    {
-                                                        Value = new[]
-                                                        {
-                                                            "hr-HR"
-                                                        }
-                                                    }
-                                                },
-                                                new SlotType1
-                                                {
-                                                    name = "serviceStartTime",
-                                                    ValueList = new ValueListType
-                                                    {
-                                                        Value = new[]
-                                                        {
-                                                            DateTime.Now.ToString("yyyyMMddHHmmss")
-                                                        }
-                                                    }
-                                                },
-                                                new SlotType1
-                                                {
-                                                    name = "serviceStopTime",
-                                                    ValueList = new ValueListType
-                                                    {
-                                                        Value = new[]
-                                                        {
-                                                            DateTime.Now.ToString("yyyyMMddHHmmss")
-                                                        }
-                                                    }
-                                                },
-                                            }
-                                        }
-                                    }
-                                },
-                                Document = new[]
-                                {
-                                    new ProvideAndRegisterDocumentSetRequestTypeDocument
-                                    {
-                                        Value = Array.Empty<byte>()
-                                    }
-                                }
-                            }));
-
-
-                    //var opts = new OsigInfoOptions()
-                    //{
-                    //    BaseUri = new Uri("https://certws.cezih.hr:40443/osiginfo-3"),
-                    //    Timeout = TimeSpan.FromSeconds(10)
-                    //};
-
-                    //var osigInfoClient = new OsigInfoClient(opts, provider.Certificate);
-
-                    //var responseSync1 = osigInfoClient.osigInfoForSKZZ("990000818");
-                    //var responseSync2 = osigInfoClient.osigInfoForDoctor("990000818");
-                    //var responseSync3 = osigInfoClient.osigInfoForBIS("990000818");
-
-                    //var glavarina = osigInfoClient.infoGlavarina("990002068", DateTime.MinValue);
-                    //var chosen = osigInfoClient.chosenDoctor("");
+                    return null;
                 }
+
+                var thumb = cert.Thumbprint;
+
+                if (string.IsNullOrWhiteSpace(thumb))
+                {
+                    return null;
+                }
+
+                // we take the cert from store because the one returned by Pkcs11X509Store doesn't have a PK
+                // and also to be compliant with existing IK interface implementation... if you don't need to be compliant
+                // you can use algorithm that was created above
+                var store = new X509Store();
+                store.Open(OpenFlags.ReadOnly);
+                var certs = store.Certificates.Find(X509FindType.FindByThumbprint, thumb, false);
+                if (certs.Count <= 0)
+                {
+                    return null;
+                }
+
+                return certs[0];
             }
         }
 
-        public static string GetSafePath(string path1, string path2)
+
+        private static X509Certificate2 ReadFromSoftCert()
+        {
+            const string thumb = "d6d708bb76ca6812f07d8ec6a0dd032ddc8884c6";
+
+            var store = new X509Store();
+            store.Open(OpenFlags.ReadOnly);
+            var certs = store.Certificates.Find(X509FindType.FindByThumbprint, thumb, false);
+            if (certs.Count <= 0)
+            {
+                return null;
+            }
+
+            return certs[0];
+        }
+
+        private static void TestXmlSigning(X509Certificate2 cert)
+        {
+            // this is for mock data
+            var provider = new XmlDigitalSignatureProvider
+            {
+                Certificate = cert
+            };
+
+            var doc = new XmlDocument();
+            doc.LoadXml(xml);
+
+            provider.SignXml(doc, "PO123456");
+        }
+
+        private static void TestOsigInfo(X509Certificate2 cert)
+        {
+            var opts = new OsigInfoOptions
+            {
+                BaseUri = new Uri("https://certws.cezih.hr:40443/osiginfo-3"),
+                Timeout = TimeSpan.FromSeconds(10)
+            };
+            var osigInfoClient = new OsigInfoClient(opts, cert);
+            var responseSync1 = osigInfoClient.osigInfoForSKZZ("990000818");
+            var responseSync2 = osigInfoClient.osigInfoForDoctor("990000818");
+            var responseSync3 = osigInfoClient.osigInfoForBIS("990000818");
+            var glavarina = osigInfoClient.infoGlavarina("990002068", DateTime.MinValue);
+            var chosen = osigInfoClient.chosenDoctor("");
+        }
+
+        private static void TestPrijavaZarazne(X509Certificate2 cert)
+        {
+            var opts = new PrijavaZarazneOptions
+            {
+                BaseUri = new Uri("https://certws.cezih.hr:48443"),
+                Timeout = TimeSpan.FromSeconds(30)
+            };
+
+            var prijavaZarazneClient = new PrijavaZarazneClient(opts, cert);
+
+            var extrinsicObjId = $"urn:uuid:{Guid.NewGuid():N}";
+            var response = prijavaZarazneClient.DocumentRepository_ProvideAndRegisterDocumentSetb(
+                new DocumentRepository_ProvideAndRegisterDocumentSetbRequest(
+                    new ProvideAndRegisterDocumentSetRequestType
+                    {
+                        SubmitObjectsRequest = new SubmitObjectsRequest
+                        {
+                            id = $"urn:uuid:{Guid.NewGuid():N}",
+                            comment = "Test comment",
+                            RegistryObjectList = new[]
+                            {
+                                new ExtrinsicObjectType
+                                {
+                                    id = extrinsicObjId,
+                                    mimeType = "text/xml",
+                                    objectType = $"urn:uuid:{Guid.NewGuid():N}",
+                                    status = "urn:oasis:names:tc:ebxml-regrep:StatusType:Approved",
+                                    Slot = new[]
+                                    {
+                                        new SlotType1
+                                        {
+                                            name = "creationTime",
+                                            ValueList = new ValueListType
+                                            {
+                                                Value = new[]
+                                                {
+                                                    DateTime.Now.ToString("yyyyMMddHHmmss")
+                                                }
+                                            }
+                                        },
+                                        new SlotType1
+                                        {
+                                            name = "languageCode",
+                                            ValueList = new ValueListType
+                                            {
+                                                Value = new[]
+                                                {
+                                                    "hr-HR"
+                                                }
+                                            }
+                                        },
+                                        new SlotType1
+                                        {
+                                            name = "serviceStartTime",
+                                            ValueList = new ValueListType
+                                            {
+                                                Value = new[]
+                                                {
+                                                    DateTime.Now.ToString("yyyyMMddHHmmss")
+                                                }
+                                            }
+                                        },
+                                        new SlotType1
+                                        {
+                                            name = "serviceStopTime",
+                                            ValueList = new ValueListType
+                                            {
+                                                Value = new[]
+                                                {
+                                                    DateTime.Now.ToString("yyyyMMddHHmmss")
+                                                }
+                                            }
+                                        },
+                                    }
+                                }
+                            }
+                        },
+                        Document = new[]
+                        {
+                            new ProvideAndRegisterDocumentSetRequestTypeDocument
+                            {
+                                Value = Array.Empty<byte>()
+                            }
+                        }
+                    }));
+        }
+
+        private static void TestECezdlih(X509Certificate2 cert)
+        {
+            //try
+            //{
+            //    var request = new PreuzimanjePlanaImunizacijePreuzimanjePlanaImunizacijeRequest
+            //    {
+            //        IdentifikatorZahtjev = new ZaglavljeZahtjevType
+            //        {
+            //            VrijemeSlanja = DateTime.Now,
+            //            PorukaID = $"{Guid.NewGuid()}",
+            //        },
+            //        SifraUstanove = "940394030",
+            //        Godina = 2025
+            //    };
+
+            //    var binding = new CustomBinding("Soap12");
+            //    var securityBindingElement = binding.Elements.Find<SecurityBindingElement>();
+            //    securityBindingElement.LocalClientSettings.IdentityVerifier = new EverythingIsFineIdentityVerifier();
+
+            //    var uri = new Uri("https://cezdlih-cijepih-test.zdravlje.hr:8443");
+            //    var endpoint = new EndpointAddress(uri);
+            //    var client = new CEZDLIHWSSoapClient(binding, endpoint);
+            //    client.Endpoint.EndpointBehaviors.Add(new LoggingEndpointBehavior());
+            //    client.Endpoint.Contract.ProtectionLevel = ProtectionLevel.Sign;
+            //    client.ClientCredentials.ClientCertificate.Certificate = cert;
+            //    client.ClientCredentials.ServiceCertificate.DefaultCertificate = cert;
+
+            //    var response = client.PreuzimanjePlanaImunizacije(request);
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e);
+            //}
+
+            // ovo radi sa RSA ne radi sa ECDSA mora se slati nepotpisani request
+            //var opts = new CezdlihOptions
+            //{
+            //    BaseUri = new Uri("https://cezdlih-cijepih-test.zdravlje.hr:8443"),
+            //    Timeout = TimeSpan.FromSeconds(30)
+            //};
+
+            // ovo radi sa ECDSA mora se slati potpiani request
+            var opts = new CezdlihOptions
+            {
+                BaseUri = new Uri("https://evaccert.zdravlje.hr/WebServices2/CEZDLIHWS.asmx"),
+                Timeout = TimeSpan.FromSeconds(30)
+            };
+
+            var cezdlihClient = new CezdlihClient(opts, cert);
+            var response = cezdlihClient.PreuzimanjePlanaImunizacije(
+                new PreuzimanjePlanaImunizacijeRequest
+                {
+                    PreuzimanjePlanaImunizacijeRequest1 =
+                        new PreuzimanjePlanaImunizacijePreuzimanjePlanaImunizacijeRequest
+                        {
+                            Godina = 2025,
+                            SifraUstanove = "940394030",
+                            IdentifikatorZahtjev = new ZaglavljeZahtjevType
+                            {
+                                PorukaID = $"{Guid.NewGuid()}",
+                                VrijemeSlanja = DateTime.Now
+                            }
+                        }
+                });
+        }
+
+        private static string GetSafePath(string path1, string path2)
         {
             const int maxLength = 1024;
             var sb = new StringBuilder(maxLength);
             HelperWin32.GetShortPathName(Path.Combine(path1, path2), sb, maxLength);
 
             return sb.ToString();
+        }
+    }
+
+    public class EverythingIsFineIdentityVerifier : IdentityVerifier
+    {
+        public override bool CheckAccess(EndpointIdentity identity, AuthorizationContext authContext)
+        {
+            return true;
+        }
+
+        public override bool TryGetIdentity(EndpointAddress reference, out EndpointIdentity identity)
+        {
+            return CreateDefault().TryGetIdentity(reference, out identity);
         }
     }
 }

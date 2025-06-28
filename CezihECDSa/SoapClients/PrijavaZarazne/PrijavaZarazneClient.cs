@@ -51,7 +51,15 @@ namespace CezihECDSa.SoapClients.PrijavaZarazne
                 var xml = SoapSerializer.Instance.Serialize(request.RetrieveDocumentSetRequest, Namespaces);
                 var uri = new Uri(_options.BaseUri, "/WS/IHE/XDS_DocumentRegistry");
 
-                var result = SendRequest(xml, "urn:ihe:iti:2007:RetrieveDocumentSet", _cert, uri);
+                var result = SendSignedRequest(new SoapOptions
+                {
+                    XmlString = xml,
+                    Certificate = _cert,
+                    SoapAction = "urn:ihe:iti:2007:RetrieveDocumentSet",
+                    IncludeTimestamp = true,
+                    Uri = uri,
+                    MessageId = Guid.NewGuid()
+                });
 
                 return ProcessRetrieveDocumentSetResponse(result);
             }
@@ -70,7 +78,15 @@ namespace CezihECDSa.SoapClients.PrijavaZarazne
                 var xml = SoapSerializer.Instance.Serialize(request.RetrieveDocumentSetRequest, Namespaces);
                 var uri = new Uri(_options.BaseUri, "/WS/IHE/XDS_DocumentRegistry");
 
-                var result = await SendRequestAsync(xml, "urn:ihe:iti:2007:RetrieveDocumentSet", _cert, uri, ct);
+                var result = await SendSignedRequestAsync(new SoapOptions
+                {
+                    XmlString = xml,
+                    Certificate = _cert,
+                    SoapAction = "urn:ihe:iti:2007:RetrieveDocumentSet",
+                    IncludeTimestamp = true,
+                    Uri = uri,
+                    MessageId = Guid.NewGuid()
+                }, ct);
 
                 return ProcessRetrieveDocumentSetResponse(result);
             }
@@ -90,7 +106,15 @@ namespace CezihECDSa.SoapClients.PrijavaZarazne
                 var xml = SoapSerializer.Instance.Serialize(request.ProvideAndRegisterDocumentSetRequest, Namespaces);
                 var uri = new Uri(_options.BaseUri, "/WS/IHE/XDS_DocumentRepository");
 
-                var result = SendRequest(xml, "urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b", _cert, uri);
+                var result = SendSignedRequest(new SoapOptions
+                {
+                    XmlString = xml,
+                    Certificate = _cert,
+                    SoapAction = "urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b",
+                    IncludeTimestamp = true,
+                    Uri = uri,
+                    MessageId = Guid.NewGuid()
+                });
 
                 return ProcessProvideAndRegisterResponse(result);
             }
@@ -110,9 +134,15 @@ namespace CezihECDSa.SoapClients.PrijavaZarazne
                 var xml = SoapSerializer.Instance.Serialize(request.ProvideAndRegisterDocumentSetRequest, Namespaces);
                 var uri = new Uri(_options.BaseUri, "/WS/IHE/XDS_DocumentRepository");
 
-                var result = await SendRequestAsync(xml, "urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b", _cert,
-                    uri,
-                    ct);
+                var result = await SendSignedRequestAsync(new SoapOptions
+                {
+                    XmlString = xml,
+                    Certificate = _cert,
+                    SoapAction = "urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b",
+                    IncludeTimestamp = true,
+                    Uri = uri,
+                    MessageId = Guid.NewGuid()
+                }, ct);
 
                 return ProcessProvideAndRegisterResponse(result);
             }
@@ -130,7 +160,14 @@ namespace CezihECDSa.SoapClients.PrijavaZarazne
                 var xml = SoapSerializer.Instance.Serialize(request.SubmitObjectsRequest, Namespaces);
                 var uri = new Uri(_options.BaseUri, "/WS/IHE/XDS_UpdateDocumentSet");
 
-                var result = SendRequest(xml, "urn:ihe:iti:2010:UpdateDocumentSet", _cert, uri);
+                var result = SendSignedRequest(new SoapOptions
+                {
+                    XmlString = xml,
+                    Certificate = _cert,
+                    SoapAction = "urn:ihe:iti:2007:UpdateDocumentSet",
+                    IncludeTimestamp = true,
+                    Uri = uri
+                });
 
                 return ProcessUpdateDocumentSetResponse(result);
             }
@@ -149,7 +186,14 @@ namespace CezihECDSa.SoapClients.PrijavaZarazne
                 var xml = SoapSerializer.Instance.Serialize(request.SubmitObjectsRequest, Namespaces);
                 var uri = new Uri(_options.BaseUri, "/WS/IHE/XDS_UpdateDocumentSet");
 
-                var result = await SendRequestAsync(xml, "urn:ihe:iti:2010:UpdateDocumentSet", _cert, uri, ct);
+                var result = await SendSignedRequestAsync(new SoapOptions
+                {
+                    XmlString = xml,
+                    Certificate = _cert,
+                    SoapAction = "urn:ihe:iti:2007:UpdateDocumentSet",
+                    IncludeTimestamp = true,
+                    Uri = uri
+                }, ct);
 
                 return ProcessUpdateDocumentSetResponse(result);
             }

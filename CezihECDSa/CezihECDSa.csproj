@@ -88,9 +88,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HelperWin32.cs" />
+    <Compile Include="Logging\LoggingInspector.cs" />
     <Compile Include="PinProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SoapClients\Cezdlih\CezdlihClient.cs" />
+    <Compile Include="SoapClients\Cezdlih\CezdlihOptions.cs" />
+    <Compile Include="SoapClients\Cezdlih\Wrappers\WPreuzimanjePlanaImunizacijeRequest.cs" />
+    <Compile Include="SoapClients\Cezdlih\Wrappers\WPreuzimanjePlanaImunizacijeResponse.cs" />
     <Compile Include="SoapClients\OsigInfo\ChosenDoctorRequest.cs" />
     <Compile Include="SoapClients\OsigInfo\ChosenDoctorResponse.cs" />
     <Compile Include="SoapClients\OsigInfo\InfoGlavarinaCheckRequest.cs" />
@@ -124,8 +129,6 @@
       <Name>ECDSa</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SoapClients\Cezdlih\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
