@@ -214,7 +214,7 @@ namespace ECDSa.Helper
 
             var addrNs = _namesapces["wsa10"];
             var action = soapDoc.CreateElement("wsa10", "Action", addrNs);
-            action.Attributes.Append(mustUnderstandAttr);
+            //action.Attributes.Append(mustUnderstandAttr);
             action.InnerText = opts.SoapAction;
 
             header.AppendChild(security);
