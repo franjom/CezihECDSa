@@ -410,9 +410,9 @@ namespace ECDSa.Helper
             soapDoc.LoadXml(soapResponseString);
 
             var nsmgr = new XmlNamespaceManager(soapDoc.NameTable);
-            nsmgr.AddNamespace("soapenv", SoapNs12);
+            nsmgr.AddNamespace("s12", SoapNs12);
 
-            var bodyNode = soapDoc.SelectSingleNode("/soapenv:Envelope/soapenv:Body", nsmgr);
+            var bodyNode = soapDoc.SelectSingleNode("/s12:Envelope/s12:Body", nsmgr);
 
             if (bodyNode == null)
             {
@@ -430,9 +430,9 @@ namespace ECDSa.Helper
             soapDoc.LoadXml(soapResponseString);
 
             var nsmgr = new XmlNamespaceManager(soapDoc.NameTable);
-            nsmgr.AddNamespace("soapenv", SoapNs11);
+            nsmgr.AddNamespace("s11", SoapNs11);
 
-            var bodyNode = soapDoc.SelectSingleNode("/soapenv:Envelope/soapenv:Body", nsmgr);
+            var bodyNode = soapDoc.SelectSingleNode("/s11:Envelope/s11:Body", nsmgr);
 
             if (bodyNode == null)
             {
