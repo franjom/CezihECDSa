@@ -74,7 +74,7 @@ namespace CezihECDSa
 
             //TestXmlSigning(cert);
             //TestOsigInfo(cert);
-            //TestPrijavaZarazne(cert);
+            TestPrijavaZarazne(cert);
             //TestECezdlih(cert);
         }
 

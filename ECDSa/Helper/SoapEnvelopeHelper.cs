@@ -60,7 +60,7 @@ namespace ECDSa.Helper
             var header = soapDoc.CreateElement(s11ns, "Header", SoapNs11);
             envelope.AppendChild(header);
 
-          
+
             var action = soapDoc.CreateElement("wsa10", "Action", addrNs);
             action.InnerText = opts.SoapAction;
             header.AppendChild(action);
@@ -148,127 +148,40 @@ namespace ECDSa.Helper
 
         public static string CreateSoap11SignedEnvelope(SoapOptions opts)
         {
-            opts.XmlString = Regex.Replace(opts.XmlString, @"<\?xml[^>]+\?>", "").TrimStart('\uFEFF').Trim();
-
-            var s11ns = _namesapces.Keys.FirstOrDefault(k => _namesapces[k] == SoapNs11);
-            var wsuns = _namesapces["wsu"];
-            var wssens = _namesapces["wsse"];
-
-            var soapDoc = new XmlDocument { PreserveWhitespace = true };
-
-            var envelope = soapDoc.CreateElement(s11ns, "Envelope", SoapNs11);
-            foreach (var kv in _namesapces.Where(o => o.Value != SoapNs12))
-            {
-                envelope.SetAttribute($"xmlns:{kv.Key}", kv.Value);
-            }
-
-            soapDoc.AppendChild(envelope);
-
-            var header = soapDoc.CreateElement(s11ns, "Header", SoapNs11);
-            envelope.AppendChild(header);
-
-            var id = $"id-{Guid.NewGuid():N}";
-            var body = soapDoc.CreateElement(s11ns, "Body", SoapNs11);
-            var bodyId = soapDoc.CreateAttribute("wsu", "Id", wsuns);
-            bodyId.Value = id;
-            body.Attributes.Append(bodyId);
-
-            var importedNode = soapDoc.CreateDocumentFragment();
-            importedNode.InnerXml = opts.XmlString;
-            body.AppendChild(importedNode);
-
-            envelope.AppendChild(body);
-
-            var security = soapDoc.CreateElement("wsse", "Security", wssens);
-            var mustUnderstandAttr = soapDoc.CreateAttribute(s11ns, "mustUnderstand", SoapNs11);
-            mustUnderstandAttr.Value = "1";
-            security.Attributes.Append(mustUnderstandAttr);
-
-            if (opts.IncludeTimestamp)
-            {
-                var timestamp = CreateTimestamp(soapDoc);
-                security.AppendChild(timestamp);
-            }
-
-            var token = soapDoc.CreateElement("wsse", "BinarySecurityToken", wssens);
-            token.SetAttribute("EncodingType", B64Encoding);
-            token.SetAttribute("ValueType", ValueType);
-            var bstId = soapDoc.CreateAttribute("wsu", "Id", wsuns);
-            bstId.Value = "_kt";
-            token.Attributes.Append(bstId);
-            token.InnerText = Convert.ToBase64String(opts.Certificate.RawData);
-            security.AppendChild(token);
-
-            var addrNs = _namesapces["wsa10"];
-            var action = soapDoc.CreateElement("wsa10", "Action", addrNs);
-            action.Attributes.Append(mustUnderstandAttr);
-            action.InnerText = opts.SoapAction;
-
-            if (opts.ReplyTo != null)
-            {
-                var to = soapDoc.CreateElement("wsa10", "To", addrNs);
-                to.Attributes.Append(mustUnderstandAttr);
-                to.InnerText = opts.ReplyTo.ToString();
-                header.AppendChild(to);
-            }
-
-            if (opts.MessageId != Guid.Empty)
-            {
-                var addr = _namesapces["wsa10"];
-                var msgId = soapDoc.CreateElement("wsa10", "MessageID", addr);
-                msgId.InnerText = $"urn:uuid:{Guid.NewGuid():D}";
-                header.AppendChild(msgId);
-            }
-
-            header.AppendChild(security);
-            header.AppendChild(action);
-
-            XmlElement signature;
-            if (opts.Certificate.IsEcdsaCertificate())
-            {
-                signature = SignWithECDSA(opts.Certificate, soapDoc, id);
-            }
-            else
-            {
-                signature = SignWithRsa(opts.Certificate, soapDoc, id);
-            }
-
-            var importedSignature = soapDoc.ImportNode(signature, true);
-            security.AppendChild(importedSignature);
-
-            var sb = new StringBuilder();
-            using (var writer = XmlWriter.Create(sb, CompactXmlWriterSettings))
-            {
-                soapDoc.WriteTo(writer);
-                writer.Flush();
-
-                return sb.ToString();
-            }
+            return CreateSignedSoapEnvelope(opts, SoapNs11, "s11", SoapNs12);
         }
 
         public static string CreateSoap12SignedEnvelope(SoapOptions opts)
         {
+            return CreateSignedSoapEnvelope(opts, SoapNs12, "s12", SoapNs11);
+        }
+
+        private static string CreateSignedSoapEnvelope(
+            SoapOptions opts,
+            string soapNs,
+            string soapPrefix,
+            string excludeNs)
+        {
             opts.XmlString = Regex.Replace(opts.XmlString, @"<\?xml[^>]+\?>", "").TrimStart('\uFEFF').Trim();
 
-            var s12ns = _namesapces.Keys.FirstOrDefault(k => _namesapces[k] == SoapNs12);
             var wsuns = _namesapces["wsu"];
             var wssens = _namesapces["wsse"];
 
             var soapDoc = new XmlDocument { PreserveWhitespace = true };
 
-            var envelope = soapDoc.CreateElement(s12ns, "Envelope", SoapNs12);
-            foreach (var kv in _namesapces.Where(o => o.Value != SoapNs11))
+            var envelope = soapDoc.CreateElement(soapPrefix, "Envelope", soapNs);
+            foreach (var kv in _namesapces.Where(o => o.Value != excludeNs))
             {
                 envelope.SetAttribute($"xmlns:{kv.Key}", kv.Value);
             }
 
             soapDoc.AppendChild(envelope);
 
-            var header = soapDoc.CreateElement(s12ns, "Header", SoapNs12);
+            var header = soapDoc.CreateElement(soapPrefix, "Header", soapNs);
             envelope.AppendChild(header);
 
             var id = $"id-{Guid.NewGuid():N}";
-            var body = soapDoc.CreateElement(s12ns, "Body", SoapNs12);
+            var body = soapDoc.CreateElement(soapPrefix, "Body", soapNs);
             var bodyId = soapDoc.CreateAttribute("wsu", "Id", wsuns);
             bodyId.Value = id;
             body.Attributes.Append(bodyId);
@@ -280,7 +193,7 @@ namespace ECDSa.Helper
             envelope.AppendChild(body);
 
             var security = soapDoc.CreateElement("wsse", "Security", wssens);
-            var mustUnderstandAttr = soapDoc.CreateAttribute(s12ns, "mustUnderstand", SoapNs12);
+            var mustUnderstandAttr = soapDoc.CreateAttribute(soapPrefix, "mustUnderstand", soapNs);
             mustUnderstandAttr.Value = "1";
             security.Attributes.Append(mustUnderstandAttr);
 
@@ -345,7 +258,6 @@ namespace ECDSa.Helper
                 return sb.ToString();
             }
         }
-
 
         private static XmlElement SignWithRsa(X509Certificate2 cert, XmlDocument soapDoc, string id)
         {
