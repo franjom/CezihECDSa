@@ -27,7 +27,10 @@ namespace ECDSa.Helper.Soap
             _soapVersion = soapVersion;
         }
 
-        protected virtual TimeSpan DefaultTimeout => TimeSpan.FromSeconds(15);
+        protected virtual TimeSpan DefaultTimeout
+        {
+            get { return TimeSpan.FromSeconds(15); }
+        }
 
         protected HttpClient CreateHttpClient(X509Certificate2 cert)
         {
@@ -270,81 +273,58 @@ namespace ECDSa.Helper.Soap
 
         private static HttpRequestMessage CreateSoap11Request(SoapOptions options)
         {
-            var soapEnvelope = SoapEnvelopeHelper.CreateSoap11Envelope(options);
-
-            var httpRequest = new HttpRequestMessage(HttpMethod.Post, options.Uri)
-            {
-                Content = new StringContent(soapEnvelope, Encoding.UTF8, "text/xml")
-            };
-
-            httpRequest.Headers.Add("SOAPAction", options.SoapAction);
-            httpRequest.Headers.UserAgent.ParseAdd($"OpenCezih.NET");
-            httpRequest.Headers.AcceptEncoding.ParseAdd("gzip,deflate");
-
-            return httpRequest;
+            return CreateSoapRequest(options, SoapEnvelopeHelper.CreateSoap11Envelope, false);
         }
 
         private static HttpRequestMessage CreateSoap11SignedRequest(SoapOptions options)
         {
-            var soapEnvelope = SoapEnvelopeHelper.CreateSoap11SignedEnvelope(options);
-            var request = new HttpRequestMessage(HttpMethod.Post, options.Uri)
-            {
-                Content = new StringContent(soapEnvelope, Encoding.UTF8, "text/xml")
-            };
-            request.Headers.Add("SOAPAction", options.SoapAction);
-            request.Headers.UserAgent.ParseAdd("OpenCezih.NET");
-            request.Headers.AcceptEncoding.ParseAdd("gzip,deflate");
-            return request;
+            return CreateSoapRequest(options, SoapEnvelopeHelper.CreateSoap11SignedEnvelope, false);
         }
 
         private static HttpRequestMessage CreateSoap12Request(SoapOptions options)
         {
-            var soapEnvelope = SoapEnvelopeHelper.CreateSoap12Envelope(options);
-
-            var request = new HttpRequestMessage(HttpMethod.Post, options.Uri)
-            {
-                Content = new StringContent(soapEnvelope, Encoding.UTF8, "text/xml")
-            };
-            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/soap+xml")
-            {
-                CharSet = Encoding.UTF8.WebName
-            };
-            request.Content.Headers.ContentType.Parameters.Add(
-                new NameValueHeaderValue("action", $"\"{options.SoapAction}\""));
-
-            request.Headers.UserAgent.ParseAdd("OpenCezih.NET");
-            request.Headers.AcceptEncoding.ParseAdd("gzip,deflate");
-            return request;
+            return CreateSoapRequest(options, SoapEnvelopeHelper.CreateSoap12Envelope, true);
         }
 
         private static HttpRequestMessage CreateSignedSoap12Request(SoapOptions options)
         {
-            var soapEnvelope = SoapEnvelopeHelper.CreateSoap12SignedEnvelope(options);
+            return CreateSoapRequest(options, SoapEnvelopeHelper.CreateSoap12SignedEnvelope, true);
+        }
 
-            //var soapEnvelope = SoapEnvelopeHelper.CreateSoap12SignedEnvelope(
-            //    options.XmlString,
-            //    options.SoapAction,
-            //    options.Uri.ToString(),
-            //    options.Certificate
-            //);
-
+        private static HttpRequestMessage CreateSoapRequest(
+            SoapOptions options,
+            Func<SoapOptions, string> envelopeBuilder,
+            bool isSoap12)
+        {
+            var soapEnvelope = envelopeBuilder(options);
             var request = new HttpRequestMessage(HttpMethod.Post, options.Uri)
             {
                 Content = new StringContent(soapEnvelope, Encoding.UTF8)
             };
 
-            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/soap+xml")
+            if (isSoap12)
             {
-                CharSet = Encoding.UTF8.WebName
-            };
-            request.Content.Headers.ContentType.Parameters.Add(
-                new NameValueHeaderValue("action", $"\"{options.SoapAction}\""));
+                request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/soap+xml")
+                {
+                    CharSet = Encoding.UTF8.WebName
+                };
+                request.Content.Headers.ContentType.Parameters.Add(
+                    new NameValueHeaderValue("action", $"\"{options.SoapAction}\""));
+            }
+            else
+            {
+                request.Content.Headers.ContentType = new MediaTypeHeaderValue("text/xml")
+                {
+                    CharSet = Encoding.UTF8.WebName
+                };
+                request.Headers.Add("SOAPAction", options.SoapAction);
+            }
 
             request.Headers.UserAgent.ParseAdd("OpenCezih.NET");
             request.Headers.AcceptEncoding.ParseAdd("gzip,deflate");
-
             return request;
         }
+
 
         private static async Task<SoapRequestResult> SendAsyncInternal(HttpRequestMessage request, HttpClient client,
             CancellationToken ct)
