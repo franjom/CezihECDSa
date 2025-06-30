@@ -73,9 +73,9 @@ namespace CezihECDSa
             var cert = ReadFromEcdsaCard();
 
             //TestXmlSigning(cert);
-            //TestOsigInfo(cert);
+            TestOsigInfo(cert);
             //TestPrijavaZarazne(cert);
-            TestECezdlih(cert);
+            //TestECezdlih(cert);
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()
@@ -196,7 +196,7 @@ namespace CezihECDSa
 
         private static X509Certificate2 ReadFromSoftCert()
         {
-            const string thumb = "d6d708bb76ca6812f07d8ec6a0dd032ddc8884c6";
+            const string thumb = "";
 
             var store = new X509Store();
             store.Open(OpenFlags.ReadOnly);
@@ -231,10 +231,10 @@ namespace CezihECDSa
                 Timeout = TimeSpan.FromSeconds(10)
             };
             var osigInfoClient = new OsigInfoClient(opts, cert);
-            var responseSync1 = osigInfoClient.osigInfoForSKZZ("990000818");
-            var responseSync2 = osigInfoClient.osigInfoForDoctor("990000818");
-            var responseSync3 = osigInfoClient.osigInfoForBIS("990000818");
-            var glavarina = osigInfoClient.infoGlavarina("990002068", DateTime.MinValue);
+            var responseSync1 = osigInfoClient.osigInfoForSKZZ("");
+            var responseSync2 = osigInfoClient.osigInfoForDoctor("");
+            var responseSync3 = osigInfoClient.osigInfoForBIS("");
+            var glavarina = osigInfoClient.infoGlavarina("", DateTime.MinValue);
             var chosen = osigInfoClient.chosenDoctor("");
         }
 
@@ -374,27 +374,27 @@ namespace CezihECDSa
             };
 
             var cezdlihClient = new CezdlihClient(opts, cert);
-            //var response = cezdlihClient.PreuzimanjePlanaImunizacije(
-            //    new PreuzimanjePlanaImunizacijeRequest
-            //    {
-            //        PreuzimanjePlanaImunizacijeRequest1 =
-            //            new PreuzimanjePlanaImunizacijePreuzimanjePlanaImunizacijeRequest
-            //            {
-            //                Godina = 2025,
-            //                SifraUstanove = "940394030",
-            //                IdentifikatorZahtjev = new ZaglavljeZahtjevType
-            //                {
-            //                    PorukaID = $"{Guid.NewGuid()}",
-            //                    VrijemeSlanja = DateTime.Now
-            //                }
-            //            }
-            //    });
+            var response = cezdlihClient.PreuzimanjePlanaImunizacije(
+                new PreuzimanjePlanaImunizacijeRequest
+                {
+                    PreuzimanjePlanaImunizacijeRequest1 =
+                        new PreuzimanjePlanaImunizacijePreuzimanjePlanaImunizacijeRequest
+                        {
+                            Godina = 2025,
+                            SifraUstanove = "",
+                            IdentifikatorZahtjev = new ZaglavljeZahtjevType
+                            {
+                                PorukaID = $"{Guid.NewGuid()}",
+                                VrijemeSlanja = DateTime.Now
+                            }
+                        }
+                });
 
-            var response = cezdlihClient.SlanjePlanaImunizacije(new SlanjePlanaImunizacijeRequest(
+            var response2 = cezdlihClient.SlanjePlanaImunizacije(new SlanjePlanaImunizacijeRequest(
                 new SlanjePlanaImunizacijeSlanjePlanaImunizacijeRequest
                 {
                     GodinuZaKojuSeTraziPlan = 2025,
-                    SifraUstanove = "940394030"
+                    SifraUstanove = ""
                 }));
         }
 
