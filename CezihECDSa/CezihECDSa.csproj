@@ -96,6 +96,8 @@
     <Compile Include="SoapClients\Cezdlih\CezdlihOptions.cs" />
     <Compile Include="SoapClients\Cezdlih\Wrappers\WPreuzimanjePlanaImunizacijeRequest.cs" />
     <Compile Include="SoapClients\Cezdlih\Wrappers\WPreuzimanjePlanaImunizacijeResponse.cs" />
+    <Compile Include="SoapClients\Cezdlih\Wrappers\WSlanjePlanaImunizacijeRequest.cs" />
+    <Compile Include="SoapClients\Cezdlih\Wrappers\WSlanjePlanaImunizacijeResponse.cs" />
     <Compile Include="SoapClients\OsigInfo\ChosenDoctorRequest.cs" />
     <Compile Include="SoapClients\OsigInfo\ChosenDoctorResponse.cs" />
     <Compile Include="SoapClients\OsigInfo\InfoGlavarinaCheckRequest.cs" />

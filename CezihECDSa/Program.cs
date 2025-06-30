@@ -74,8 +74,8 @@ namespace CezihECDSa
 
             //TestXmlSigning(cert);
             //TestOsigInfo(cert);
-            TestPrijavaZarazne(cert);
-            //TestECezdlih(cert);
+            //TestPrijavaZarazne(cert);
+            TestECezdlih(cert);
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()
@@ -374,21 +374,28 @@ namespace CezihECDSa
             };
 
             var cezdlihClient = new CezdlihClient(opts, cert);
-            var response = cezdlihClient.PreuzimanjePlanaImunizacije(
-                new PreuzimanjePlanaImunizacijeRequest
+            //var response = cezdlihClient.PreuzimanjePlanaImunizacije(
+            //    new PreuzimanjePlanaImunizacijeRequest
+            //    {
+            //        PreuzimanjePlanaImunizacijeRequest1 =
+            //            new PreuzimanjePlanaImunizacijePreuzimanjePlanaImunizacijeRequest
+            //            {
+            //                Godina = 2025,
+            //                SifraUstanove = "940394030",
+            //                IdentifikatorZahtjev = new ZaglavljeZahtjevType
+            //                {
+            //                    PorukaID = $"{Guid.NewGuid()}",
+            //                    VrijemeSlanja = DateTime.Now
+            //                }
+            //            }
+            //    });
+
+            var response = cezdlihClient.SlanjePlanaImunizacije(new SlanjePlanaImunizacijeRequest(
+                new SlanjePlanaImunizacijeSlanjePlanaImunizacijeRequest
                 {
-                    PreuzimanjePlanaImunizacijeRequest1 =
-                        new PreuzimanjePlanaImunizacijePreuzimanjePlanaImunizacijeRequest
-                        {
-                            Godina = 2025,
-                            SifraUstanove = "940394030",
-                            IdentifikatorZahtjev = new ZaglavljeZahtjevType
-                            {
-                                PorukaID = $"{Guid.NewGuid()}",
-                                VrijemeSlanja = DateTime.Now
-                            }
-                        }
-                });
+                    GodinuZaKojuSeTraziPlan = 2025,
+                    SifraUstanove = "940394030"
+                }));
         }
 
         private static string GetSafePath(string path1, string path2)
