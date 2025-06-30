@@ -327,45 +327,6 @@ namespace CezihECDSa
 
         private static void TestECezdlih(X509Certificate2 cert)
         {
-            //try
-            //{
-            //    var request = new PreuzimanjePlanaImunizacijePreuzimanjePlanaImunizacijeRequest
-            //    {
-            //        IdentifikatorZahtjev = new ZaglavljeZahtjevType
-            //        {
-            //            VrijemeSlanja = DateTime.Now,
-            //            PorukaID = $"{Guid.NewGuid()}",
-            //        },
-            //        SifraUstanove = "940394030",
-            //        Godina = 2025
-            //    };
-
-            //    var binding = new CustomBinding("Soap12");
-            //    var securityBindingElement = binding.Elements.Find<SecurityBindingElement>();
-            //    securityBindingElement.LocalClientSettings.IdentityVerifier = new EverythingIsFineIdentityVerifier();
-
-            //    var uri = new Uri("https://cezdlih-cijepih-test.zdravlje.hr:8443");
-            //    var endpoint = new EndpointAddress(uri);
-            //    var client = new CEZDLIHWSSoapClient(binding, endpoint);
-            //    client.Endpoint.EndpointBehaviors.Add(new LoggingEndpointBehavior());
-            //    client.Endpoint.Contract.ProtectionLevel = ProtectionLevel.Sign;
-            //    client.ClientCredentials.ClientCertificate.Certificate = cert;
-            //    client.ClientCredentials.ServiceCertificate.DefaultCertificate = cert;
-
-            //    var response = client.PreuzimanjePlanaImunizacije(request);
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e);
-            //}
-
-            // ovo radi sa RSA ne radi sa ECDSA mora se slati nepotpisani request
-            //var opts = new CezdlihOptions
-            //{
-            //    BaseUri = new Uri("https://cezdlih-cijepih-test.zdravlje.hr:8443"),
-            //    Timeout = TimeSpan.FromSeconds(30)
-            //};
-
             // ovo radi sa ECDSA mora se slati potpiani request
             var opts = new CezdlihOptions
             {
