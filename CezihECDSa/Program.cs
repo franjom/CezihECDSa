@@ -227,7 +227,7 @@ namespace CezihECDSa
         {
             var opts = new OsigInfoOptions
             {
-                BaseUri = new Uri("https://certws.cezih.hr:40443/osiginfo-3"),
+                BaseUri = new Uri(""),
                 Timeout = TimeSpan.FromSeconds(10)
             };
             var osigInfoClient = new OsigInfoClient(opts, cert);
@@ -242,7 +242,7 @@ namespace CezihECDSa
         {
             var opts = new PrijavaZarazneOptions
             {
-                BaseUri = new Uri("https://certws.cezih.hr:48443"),
+                BaseUri = new Uri(""),
                 Timeout = TimeSpan.FromSeconds(30)
             };
 
@@ -330,7 +330,7 @@ namespace CezihECDSa
             // ovo radi sa ECDSA mora se slati potpiani request
             var opts = new CezdlihOptions
             {
-                BaseUri = new Uri("https://evaccert.zdravlje.hr/WebServices2/CEZDLIHWS.asmx"),
+                BaseUri = new Uri(""),
                 Timeout = TimeSpan.FromSeconds(30)
             };
 
