@@ -15,7 +15,7 @@ namespace CezihECDSa.SoapClients.Cezdlih.Wrappers
             Request = request;
         }
 
-        [XmlElement("SlanjePlanaImunizacijeRequest")]
+        [XmlElement("SlanjePlanaImunizacijeRequest", Order = 0)]
         public SlanjePlanaImunizacijeSlanjePlanaImunizacijeRequest Request { get; set; }
     }
 }
