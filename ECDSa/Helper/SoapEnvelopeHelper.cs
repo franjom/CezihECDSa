@@ -65,14 +65,14 @@ namespace ECDSa.Helper
             action.InnerText = opts.SoapAction;
             header.AppendChild(action);
 
-            if (opts.MessageId != Guid.Empty)
+            if (opts.MessageId != default)
             {
                 var msgId = soapDoc.CreateElement("wsa10", "MessageID", addrNs);
                 msgId.InnerText = $"urn:uuid:{opts.MessageId:D}";
                 header.AppendChild(msgId);
             }
 
-            if (opts.ReplyTo != null)
+            if (opts.ReplyTo != default)
             {
                 var replyTo = soapDoc.CreateElement("wsa10", "ReplyTo", addrNs);
                 var address = soapDoc.CreateElement("wsa10", "Address", addrNs);
@@ -82,7 +82,7 @@ namespace ECDSa.Helper
                 header.AppendChild(replyTo);
             }
             
-            if (opts.To != null)
+            if (opts.To != default)
             {
                 var to = soapDoc.CreateElement("wsa10", "To", addrNs);
                 to.InnerText = opts.To.ToString();
@@ -130,14 +130,14 @@ namespace ECDSa.Helper
             action.InnerText = opts.SoapAction;
             header.AppendChild(action);
 
-            if (opts.MessageId != Guid.Empty)
+            if (opts.MessageId != default)
             {
                 var msgId = soapDoc.CreateElement("wsa10", "MessageID", addrNs);
                 msgId.InnerText = $"urn:uuid:{opts.MessageId:D}";
                 header.AppendChild(msgId);
             }
 
-            if (opts.ReplyTo != null)
+            if (opts.ReplyTo != default)
             {
                 var replyTo = soapDoc.CreateElement("wsa10", "ReplyTo", addrNs);
                 var address = soapDoc.CreateElement("wsa10", "Address", addrNs);
@@ -147,7 +147,7 @@ namespace ECDSa.Helper
                 header.AppendChild(replyTo);
             }
             
-            if (opts.To != null)
+            if (opts.To != default)
             {
                 var to = soapDoc.CreateElement("wsa10", "To", addrNs);
                 to.InnerText = opts.To.ToString();
@@ -244,14 +244,14 @@ namespace ECDSa.Helper
             header.AppendChild(security);
             header.AppendChild(action);
 
-            if (opts.MessageId != Guid.Empty)
+            if (opts.MessageId != default)
             {
                 var msgId = soapDoc.CreateElement("wsa10", "MessageID", addrNs);
                 msgId.InnerText = $"urn:uuid:{opts.MessageId:D}";
                 header.AppendChild(msgId);
             }
 
-            if (opts.ReplyTo != null)
+            if (opts.ReplyTo != default)
             {
                 var replyTo = soapDoc.CreateElement("wsa10", "ReplyTo", addrNs);
                 var address = soapDoc.CreateElement("wsa10", "Address", addrNs);
@@ -261,7 +261,7 @@ namespace ECDSa.Helper
                 header.AppendChild(replyTo);
             }
 
-            if (opts.To != null)
+            if (opts.To != default)
             {
                 var to = soapDoc.CreateElement("wsa10", "To", addrNs);
                 to.InnerText = opts.To.ToString();
