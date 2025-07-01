@@ -70,7 +70,7 @@ namespace ECDSa.Helper
             {
                 var addr = _namesapces["wsa10"];
                 var msgId = soapDoc.CreateElement("wsa10", "MessageID", addr);
-                msgId.InnerText = $"urn:uuid:{Guid.NewGuid():D}";
+                msgId.InnerText = $"urn:uuid:{opts.MessageId:D}";
                 header.AppendChild(msgId);
             }
 
@@ -127,7 +127,7 @@ namespace ECDSa.Helper
             {
                 var addr = _namesapces["wsa10"];
                 var msgId = soapDoc.CreateElement("wsa10", "MessageID", addr);
-                msgId.InnerText = $"urn:uuid:{Guid.NewGuid():D}";
+                msgId.InnerText = $"urn:uuid:{opts.MessageId:D}";
                 header.AppendChild(msgId);
             }
 
@@ -233,7 +233,7 @@ namespace ECDSa.Helper
             {
                 var addr = _namesapces["wsa10"];
                 var msgId = soapDoc.CreateElement("wsa10", "MessageID", addr);
-                msgId.InnerText = $"urn:uuid:{Guid.NewGuid():D}";
+                msgId.InnerText = $"urn:uuid:{opts.MessageId:D}";
                 header.AppendChild(msgId);
             }
 
