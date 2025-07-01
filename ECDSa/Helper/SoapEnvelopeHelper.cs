@@ -2,7 +2,6 @@
 using ECDSa.Helper.Xml;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
@@ -68,10 +67,26 @@ namespace ECDSa.Helper
 
             if (opts.MessageId != Guid.Empty)
             {
-                var addr = _namesapces["wsa10"];
-                var msgId = soapDoc.CreateElement("wsa10", "MessageID", addr);
+                var msgId = soapDoc.CreateElement("wsa10", "MessageID", addrNs);
                 msgId.InnerText = $"urn:uuid:{opts.MessageId:D}";
                 header.AppendChild(msgId);
+            }
+
+            if (opts.ReplyTo != null)
+            {
+                var replyTo = soapDoc.CreateElement("wsa10", "ReplyTo", addrNs);
+                var address = soapDoc.CreateElement("wsa10", "Address", addrNs);
+                address.InnerText = opts.ReplyTo.ToString();
+
+                replyTo.AppendChild(address);
+                header.AppendChild(replyTo);
+            }
+            
+            if (opts.To != null)
+            {
+                var to = soapDoc.CreateElement("wsa10", "To", addrNs);
+                to.InnerText = opts.To.ToString();
+                header.AppendChild(to);
             }
 
             var body = soapDoc.CreateElement(s11ns, "Body", SoapNs11);
@@ -115,20 +130,28 @@ namespace ECDSa.Helper
             action.InnerText = opts.SoapAction;
             header.AppendChild(action);
 
-            if (opts.ReplyTo != null)
-            {
-                var to = soapDoc.CreateElement("wsa10", "To", addrNs);
-                to.Attributes.Append(mustUnderstandAttr);
-                to.InnerText = opts.ReplyTo.ToString();
-                header.AppendChild(to);
-            }
-
             if (opts.MessageId != Guid.Empty)
             {
-                var addr = _namesapces["wsa10"];
-                var msgId = soapDoc.CreateElement("wsa10", "MessageID", addr);
+                var msgId = soapDoc.CreateElement("wsa10", "MessageID", addrNs);
                 msgId.InnerText = $"urn:uuid:{opts.MessageId:D}";
                 header.AppendChild(msgId);
+            }
+
+            if (opts.ReplyTo != null)
+            {
+                var replyTo = soapDoc.CreateElement("wsa10", "ReplyTo", addrNs);
+                var address = soapDoc.CreateElement("wsa10", "Address", addrNs);
+                address.InnerText = opts.ReplyTo.ToString();
+
+                replyTo.AppendChild(address);
+                header.AppendChild(replyTo);
+            }
+            
+            if (opts.To != null)
+            {
+                var to = soapDoc.CreateElement("wsa10", "To", addrNs);
+                to.InnerText = opts.To.ToString();
+                header.AppendChild(to);
             }
 
             var body = soapDoc.CreateElement("soap", "Body", SoapNs12);
@@ -221,20 +244,28 @@ namespace ECDSa.Helper
             header.AppendChild(security);
             header.AppendChild(action);
 
-            if (opts.ReplyTo != null)
-            {
-                var to = soapDoc.CreateElement("wsa10", "To", addrNs);
-                to.Attributes.Append(mustUnderstandAttr);
-                to.InnerText = opts.ReplyTo.ToString();
-                header.AppendChild(to);
-            }
-
             if (opts.MessageId != Guid.Empty)
             {
-                var addr = _namesapces["wsa10"];
-                var msgId = soapDoc.CreateElement("wsa10", "MessageID", addr);
+                var msgId = soapDoc.CreateElement("wsa10", "MessageID", addrNs);
                 msgId.InnerText = $"urn:uuid:{opts.MessageId:D}";
                 header.AppendChild(msgId);
+            }
+
+            if (opts.ReplyTo != null)
+            {
+                var replyTo = soapDoc.CreateElement("wsa10", "ReplyTo", addrNs);
+                var address = soapDoc.CreateElement("wsa10", "Address", addrNs);
+                address.InnerText = opts.ReplyTo.ToString();
+
+                replyTo.AppendChild(address);
+                header.AppendChild(replyTo);
+            }
+
+            if (opts.To != null)
+            {
+                var to = soapDoc.CreateElement("wsa10", "To", addrNs);
+                to.InnerText = opts.To.ToString();
+                header.AppendChild(to);
             }
 
             XmlElement signature;
