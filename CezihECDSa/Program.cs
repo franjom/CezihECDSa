@@ -9,6 +9,7 @@ using ECDSa.ECDSa;
 using ECDSa.Helper;
 using Net.Pkcs11Interop.X509Store;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Policy;
 using System.IO;
 using System.Net.Security;
@@ -73,9 +74,9 @@ namespace CezihECDSa
             var cert = ReadFromEcdsaCard();
 
             //TestXmlSigning(cert);
-            TestOsigInfo(cert);
+            //TestOsigInfo(cert);
             //TestPrijavaZarazne(cert);
-            //TestECezdlih(cert);
+            TestECezdlih(cert);
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()
@@ -330,7 +331,7 @@ namespace CezihECDSa
             // ovo radi sa ECDSA mora se slati potpiani request
             var opts = new CezdlihOptions
             {
-                BaseUri = new Uri(""),
+                BaseUri = new Uri("https://cezihtest.cezih.hr/CezihWs/ws"),
                 Timeout = TimeSpan.FromSeconds(30)
             };
 
@@ -357,6 +358,128 @@ namespace CezihECDSa
                     GodinuZaKojuSeTraziPlan = 2025,
                     SifraUstanove = ""
                 }));
+
+            var response3 = cezdlihClient.SlanjeNarudzbenica(new SlanjeNarudzbenicaRequest(
+                new SlanjeNarudzbenicaSlanjeNarudzbenicaRequest
+                {
+                    SifraUstanoveNarucitelj = "",
+                    PodaciOSkladistu = "",
+                    PodaciOLokacijiSkladista = "",
+                    SifraUstanoveOdKojegSeNarucuje = "",
+                    BrojNarudzbenice = "",
+                    DatumKreiranjaNarudzbenice = DateTime.Now,
+                    Cjepiva = new List<ArrayOfSlanjeNarudzbenicaZahtjevCjepivoCjepivo>
+                    {
+                        new ArrayOfSlanjeNarudzbenicaZahtjevCjepivoCjepivo
+                        {
+                            SifraVrsteCjepivo = 0,
+                            TrazenaKolicina = 0,
+                            Napomena = ""
+                        }
+                    }.ToArray(),
+                    IdentifikatorZahtjev = new ZaglavljeZahtjevType
+                    {
+                        PorukaID = $"{Guid.NewGuid()}",
+                        VrijemeSlanja = DateTime.Now
+                    }
+                }));
+
+            var response4 = cezdlihClient.PreuzimanjeOtpremnice(new PreuzimanjeOtpremniceRequest(
+                new PreuzimanjeOtpremnicePreuzimanjeOtpremniceRequest
+                {
+                    SifraUstanove = "",
+                    BrojNarudzbenice = "",
+                    IdentifikatorZahtjev = new ZaglavljeZahtjevType
+                    {
+                        PorukaID = $"{Guid.NewGuid()}",
+                        VrijemeSlanja = DateTime.Now
+                    }
+                }));
+
+            var response5 = cezdlihClient.SlanjePrimke(new SlanjePrimkeRequest(
+                new SlanjePrimkeSlanjePrimkeRequest
+                {
+                    SifraUstanove = "",
+                    BrojNarudzbenice = "",
+                    BrojOtpremnice = "",
+                    BrojPrimke = "",
+                    Cjepiva = new List<ArrayOfStavkeCjepivaTypeCjepivoCjepivo>
+                    {
+                        new ArrayOfStavkeCjepivaTypeCjepivoCjepivo
+                        {
+                            JedinstvenaSifraCjepiva = "",
+                            GenerickoImeCjepiva = "",
+                            ZasticenoImeCjepiva = "",
+                            SifraVrsteCjepiva = 0,
+                            NazivProizvodacaCjepiva = "",
+                            ATK10SifraCjepiva = "",
+                            JedinicaMjere = "",
+                            Serija = "",
+                            RokUporabe = DateTime.Now,
+                            Doza = 0,
+                            KolicinaOriginalnihPakiranja = null,
+                            PrezentacijaCjepiva = "",
+                        }
+                    }.ToArray(),
+                    IdentifikatorZahtjev = new ZaglavljeZahtjevType
+                    {
+                        PorukaID = $"{Guid.NewGuid()}",
+                        VrijemeSlanja = DateTime.Now
+                    }
+                }));
+
+            var response13 = cezdlihClient.PreuzimanjeZip(new PreuzimanjeZipRequest(
+                new PreuzimanjeZipPreuzimanjeZipRequest
+                {
+                    SifraUstanove = "",
+                    IdentifikatorZahtjev = new ZaglavljeZahtjevType
+                    {
+                        PorukaID = $"{Guid.NewGuid()}",
+                        VrijemeSlanja = DateTime.Now
+                    }
+                }));
+
+            var response15 = cezdlihClient.StatusLijecenjaPacijenta(new StatusLijecenjaPacijentaZahtjevZaStatusLijecenjaPacijenta
+            {
+                StatusLijecenjaPacijenta = new List<ArrayOfStatusLijecenjaPacijentaTypeStatusLijecenjaPacijentaType>
+                {
+                    new ArrayOfStatusLijecenjaPacijentaTypeStatusLijecenjaPacijentaType
+                    {
+                        SifraUstanoveKojaUpucuje = "",
+                        DatumVrijemeStatusa = DateTime.Now,
+                        Status = 0,
+                        Covid = false,
+                        AsimptomatskiIzDomova = false,
+                        IntenzitetSimptoma = 0,
+                        IshodLijecenja = 0,
+                        Oprema = "",
+                        Pacijent = new ArrayOfStatusLijecenjaPacijentaTypeStatusLijecenjaPacijentaTypePacijent
+                        {
+                            Item = "",
+                            ItemElementName = ItemChoiceType2.EUKartica,
+                            Ime = "",
+                            Prezime = "",
+                            Spol = Spol.Nepoznato,
+                            DatumRodjenja = DateTime.Now,
+                            DrzavaOsiguranjaZaStrance = ""
+                        },
+                        Dijagnoza = new List<ArrayOfStatusLijecenjaPacijentaTypeStatusLijecenjaPacijentaTypeDijagnoza>
+                        {
+                            new ArrayOfStatusLijecenjaPacijentaTypeStatusLijecenjaPacijentaTypeDijagnoza
+                            {
+                                Sifra = "",
+                            }
+                        }.ToArray(),
+                    }
+                }.ToArray(),
+                IdentifikatorZahtjev = new ZaglavljeZahtjevType
+                {
+                    PorukaID = $"{Guid.NewGuid()}",
+                    VrijemeSlanja = DateTime.Now
+                }
+            });
+
+            Console.WriteLine("done");
         }
 
         private static string GetSafePath(string path1, string path2)
