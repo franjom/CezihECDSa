@@ -362,6 +362,14 @@ namespace ECDSa.Helper.Soap
             {
                 using (var response = client.SendAsync(request).GetAwaiter().GetResult())
                 {
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        return new SoapRequestResult
+                        {
+                            IsSuccessStatusCode = response.IsSuccessStatusCode,
+                            Content = response.ReasonPhrase
+                        };
+                    }
                     var content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                     return new SoapRequestResult
                     {

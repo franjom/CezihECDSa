@@ -1,5 +1,7 @@
 ﻿using CezihECDSa.Logging;
 using CezihECDSa.SoapClients.Cezdlih;
+using CezihECDSa.SoapClients.InfoOthers;
+using CezihECDSa.SoapClients.InfoOthers.Wrappers;
 using CezihECDSa.SoapClients.OsigInfo;
 using CezihECDSa.SoapClients.PrijavaZarazne;
 using CezihECDSa.Wsdl;
@@ -73,9 +75,10 @@ namespace CezihECDSa
             var cert = ReadFromEcdsaCard();
 
             //TestXmlSigning(cert);
-            TestOsigInfo(cert);
+            //TestOsigInfo(cert);
             //TestPrijavaZarazne(cert);
             //TestECezdlih(cert);
+            TestInfoOthers(cert);
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()
@@ -330,7 +333,7 @@ namespace CezihECDSa
             // ovo radi sa ECDSA mora se slati potpiani request
             var opts = new CezdlihOptions
             {
-                BaseUri = new Uri(""),
+                BaseUri = new Uri("https://evaccert.zdravlje.hr/WebServices2/CEZDLIHWS.asmx"),
                 Timeout = TimeSpan.FromSeconds(30)
             };
 
@@ -357,6 +360,21 @@ namespace CezihECDSa
                     GodinuZaKojuSeTraziPlan = 2025,
                     SifraUstanove = ""
                 }));
+        }
+
+        private static void TestInfoOthers(X509Certificate2 cert)
+        {
+            var opts = new InfoOthersOptions
+            {
+                //BaseUri = new Uri("https://servistest.hzzo.hr/InfoOthers/InfoOthers.svc"),
+                BaseUri = new Uri("https://servistest.hzzo.hr/InfoOthers/InfoOthers.svc/s11"),
+                Timeout = TimeSpan.FromSeconds(30)
+            };
+            var infoOthersClient = new InfoOthersClient(opts, cert);
+            var responseSync1 = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("", "54968374901"));
+            var responseSync2 = infoOthersClient.DohvatiOthersNaDan(new WDohvatiOthersNaDanRequest("03276147", "990000767", DateTime.Now, true));
+
+            Console.WriteLine("done");
         }
 
         private static string GetSafePath(string path1, string path2)
