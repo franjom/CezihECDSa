@@ -331,7 +331,7 @@ namespace CezihECDSa
             // ovo radi sa ECDSA mora se slati potpiani request
             var opts = new CezdlihOptions
             {
-                BaseUri = new Uri("https://cezihtest.cezih.hr/CezihWs/ws"),
+                BaseUri = new Uri(""),
                 Timeout = TimeSpan.FromSeconds(30)
             };
 
