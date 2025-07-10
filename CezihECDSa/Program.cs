@@ -364,15 +364,15 @@ namespace CezihECDSa
 
         private static void TestInfoOthers(X509Certificate2 cert)
         {
-            var opts = new InfoOthersOptions
+            var opts = new InfoOthersOptions 
             {
                 //BaseUri = new Uri("https://servistest.hzzo.hr/InfoOthers/InfoOthers.svc"),
                 BaseUri = new Uri("https://servistest.hzzo.hr/InfoOthers/InfoOthers.svc/s11"),
                 Timeout = TimeSpan.FromSeconds(30)
             };
             var infoOthersClient = new InfoOthersClient(opts, cert);
-            var responseSync1 = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("", "54968374901"));
-            var responseSync2 = infoOthersClient.DohvatiOthersNaDan(new WDohvatiOthersNaDanRequest("03276147", "990000767", DateTime.Now, true));
+            //var responseSync1 = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("", "54968374901"));
+            var responseSync2 = infoOthersClient.DohvatiOthersNaDan(new WDohvatiOthersNaDanRequest("03276147", "990000767", DateTime.Today, true));
 
             Console.WriteLine("done");
         }

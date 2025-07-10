@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace CezihECDSa.SoapClients.InfoOthers.Wrappers
 {
-    [XmlRoot("DohvatiOthersNaDan")]
+    [XmlRoot("DohvatiOthersNaDan", Namespace = "http://tempuri.org/")]
     public sealed class WDohvatiOthersNaDanRequest
     {
         public WDohvatiOthersNaDanRequest() { }
@@ -25,9 +21,17 @@ namespace CezihECDSa.SoapClients.InfoOthers.Wrappers
         [XmlElement("pacijentoib", Order = 1)]
         public string PacijentOib { get; set; }
 
-        [XmlElement("dan", Order = 2)]
+        [XmlIgnore]
         public DateTime Dan { get; set; }
 
+        [XmlElement("dan", Order = 2)]
+        public string DanString
+        {
+            get => Dan.ToString("yyyy-MM-ddTHH:mm:ss");
+            set => Dan = DateTime.Parse(value);
+        }
+
+        [XmlIgnore]
         [XmlElement("danSpecified", Order = 3)]
         public bool DanSpecified { get; set; }
     }
