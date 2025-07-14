@@ -73,8 +73,8 @@ namespace CezihECDSa
             var cert = ReadFromEcdsaCard();
 
             //TestXmlSigning(cert);
-            TestOsigInfo(cert);
-            //TestPrijavaZarazne(cert);
+            //TestOsigInfo(cert);
+            TestPrijavaZarazne(cert);
             //TestECezdlih(cert);
         }
 
@@ -242,7 +242,7 @@ namespace CezihECDSa
         {
             var opts = new PrijavaZarazneOptions
             {
-                BaseUri = new Uri(""),
+                BaseUri = new Uri("https://certws.cezih.hr:48443"),
                 Timeout = TimeSpan.FromSeconds(30)
             };
 
