@@ -98,6 +98,8 @@
     <Compile Include="SoapClients\Cezdlih\Wrappers\WPreuzimanjePlanaImunizacijeResponse.cs" />
     <Compile Include="SoapClients\Cezdlih\Wrappers\WSlanjePlanaImunizacijeRequest.cs" />
     <Compile Include="SoapClients\Cezdlih\Wrappers\WSlanjePlanaImunizacijeResponse.cs" />
+    <Compile Include="SoapClients\InjuryApplicationService\InjuryApplicationServiceClient.cs" />
+    <Compile Include="SoapClients\InjuryApplicationService\InjuryApplicationServiceOptions.cs" />
     <Compile Include="SoapClients\OsigInfo\ChosenDoctorRequest.cs" />
     <Compile Include="SoapClients\OsigInfo\ChosenDoctorResponse.cs" />
     <Compile Include="SoapClients\OsigInfo\InfoGlavarinaCheckRequest.cs" />
@@ -117,6 +119,7 @@
     <Compile Include="SoapClients\PrijavaZarazne\PrijavaZarazneClient.cs" />
     <Compile Include="SoapClients\PrijavaZarazne\PrijavaZarazneOptions.cs" />
     <Compile Include="Wsdl\CezdlihWsdl.cs" />
+    <Compile Include="Wsdl\InjuryApplicationService.cs" />
     <Compile Include="Wsdl\OsigInfoWsdl.cs" />
     <Compile Include="Wsdl\PrijavaZarazneUpdateWsdl.cs" />
     <Compile Include="Wsdl\PrijavaZarazneWsdl.cs" />
