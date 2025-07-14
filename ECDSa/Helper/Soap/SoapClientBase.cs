@@ -41,7 +41,6 @@ namespace ECDSa.Helper.Soap
                 AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
 #if DEBUG
                 ServerCertificateCustomValidationCallback = delegate { return true; },
-                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
 #endif
             };
 
