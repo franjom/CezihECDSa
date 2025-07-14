@@ -40,7 +40,8 @@ namespace ECDSa.Helper.Soap
                 ClientCertificates = { cert },
                 AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
 #if DEBUG
-                ServerCertificateCustomValidationCallback = delegate { return true; }
+                ServerCertificateCustomValidationCallback = delegate { return true; },
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
 #endif
             };
 
@@ -339,7 +340,7 @@ namespace ECDSa.Helper.Soap
                     return new SoapRequestResult
                     {
                         IsSuccessStatusCode = response.IsSuccessStatusCode,
-                        Content = content
+                        Content = string.IsNullOrWhiteSpace(content) ? response.ReasonPhrase : content
                     };
                 }
             }
@@ -368,7 +369,7 @@ namespace ECDSa.Helper.Soap
                     return new SoapRequestResult
                     {
                         IsSuccessStatusCode = response.IsSuccessStatusCode,
-                        Content = content
+                        Content = string.IsNullOrWhiteSpace(content) ? response.ReasonPhrase : content
                     };
                 }
             }
