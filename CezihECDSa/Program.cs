@@ -368,8 +368,8 @@ namespace CezihECDSa
             {
                 BaseUri = new Uri("")
             };
-            var osigInfoClient = new InjuryApplicationServiceClient(opts, cert);
-            var responseSync1 = osigInfoClient.Prijava(new prijavaRequest 
+            var client = new InjuryApplicationServiceClient(opts, cert);
+            var responseSync1 = client.Prijava(new prijavaRequest 
             { 
                 idPrijave = 20
             });
