@@ -2,6 +2,7 @@
 using ECDSa.Helper.Soap._1_2;
 using System;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
@@ -37,6 +38,7 @@ namespace ECDSa.Helper.Soap
             var handler = new HttpClientHandler
             {
                 ClientCertificates = { cert },
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
 #if DEBUG
                 ServerCertificateCustomValidationCallback = delegate { return true; }
 #endif
