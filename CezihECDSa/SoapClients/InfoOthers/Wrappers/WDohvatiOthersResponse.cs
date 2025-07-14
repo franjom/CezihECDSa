@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace CezihECDSa.SoapClients.InfoOthers.Wrappers
 {
-    [XmlRoot("DohvatiOthers", Namespace = "http://tempuri.org/")]
+    [XmlRoot("DohvatiOthersResponse", Namespace = "http://tempuri.org/")]
     public sealed class WDohvatiOthersResponse
     {
         public WDohvatiOthersResponse()
@@ -15,7 +15,7 @@ namespace CezihECDSa.SoapClients.InfoOthers.Wrappers
             Output = output;
         }
 
-        [XmlElement("OsigStatus", Order = 0)]
+        [XmlElement("DohvatiOthersResult", Order = 0)]
         public OsigStatus Output { get; set; }
     }
 }

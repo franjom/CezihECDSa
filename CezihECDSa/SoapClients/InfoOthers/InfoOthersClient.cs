@@ -55,14 +55,12 @@ namespace CezihECDSa.SoapClients.InfoOthers
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
                     SoapAction = "http://tempuri.org/IInfoOthers/DohvatiOthers",
                     Uri = uri,
-                    XmlString = xml,
-                    IncludeTimestamp = true,
-                    MessageId = Guid.NewGuid(),
+                    XmlString = xml
                 });
 
                 return ProcesDohvatiOthersResponse(result);
@@ -80,7 +78,7 @@ namespace CezihECDSa.SoapClients.InfoOthers
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
                     SoapAction = "http://tempuri.org/IInfoOthers/DohvatiOthers",
@@ -109,7 +107,7 @@ namespace CezihECDSa.SoapClients.InfoOthers
                     Certificate = _cert,
                     SoapAction = "http://tempuri.org/IInfoOthers/DohvatiOthersNaDan",
                     Uri = uri,
-                    XmlString = goodxml
+                    XmlString = xml 
                 });
 
                 return ProcesDohvatiOthersNaDanResponse(result);
@@ -127,7 +125,7 @@ namespace CezihECDSa.SoapClients.InfoOthers
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
                     SoapAction = "http://tempuri.org/IInfoOthers/DohvatiOthersNaDan",
@@ -151,7 +149,7 @@ namespace CezihECDSa.SoapClients.InfoOthers
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
                     SoapAction = "http://tempuri.org/IInfoOthers/AutorizacijaOthers",
@@ -174,7 +172,7 @@ namespace CezihECDSa.SoapClients.InfoOthers
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
                     SoapAction = "http://tempuri.org/IInfoOthers/AutorizacijaOthers",
@@ -198,7 +196,7 @@ namespace CezihECDSa.SoapClients.InfoOthers
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
                     SoapAction = "http://tempuri.org/IInfoOthers/AutorizacijaOthersPharmacy",
@@ -221,7 +219,7 @@ namespace CezihECDSa.SoapClients.InfoOthers
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
                     SoapAction = "http://tempuri.org/IInfoOthers/AutorizacijaOthersPharmacy",
@@ -244,7 +242,7 @@ namespace CezihECDSa.SoapClients.InfoOthers
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
                     SoapAction = "http://tempuri.org/IInfoOthers/StornoOthers",
@@ -267,7 +265,7 @@ namespace CezihECDSa.SoapClients.InfoOthers
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
                     SoapAction = "http://tempuri.org/IInfoOthers/StornoOthers",

@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace CezihECDSa.SoapClients.InfoOthers.Wrappers
 {
-    [XmlRoot("AutorizacijaOthersPharmacyNaDan", Namespace = "http://tempuri.org/")]
+    [XmlRoot("AutorizacijaOthersPharmacyNaDanResponse", Namespace = "http://tempuri.org/")]
     public sealed class WAutorizacijaOthersPharmacyResponse
     {
         public WAutorizacijaOthersPharmacyResponse()
@@ -15,7 +15,7 @@ namespace CezihECDSa.SoapClients.InfoOthers.Wrappers
             Output = output;
         }
 
-        [XmlElement("AutStatus", Order = 0)]
+        [XmlElement("AutorizacijaOthersPharmacyNaDanResult", Order = 0)]
         public AutStatus Output { get; set; }
     }
 }

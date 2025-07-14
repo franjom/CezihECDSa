@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace CezihECDSa.SoapClients.InfoOthers.Wrappers
 {
-    [XmlRoot("StornoOthersNaDan", Namespace = "http://tempuri.org/")]
+    [XmlRoot("StornoOthersNaDanResponse", Namespace = "http://tempuri.org/")]
     public sealed class WStornoOthersResponse
     {
         public WStornoOthersResponse()
@@ -15,7 +15,7 @@ namespace CezihECDSa.SoapClients.InfoOthers.Wrappers
             Output = output;
         }
 
-        [XmlElement("StornoStatus", Order = 0)]
+        [XmlElement("StornoOthersNaDanResult", Order = 0)]
         public StornoStatus Output { get; set; }
     }
 }
