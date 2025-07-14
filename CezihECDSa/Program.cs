@@ -1,10 +1,12 @@
 ﻿using CezihECDSa.Logging;
 using CezihECDSa.SoapClients.Cezdlih;
+using CezihECDSa.SoapClients.InjuryApplicationService;
 using CezihECDSa.SoapClients.InfoOthers;
 using CezihECDSa.SoapClients.InfoOthers.Wrappers;
 using CezihECDSa.SoapClients.OsigInfo;
 using CezihECDSa.SoapClients.PrijavaZarazne;
 using CezihECDSa.Wsdl;
+using CezihECDSa.Wsdl.InjuryApplicationService;
 using CezihECDSa.Wsdl.PrijavaZarazne;
 using ECDSa;
 using ECDSa.ECDSa;
@@ -78,8 +80,9 @@ namespace CezihECDSa
             //TestXmlSigning(cert);
             //TestOsigInfo(cert);
             //TestPrijavaZarazne(cert);
+            //TestECezdlih(cert);
             //TestInfoOthers(cert);
-            TestECezdlih(cert);
+            TestInjuryApplication(cert);
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()
@@ -537,6 +540,19 @@ namespace CezihECDSa
                                 ));
 
             Console.WriteLine("done");
+        }
+
+        private static void TestInjuryApplication(X509Certificate2 cert)
+        {
+            var opts = new InjuryApplicationServiceOptions
+            {
+                BaseUri = new Uri("")
+            };
+            var client = new InjuryApplicationServiceClient(opts, cert);
+            var responseSync1 = client.Prijava(new prijavaRequest 
+            { 
+                idPrijave = 20
+            });
         }
 
         private static string GetSafePath(string path1, string path2)
