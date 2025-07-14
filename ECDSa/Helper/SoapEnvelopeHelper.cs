@@ -82,7 +82,7 @@ namespace ECDSa.Helper
                 replyTo.AppendChild(address);
                 header.AppendChild(replyTo);
             }
-            
+
             if (opts.To != default)
             {
                 var to = soapDoc.CreateElement("wsa10", "To", addrNs);
@@ -95,16 +95,7 @@ namespace ECDSa.Helper
 
             envelope.AppendChild(body);
 
-            using (var ms = new MemoryStream())
-            {
-                using (var writer = XmlWriter.Create(ms, CompactXmlWriterSettings))
-                {
-                    soapDoc.WriteTo(writer);
-                    writer.Flush();
-                }
-
-                return Encoding.UTF8.GetString(ms.ToArray()).TrimStart('\uFEFF');
-            }
+            return Serialize(soapDoc);
         }
 
         public static string CreateSoap12Envelope(SoapOptions opts)
@@ -150,7 +141,7 @@ namespace ECDSa.Helper
                 replyTo.AppendChild(address);
                 header.AppendChild(replyTo);
             }
-            
+
             if (opts.To != default)
             {
                 var to = soapDoc.CreateElement("wsa10", "To", addrNs);
@@ -164,16 +155,7 @@ namespace ECDSa.Helper
             envelope.AppendChild(header);
             envelope.AppendChild(body);
 
-            using (var ms = new MemoryStream())
-            {
-                using (var writer = XmlWriter.Create(ms, CompactXmlWriterSettings))
-                {
-                    soapDoc.WriteTo(writer);
-                    writer.Flush();
-                }
-
-                return Encoding.UTF8.GetString(ms.ToArray()).TrimStart('\uFEFF');
-            }
+            return Serialize(soapDoc);
         }
 
         public static string CreateSoap11SignedEnvelope(SoapOptions opts)
@@ -287,6 +269,11 @@ namespace ECDSa.Helper
             var importedSignature = soapDoc.ImportNode(signature, true);
             security.AppendChild(importedSignature);
 
+            return Serialize(soapDoc);
+        }
+
+        private static string Serialize(XmlDocument soapDoc)
+        {
             using (var ms = new MemoryStream())
             {
                 using (var writer = XmlWriter.Create(ms, CompactXmlWriterSettings))
