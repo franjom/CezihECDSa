@@ -60,7 +60,8 @@ namespace CezihECDSa.SoapClients.InfoOthers
                     Certificate = _cert,
                     SoapAction = "http://tempuri.org/IInfoOthers/DohvatiOthers",
                     Uri = uri,
-                    XmlString = xml
+                    XmlString = xml,
+                    MessageId = Guid.NewGuid()
                 });
 
                 return ProcesDohvatiOthersResponse(result);

@@ -78,8 +78,8 @@ namespace CezihECDSa
             //TestXmlSigning(cert);
             //TestOsigInfo(cert);
             //TestPrijavaZarazne(cert);
-            //TestInfoOthers(cert);
-            TestECezdlih(cert);
+            TestInfoOthers(cert);
+            //TestECezdlih(cert);
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()
@@ -200,7 +200,7 @@ namespace CezihECDSa
 
         private static X509Certificate2 ReadFromSoftCert()
         {
-            const string thumb = "";
+            const string thumb = "d6d708bb76ca6812f07d8ec6a0dd032ddc8884c6";
 
             var store = new X509Store();
             store.Open(OpenFlags.ReadOnly);
@@ -489,52 +489,52 @@ namespace CezihECDSa
         {
             var opts = new InfoOthersOptions 
             {
-                BaseUri = new Uri(""),
+                BaseUri = new Uri("https://servistest.hzzo.hr/InfoOthers/InfoOthers.svc/s11"),
                 Timeout = TimeSpan.FromSeconds(30)
             };
             var infoOthersClient = new InfoOthersClient(opts, cert);
             //var responseSync1 = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("", "54968374901"));
             var responseSync = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("03276147", "990000767"));
-            var responseSync2 = infoOthersClient.DohvatiOthersNaDan(new WDohvatiOthersNaDanRequest("03276147", "990000767", DateTime.Today, true));
-            var responseSync3 = infoOthersClient.AutorizacijaOthers(new WAutorizacijaOthersRequest(
-                                    osiguravateljsifra: string.Empty,
-                                    pacijentoib: "12345678901",
-                                    brojKartice: string.Empty,
-                                    dattroska: DateTime.Now,
-                                    dattroskaSpecified: false,
-                                    transiznos: 0m,
-                                    trnsiznosSpecified: false,
-                                    transtip: 0,
-                                    transtipSpecified: false,
-                                    ustanovasifra: string.Empty
-                                ));
-            var responseSync4 = infoOthersClient.AutorizacijaOthersPharmacy(new WAutorizacijaOthersPharmacyRequest(
-                                    osiguravateljsifra: string.Empty,  // Empty string for OsiguravateljSifra
-                                    pacijentoib: "12345678901",
-                                    brojKartice: string.Empty,         // Empty string for BrojKartice
-                                    dattroska: DateTime.Now,
-                                    dattroskaSpecified: false,         // False for DatTrosakSpecified
-                                    transiznos: 0m,                    // Default decimal value (0)
-                                    trnsiznosSpecified: false,         // False for TrnsIznosSpecified
-                                    transtip: 0,                       // Default short value (0)
-                                    transtipSpecified: false,          // False for TransTipSpecified
-                                    recsb: string.Empty,               // Empty string for Recsb
-                                    erecid: string.Empty,              // Empty string for Erecid
-                                    ustanovasifra: string.Empty        // Empty string for UstanovaSifra
-                                ));
+            //var responseSync2 = infoOthersClient.DohvatiOthersNaDan(new WDohvatiOthersNaDanRequest("03276147", "990000767", DateTime.Today, true));
+            //var responseSync3 = infoOthersClient.AutorizacijaOthers(new WAutorizacijaOthersRequest(
+            //                        osiguravateljsifra: string.Empty,
+            //                        pacijentoib: "12345678901",
+            //                        brojKartice: string.Empty,
+            //                        dattroska: DateTime.Now,
+            //                        dattroskaSpecified: false,
+            //                        transiznos: 0m,
+            //                        trnsiznosSpecified: false,
+            //                        transtip: 0,
+            //                        transtipSpecified: false,
+            //                        ustanovasifra: string.Empty
+            //                    ));
+            //var responseSync4 = infoOthersClient.AutorizacijaOthersPharmacy(new WAutorizacijaOthersPharmacyRequest(
+            //                        osiguravateljsifra: string.Empty,  // Empty string for OsiguravateljSifra
+            //                        pacijentoib: "12345678901",
+            //                        brojKartice: string.Empty,         // Empty string for BrojKartice
+            //                        dattroska: DateTime.Now,
+            //                        dattroskaSpecified: false,         // False for DatTrosakSpecified
+            //                        transiznos: 0m,                    // Default decimal value (0)
+            //                        trnsiznosSpecified: false,         // False for TrnsIznosSpecified
+            //                        transtip: 0,                       // Default short value (0)
+            //                        transtipSpecified: false,          // False for TransTipSpecified
+            //                        recsb: string.Empty,               // Empty string for Recsb
+            //                        erecid: string.Empty,              // Empty string for Erecid
+            //                        ustanovasifra: string.Empty        // Empty string for UstanovaSifra
+            //                    ));
 
-            var responseSync5 = infoOthersClient.StornoOthers(new WStornoOthersRequest(
-                                    osiguravateljsifra: string.Empty,  // Empty string for OsiguravateljSifra
-                                    pacijentoib: "12345678901",
-                                    brojKartice: string.Empty,         // Empty string for BrojKartice
-                                    dattroska: DateTime.Now,
-                                    dattroskaSpecified: false,         // False for DatTrosakSpecified
-                                    transiznos: 0m,                    // Default decimal value (0)
-                                    trnsiznosSpecified: false,         // False for TrnsIznosSpecified
-                                    transtip: 0,                       // Default short value (0)
-                                    transtipSpecified: false,          // False for TransTipSpecified
-                                    autkod: string.Empty               // Empty string for AutKod
-                                ));
+            //var responseSync5 = infoOthersClient.StornoOthers(new WStornoOthersRequest(
+            //                        osiguravateljsifra: string.Empty,  // Empty string for OsiguravateljSifra
+            //                        pacijentoib: "12345678901",
+            //                        brojKartice: string.Empty,         // Empty string for BrojKartice
+            //                        dattroska: DateTime.Now,
+            //                        dattroskaSpecified: false,         // False for DatTrosakSpecified
+            //                        transiznos: 0m,                    // Default decimal value (0)
+            //                        trnsiznosSpecified: false,         // False for TrnsIznosSpecified
+            //                        transtip: 0,                       // Default short value (0)
+            //                        transtipSpecified: false,          // False for TransTipSpecified
+            //                        autkod: string.Empty               // Empty string for AutKod
+            //                    ));
 
             Console.WriteLine("done");
         }
