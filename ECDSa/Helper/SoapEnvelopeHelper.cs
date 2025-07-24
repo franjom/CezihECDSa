@@ -2,6 +2,7 @@
 using ECDSa.Helper.Xml;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
@@ -81,7 +82,7 @@ namespace ECDSa.Helper
                 replyTo.AppendChild(address);
                 header.AppendChild(replyTo);
             }
-            
+
             if (opts.To != default)
             {
                 var to = soapDoc.CreateElement("wsa10", "To", addrNs);
@@ -93,14 +94,8 @@ namespace ECDSa.Helper
             body.InnerXml = opts.XmlString;
 
             envelope.AppendChild(body);
-            var sb = new StringBuilder();
-            using (var writer = XmlWriter.Create(sb, CompactXmlWriterSettings))
-            {
-                soapDoc.WriteTo(writer);
-                writer.Flush();
 
-                return sb.ToString();
-            }
+            return Serialize(soapDoc);
         }
 
         public static string CreateSoap12Envelope(SoapOptions opts)
@@ -146,7 +141,7 @@ namespace ECDSa.Helper
                 replyTo.AppendChild(address);
                 header.AppendChild(replyTo);
             }
-            
+
             if (opts.To != default)
             {
                 var to = soapDoc.CreateElement("wsa10", "To", addrNs);
@@ -160,14 +155,7 @@ namespace ECDSa.Helper
             envelope.AppendChild(header);
             envelope.AppendChild(body);
 
-            var sb = new StringBuilder();
-            using (var writer = XmlWriter.Create(sb, CompactXmlWriterSettings))
-            {
-                soapDoc.WriteTo(writer);
-                writer.Flush();
-
-                return sb.ToString();
-            }
+            return Serialize(soapDoc);
         }
 
         public static string CreateSoap11SignedEnvelope(SoapOptions opts)
@@ -281,13 +269,20 @@ namespace ECDSa.Helper
             var importedSignature = soapDoc.ImportNode(signature, true);
             security.AppendChild(importedSignature);
 
-            var sb = new StringBuilder();
-            using (var writer = XmlWriter.Create(sb, CompactXmlWriterSettings))
-            {
-                soapDoc.WriteTo(writer);
-                writer.Flush();
+            return Serialize(soapDoc);
+        }
 
-                return sb.ToString();
+        private static string Serialize(XmlDocument soapDoc)
+        {
+            using (var ms = new MemoryStream())
+            {
+                using (var writer = XmlWriter.Create(ms, CompactXmlWriterSettings))
+                {
+                    soapDoc.WriteTo(writer);
+                    writer.Flush();
+                }
+
+                return Encoding.UTF8.GetString(ms.ToArray()).TrimStart('\uFEFF');
             }
         }
 
