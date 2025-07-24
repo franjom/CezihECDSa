@@ -546,11 +546,10 @@ namespace CezihECDSa
         {
             var opts = new InjuryApplicationServiceOptions
             {
-                BaseUri = new Uri("https://cezihtest.cezih.hr:443/eozljede-webservices/ws"),
-                Timeout = TimeSpan.FromSeconds(30)
+                BaseUri = new Uri("")
             };
-            var osigInfoClient = new InjuryApplicationServiceClient(opts, cert);
-            var responseSync1 = osigInfoClient.Prijava(new prijavaRequest 
+            var client = new InjuryApplicationServiceClient(opts, cert);
+            var responseSync1 = client.Prijava(new prijavaRequest 
             { 
                 idPrijave = 20
             });
