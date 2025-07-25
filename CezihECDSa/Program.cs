@@ -2,6 +2,8 @@
 using CezihECDSa.SoapClients.Cezdlih;
 using CezihECDSa.SoapClients.InfoOthers;
 using CezihECDSa.SoapClients.InfoOthers.Wrappers;
+using CezihECDSa.SoapClients.NarucivanjeWS;
+using CezihECDSa.SoapClients.NarucivanjeWS.Wrappers;
 using CezihECDSa.SoapClients.OsigInfo;
 using CezihECDSa.SoapClients.PrijavaZarazne;
 using CezihECDSa.Wsdl;
@@ -79,7 +81,9 @@ namespace CezihECDSa
             //TestOsigInfo(cert);
             //TestPrijavaZarazne(cert);
             //TestInfoOthers(cert);
-            TestECezdlih(cert);
+            //TestECezdlih(cert);
+            //TestECezdlih(cert);
+            TestDohvatSmjernica(cert);
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()
@@ -535,6 +539,30 @@ namespace CezihECDSa
                                     transtipSpecified: false,          // False for TransTipSpecified
                                     autkod: string.Empty               // Empty string for AutKod
                                 ));
+
+            Console.WriteLine("done");
+        }
+
+        private static async void TestDohvatSmjernica(X509Certificate2 cert)
+        {
+            // ovo radi sa ECDSA mora se slati potpiani request
+            var opts = new DohvatSmjernicaOptions
+            {
+                BaseUri = new Uri("https://cezeltest.cezih.hr:32867/DohvatSmjernica.asmx"),
+                Timeout = TimeSpan.FromSeconds(90)
+            };
+
+            var client = new DohvatSmjernicaClient(opts, cert);
+            //var response = await client.DohvatiSmjerniceAsync(
+            //    new Wsdl.DohvatSmjernica.DohvatiSmjerniceRequest 
+            //    {
+            //        Body = new Wsdl.DohvatSmjernica.DohvatiSmjerniceRequestBody
+            //        { 
+            //            poruka = "<DohvatiSmjerniceRequest><KZN>123</KZN><MKB10>123123</MKB10></DohvatiSmjerniceRequest>"
+            //        }
+            //    }); 
+
+            var response = await client.DohvatiSmjerniceAsync(new WDohvatiSmjerniceRequest("123", "123"));
 
             Console.WriteLine("done");
         }
