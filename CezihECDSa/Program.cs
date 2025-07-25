@@ -1,5 +1,7 @@
 ﻿using CezihECDSa.Logging;
 using CezihECDSa.SoapClients.Cezdlih;
+using CezihECDSa.SoapClients.HrVozaci;
+using CezihECDSa.SoapClients.HrVozaci.Wrappers;
 using CezihECDSa.SoapClients.InfoOthers;
 using CezihECDSa.SoapClients.InfoOthers.Wrappers;
 using CezihECDSa.SoapClients.OsigInfo;
@@ -9,6 +11,8 @@ using CezihECDSa.Wsdl.PrijavaZarazne;
 using ECDSa;
 using ECDSa.ECDSa;
 using ECDSa.Helper;
+using ECDSa.Helper.Soap;
+using HRVozaci;
 using Net.Pkcs11Interop.X509Store;
 using System;
 using System.Collections.Generic;
@@ -23,6 +27,7 @@ using System.ServiceModel.Security;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace CezihECDSa
 {
@@ -79,7 +84,8 @@ namespace CezihECDSa
             //TestOsigInfo(cert);
             //TestPrijavaZarazne(cert);
             //TestInfoOthers(cert);
-            TestECezdlih(cert);
+            //TestECezdlih(cert);
+            TestResponseHrVozaci(cert);
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()
@@ -487,7 +493,7 @@ namespace CezihECDSa
 
         private static void TestInfoOthers(X509Certificate2 cert)
         {
-            var opts = new InfoOthersOptions 
+            var opts = new InfoOthersOptions
             {
                 BaseUri = new Uri(""),
                 Timeout = TimeSpan.FromSeconds(30)
@@ -535,6 +541,80 @@ namespace CezihECDSa
                                     transtipSpecified: false,          // False for TransTipSpecified
                                     autkod: string.Empty               // Empty string for AutKod
                                 ));
+
+            Console.WriteLine("done");
+        }
+
+        private static void TestHrVozaci(X509Certificate2 cert)
+        {
+            var opts = new HrVozaciOptions
+            {
+                BaseUri = new Uri("https://euvjerenjacert.zdravlje.hr:8443/eUvjerenja/services/unosws"),
+                Timeout = TimeSpan.FromSeconds(30)
+            };
+            var vozaci = new HrVozaciClient(opts, cert);
+            var serializer = new XmlSerializer(typeof(PrijavaRezultata), "http://www.cezih.hr/HrVozacke/Incoming");
+            SlanjeRezultataRequest objectToSend;
+
+            string xml = @"<hrvd:PrijavaRezultata xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:hrvd=""http://www.cezih.hr/HrVozacke/Incoming"">
+                            <hrvd:Poruka>
+                                <hrvd:PorukaID>a24d301e-4da5-4b35-a406-9dd354314ce2</hrvd:PorukaID>
+                                <hrvd:VrijemeSlanja>2025-07-24T21:19:23.6810585+02:00</hrvd:VrijemeSlanja>
+                            </hrvd:Poruka>
+                            <hrvd:Autor>
+                                <hrvd:AutorOsoba>
+                                    <hrvd:OIB>77362891234</hrvd:OIB>
+                                    <hrvd:HZJZSifra>9190805</hrvd:HZJZSifra>
+                                    <hrvd:Ime>LÖVORKA</hrvd:Ime>
+                                    <hrvd:Prezime>TES-DOK80 KÖLAN</hrvd:Prezime>
+                                </hrvd:AutorOsoba>
+                                <hrvd:AutorOrganizacija>
+                                    <hrvd:Naziv>Ordinacija LOVORKA TES-DOK80 KOLAN</hrvd:Naziv>
+                                    <hrvd:HZZOSifra>992799279</hrvd:HZZOSifra>
+                                </hrvd:AutorOrganizacija>
+                            </hrvd:Autor>
+                            <hrvd:BrojUvjerenja>940394030/9190805/1200000/2025/838</hrvd:BrojUvjerenja>
+                            <hrvd:TijeloIzdavanja>
+                                <hrvd:NazivTijela>Poliklinika MCS Testna Ustanova spec. dr. Valea Jukičić</hrvd:NazivTijela>
+                                <hrvd:VrstaTijela>1</hrvd:VrstaTijela>
+                                <hrvd:OIB>04355267582</hrvd:OIB>
+                                <hrvd:StupanjKomisije>1</hrvd:StupanjKomisije>
+                            </hrvd:TijeloIzdavanja>
+                            <hrvd:Datum>2025-07-24</hrvd:Datum>
+                            <hrvd:Svrha>Polaganje za instruktora</hrvd:Svrha>
+                            <hrvd:Nositelj>
+                                <hrvd:OIB>12312321315</hrvd:OIB>
+                                <hrvd:Ime>ASTER</hrvd:Ime>
+                                <hrvd:Prezime>TEST</hrvd:Prezime>
+                                <hrvd:DatumRodjenja>1990-01-01</hrvd:DatumRodjenja>
+                            </hrvd:Nositelj>
+                            <hrvd:Sposoban>
+                                <hrvd:StatusSposobnosti>1</hrvd:StatusSposobnosti>
+                            </hrvd:Sposoban>
+                            <hrvd:Kategorije>
+                                <hrvd:Oznaka>A1</hrvd:Oznaka>
+                            </hrvd:Kategorije>
+                        </hrvd:PrijavaRezultata>";
+
+
+            using (var reader = new StringReader(xml))
+            {
+                var prijavaRezultata = (PrijavaRezultata)serializer.Deserialize(reader);
+                objectToSend = new SlanjeRezultataRequest(prijavaRezultata);
+            }
+            //var responseSync1 = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("", "54968374901"));
+            var responseSync = vozaci.SlanjeRezultata(new WPrijavaRezultata(objectToSend.PrijavaRezultata));
+            Console.WriteLine("done");
+        }
+
+        private static void TestResponseHrVozaci(X509Certificate2 cert)
+        {
+            string xml = @"<soap:Envelope xmlns:soap=""http://schemas.xmlsoap.org/soap/envelope/""><soap:Body><PrijavaRezultataOdgovor xmlns=""http://www.cezih.hr/HrVozacke/Incoming"" id=""a24d301e-4da5-4b35-a406-9dd354314ce2""><Odgovor>NOK</Odgovor><Greske><Greska><SifraGreske>ERR_00026</SifraGreske><NazivGreske>(PorukaID) id nije jedinstven.</NazivGreske></Greska></Greske></PrijavaRezultataOdgovor></soap:Body></soap:Envelope>";
+
+
+            var bodyDoc = SoapEnvelopeHelper.GetSoapBody11Contents(xml);
+            var body = SoapSerializer.Instance.Deserialize<WPrijavaRezultataOdgovor>(bodyDoc);
+
 
             Console.WriteLine("done");
         }

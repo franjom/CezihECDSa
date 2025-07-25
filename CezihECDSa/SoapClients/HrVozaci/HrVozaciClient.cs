@@ -1,4 +1,4 @@
-﻿using CezihECDSa.SoapClients.PrijavaZarazne;
+﻿using CezihECDSa.SoapClients.HrVozaci.Wrappers;
 using ECDSa.Helper;
 using ECDSa.Helper.Soap;
 using HRVozaci;
@@ -13,8 +13,8 @@ namespace CezihECDSa.SoapClients.HrVozaci
     public interface IHRVozaci
     {
         // @formatter:off
-        Result<SlanjeRezultataResponse> SlanjeRezultata(SlanjeRezultataRequest request);
-        Task<Result<SlanjeRezultataResponse>> SlanjeRezultataAsync(SlanjeRezultataRequest request, CancellationToken ct = default);
+        Result<SlanjeRezultataResponse> SlanjeRezultata(WPrijavaRezultata request);
+        Task<Result<SlanjeRezultataResponse>> SlanjeRezultataAsync(WPrijavaRezultata request, CancellationToken ct = default);
 
         // @formatter:on
     }
@@ -36,7 +36,7 @@ namespace CezihECDSa.SoapClients.HrVozaci
         }
 
         public Result<SlanjeRezultataResponse> SlanjeRezultata(
-            SlanjeRezultataRequest request)
+            WPrijavaRezultata request)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace CezihECDSa.SoapClients.HrVozaci
         }
 
         public async Task<Result<SlanjeRezultataResponse>>
-            SlanjeRezultataAsync(SlanjeRezultataRequest request,
+            SlanjeRezultataAsync(WPrijavaRezultata request,
                 CancellationToken ct = default)
         {
             try
@@ -91,9 +91,19 @@ namespace CezihECDSa.SoapClients.HrVozaci
         private Result<SlanjeRezultataResponse> ProcessSlanjeRezultataResponse(
             SoapRequestResult result)
         {
-            return ProcessResponse<SlanjeRezultataResponse, SlanjeRezultataResponse>(
-                result,
-                body => body);
+            return ProcessResponse<WPrijavaRezultataOdgovor, SlanjeRezultataResponse>(
+            result,
+            body =>
+            {
+                var prijavaRezultataOdgovor = new HRVozaci.PrijavaRezultataOdgovor
+                {
+                    Odgovor = body.Odgovor,
+                    Greske = body.Greske,
+                    id = body.Id
+                };
+
+                return new SlanjeRezultataResponse(prijavaRezultataOdgovor);
+            });
         }
 
         private XmlSerializerNamespaces Namespaces
@@ -101,7 +111,7 @@ namespace CezihECDSa.SoapClients.HrVozaci
             get
             {
                 var namespaces = new XmlSerializerNamespaces();
-
+                
                 return namespaces;
             }
         }

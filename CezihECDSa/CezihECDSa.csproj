@@ -134,6 +134,8 @@
     <Compile Include="SoapClients\Cezdlih\Wrappers\WSlanjePlanaImunizacijeResponse.cs" />
     <Compile Include="SoapClients\HrVozaci\HrVozaciClient.cs" />
     <Compile Include="SoapClients\HrVozaci\HrVozaciOptions.cs" />
+    <Compile Include="SoapClients\HrVozaci\Wrappers\WPrijavaRezultataOdgovor.cs" />
+    <Compile Include="SoapClients\HrVozaci\Wrappers\WPrijavaRezultata.cs" />
     <Compile Include="SoapClients\InfoOthers\InfoOthersClient.cs" />
     <Compile Include="SoapClients\InfoOthers\InfoOthersOptions.cs" />
     <Compile Include="SoapClients\InfoOthers\Wrappers\WStornoOthersRequest.cs" />

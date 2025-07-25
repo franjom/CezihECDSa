@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CezihECDSa.SoapClients.PrijavaZarazne
+namespace CezihECDSa.SoapClients.HrVozaci
 {
     public class HrVozaciOptions
     {
