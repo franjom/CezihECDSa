@@ -548,19 +548,19 @@ namespace CezihECDSa
             // ovo radi sa ECDSA mora se slati potpiani request
             var opts = new DohvatSmjernicaOptions
             {
-                BaseUri = new Uri("https://cezeltest.cezih.hr:32867/DohvatSmjernica.asmx"),
+                BaseUri = new Uri("https://cezeltest.cezih.hr:32867/NarucivanjeService.asmx"),
                 Timeout = TimeSpan.FromSeconds(90)
             };
 
             var client = new DohvatSmjernicaClient(opts, cert);
-            //var response = await client.DohvatiSmjerniceAsync(
-            //    new Wsdl.DohvatSmjernica.DohvatiSmjerniceRequest 
+            //var response = await client.dohvatismjerniceasync(
+            //    new wsdl.dohvatsmjernica.dohvatismjernicerequest 
             //    {
-            //        Body = new Wsdl.DohvatSmjernica.DohvatiSmjerniceRequestBody
+            //        body = new wsdl.dohvatsmjernica.dohvatismjernicerequestbody
             //        { 
-            //            poruka = "<DohvatiSmjerniceRequest><KZN>123</KZN><MKB10>123123</MKB10></DohvatiSmjerniceRequest>"
+            //            poruka = "<dohvatismjernicerequest><kzn>123</kzn><mkb10>123123</mkb10></dohvatismjernicerequest>"
             //        }
-            //    }); 
+            //    });
 
             var response = await client.DohvatiSmjerniceAsync(new WDohvatiSmjerniceRequest("123", "123"));
 
