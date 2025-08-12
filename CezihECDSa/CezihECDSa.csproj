@@ -78,6 +78,7 @@
     <Reference Include="System.ServiceModel.Security, Version=8.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ServiceModel.Primitives.8.1.2\lib\net462\System.ServiceModel.Security.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -131,6 +132,10 @@
     <Compile Include="SoapClients\Cezdlih\Wrappers\WSlanjeNarudzbenicaResponse.cs" />
     <Compile Include="SoapClients\Cezdlih\Wrappers\WPreuzimanjeOtpremniceResponse.cs" />
     <Compile Include="SoapClients\Cezdlih\Wrappers\WSlanjePlanaImunizacijeResponse.cs" />
+    <Compile Include="SoapClients\Evidencije\EvidencijeClient.cs" />
+    <Compile Include="SoapClients\Evidencije\EvidencijeOptions.cs" />
+    <Compile Include="SoapClients\Evidencije\Wrappers\WPrijedlogZaProvjeruVozacaRequest.cs" />
+    <Compile Include="SoapClients\Evidencije\Wrappers\WPrijedlogZaProvjeruVozacaResponse.cs" />
     <Compile Include="SoapClients\InfoOthers\InfoOthersClient.cs" />
     <Compile Include="SoapClients\InfoOthers\InfoOthersOptions.cs" />
     <Compile Include="SoapClients\InfoOthers\Wrappers\WStornoOthersRequest.cs" />
@@ -143,6 +148,7 @@
     <Compile Include="SoapClients\InfoOthers\Wrappers\WDohvatiOthersRequest.cs" />
     <Compile Include="SoapClients\InfoOthers\Wrappers\WAutorizacijaOthersResponse.cs" />
     <Compile Include="SoapClients\InfoOthers\Wrappers\WDohvatiOthersResponse.cs" />
+    <Compile Include="Wsdl\Evidencije.cs" />
     <Compile Include="Wsdl\InfoOthers.cs" />
     <Compile Include="SoapClients\OsigInfo\ChosenDoctorRequest.cs" />
     <Compile Include="SoapClients\OsigInfo\ChosenDoctorResponse.cs" />

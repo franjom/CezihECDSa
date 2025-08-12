@@ -1,5 +1,6 @@
 ﻿using CezihECDSa.Logging;
 using CezihECDSa.SoapClients.Cezdlih;
+using CezihECDSa.SoapClients.Evidencije;
 using CezihECDSa.SoapClients.InfoOthers;
 using CezihECDSa.SoapClients.InfoOthers.Wrappers;
 using CezihECDSa.SoapClients.OsigInfo;
@@ -78,8 +79,9 @@ namespace CezihECDSa
             //TestXmlSigning(cert);
             //TestOsigInfo(cert);
             //TestPrijavaZarazne(cert);
-            TestInfoOthers(cert);
+            //TestInfoOthers(cert);
             //TestECezdlih(cert);
+            TestEvidencije(cert);
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()
@@ -535,6 +537,22 @@ namespace CezihECDSa
             //                        transtipSpecified: false,          // False for TransTipSpecified
             //                        autkod: string.Empty               // Empty string for AutKod
             //                    ));
+
+            Console.WriteLine("done");
+        }
+
+        private static void TestEvidencije(X509Certificate2 cert)
+        {
+            var opts = new EvidencijeOptions 
+            {
+                BaseUri = new Uri("https://servistest.hzzo.hr/cezih/Evidencije.svc"),
+                Timeout = TimeSpan.FromSeconds(30)
+            };
+            var infoOthersClient = new EvidencijeClient(opts, cert);
+            var responseSync = infoOthersClient.PrijedlogZaProvjeruVozaca(new WPrijedlogZaProvjeruVozacaRequest("990000767", "03276147"));
+            var responseSync2 = infoOthersClient.PrijedlogZaProvjeruVozaca(new WPrijedlogZaProvjeruVozacaRequest("990000767", "03276147"));
+            var responseSync3 = infoOthersClient.PrijedlogZaProvjeruVozaca(new WPrijedlogZaProvjeruVozacaRequest("990000767", "03276147"));
+            var responseSync4 = infoOthersClient.PrijedlogZaProvjeruVozaca(new WPrijedlogZaProvjeruVozacaRequest("990000767", "03276147"));
 
             Console.WriteLine("done");
         }
