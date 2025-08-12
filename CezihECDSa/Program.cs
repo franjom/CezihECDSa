@@ -2,6 +2,8 @@
 using CezihECDSa.SoapClients.Cezdlih;
 using CezihECDSa.SoapClients.InfoOthers;
 using CezihECDSa.SoapClients.InfoOthers.Wrappers;
+using CezihECDSa.SoapClients.NRS;
+using CezihECDSa.SoapClients.NRS.Wrappers;
 using CezihECDSa.SoapClients.OsigInfo;
 using CezihECDSa.SoapClients.PrijavaZarazne;
 using CezihECDSa.Wsdl;
@@ -78,8 +80,9 @@ namespace CezihECDSa
             //TestXmlSigning(cert);
             //TestOsigInfo(cert);
             //TestPrijavaZarazne(cert);
-            TestInfoOthers(cert);
+            //TestInfoOthers(cert);
             //TestECezdlih(cert);
+            TestNrs(cert);
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()
@@ -535,6 +538,24 @@ namespace CezihECDSa
             //                        transtipSpecified: false,          // False for TransTipSpecified
             //                        autkod: string.Empty               // Empty string for AutKod
             //                    ));
+
+            Console.WriteLine("done");
+        }
+
+        private static void TestNrs(X509Certificate2 cert)
+        {
+            var opts = new NRSOptions 
+            {
+                BaseUri = new Uri("https://cs.medicusnet.hr/NRS/NutritionalReferenceScore"),
+                Timeout = TimeSpan.FromSeconds(30)
+            };
+            var infoOthersClient = new NRSClient(opts, cert);
+            var responseSync = infoOthersClient.CalculateScore(new WReferenceScoreData 
+            { 
+                MedicalOperater = new MedicalOperater(),
+                PatientReferenceData = new PatientReferenceData()
+            
+            });
 
             Console.WriteLine("done");
         }

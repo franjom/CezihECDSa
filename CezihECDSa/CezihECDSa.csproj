@@ -143,6 +143,10 @@
     <Compile Include="SoapClients\InfoOthers\Wrappers\WDohvatiOthersRequest.cs" />
     <Compile Include="SoapClients\InfoOthers\Wrappers\WAutorizacijaOthersResponse.cs" />
     <Compile Include="SoapClients\InfoOthers\Wrappers\WDohvatiOthersResponse.cs" />
+    <Compile Include="SoapClients\NRS\NRSClient.cs" />
+    <Compile Include="SoapClients\NRS\NRSOptions.cs" />
+    <Compile Include="SoapClients\NRS\Wrappers\WReferenceScoreResult.cs" />
+    <Compile Include="SoapClients\NRS\Wrappers\WReferenceScoreData.cs" />
     <Compile Include="Wsdl\InfoOthers.cs" />
     <Compile Include="SoapClients\OsigInfo\ChosenDoctorRequest.cs" />
     <Compile Include="SoapClients\OsigInfo\ChosenDoctorResponse.cs" />
@@ -163,6 +167,7 @@
     <Compile Include="SoapClients\PrijavaZarazne\PrijavaZarazneClient.cs" />
     <Compile Include="SoapClients\PrijavaZarazne\PrijavaZarazneOptions.cs" />
     <Compile Include="Wsdl\CezdlihWsdl.cs" />
+    <Compile Include="Wsdl\NutritionalReferenceScore.cs" />
     <Compile Include="Wsdl\OsigInfoWsdl.cs" />
     <Compile Include="Wsdl\PrijavaZarazneUpdateWsdl.cs" />
     <Compile Include="Wsdl\PrijavaZarazneWsdl.cs" />
