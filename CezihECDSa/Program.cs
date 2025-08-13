@@ -539,6 +539,35 @@ namespace CezihECDSa
             Console.WriteLine("done");
         }
 
+        private static void TestCZOLjekarne(X509Certificate2 cert)
+        {
+            var opts = new InfoOthersOptions 
+            {
+                BaseUri = new Uri("https://b2btest01.crosig.hr/_czo_ac_ljekarne_test_/czoacljekarne.asmx"),
+                Timeout = TimeSpan.FromSeconds(30)
+            };
+            var infoOthersClient = new InfoOthersClient(opts, cert);
+            var responseSync = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("03276147", "990000767"));
+
+
+            Console.WriteLine("done");
+        }
+        private static void TestCZO(X509Certificate2 cert)
+        {
+            var username = "iGai62i0MbRlgEGxGjuB";
+            var poassword = "AG3OpBfXvH8b0pWOlcRGu3Rouhg2mNmUDVEKZ6saKn8TGCBmg4Azy8Ubx5iHi7oPoIfaOCIu0YLf7ZGojlre2cBQYIuWg1rCiFP3jcWKPIlcviXi2ihhHGHFzwnTSET";
+            var opts = new InfoOthersOptions 
+            {
+                BaseUri = new Uri("https://b2btest01.crosig.hr/_czo_ac_ljekarne_test_/czoacljekarne.asmx"),
+                Timeout = TimeSpan.FromSeconds(30)
+            };
+            var infoOthersClient = new InfoOthersClient(opts, cert);
+            var responseSync = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("03276147", "990000767"));
+
+
+            Console.WriteLine("done");
+        }
+
         private static string GetSafePath(string path1, string path2)
         {
             const int maxLength = 1024;
