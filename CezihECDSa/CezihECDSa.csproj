@@ -143,6 +143,10 @@
     <Compile Include="SoapClients\InfoOthers\Wrappers\WDohvatiOthersRequest.cs" />
     <Compile Include="SoapClients\InfoOthers\Wrappers\WAutorizacijaOthersResponse.cs" />
     <Compile Include="SoapClients\InfoOthers\Wrappers\WDohvatiOthersResponse.cs" />
+    <Compile Include="SoapClients\SkolskaMedicina\SkolskaMedicinaClient.cs" />
+    <Compile Include="SoapClients\SkolskaMedicina\SkolskaMedicinaOptions.cs" />
+    <Compile Include="SoapClients\SkolskaMedicina\Wrappers\WAutorizacijaOthersPharmacyRequest.cs" />
+    <Compile Include="SoapClients\SkolskaMedicina\Wrappers\WAutorizacijaOthersPharmacyResponse.cs" />
     <Compile Include="Wsdl\InfoOthers.cs" />
     <Compile Include="SoapClients\OsigInfo\ChosenDoctorRequest.cs" />
     <Compile Include="SoapClients\OsigInfo\ChosenDoctorResponse.cs" />
@@ -166,6 +170,7 @@
     <Compile Include="Wsdl\OsigInfoWsdl.cs" />
     <Compile Include="Wsdl\PrijavaZarazneUpdateWsdl.cs" />
     <Compile Include="Wsdl\PrijavaZarazneWsdl.cs" />
+    <Compile Include="Wsdl\SkolskaMedicina.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

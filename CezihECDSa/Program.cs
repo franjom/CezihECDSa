@@ -4,8 +4,10 @@ using CezihECDSa.SoapClients.InfoOthers;
 using CezihECDSa.SoapClients.InfoOthers.Wrappers;
 using CezihECDSa.SoapClients.OsigInfo;
 using CezihECDSa.SoapClients.PrijavaZarazne;
+using CezihECDSa.SoapClients.SkolskaMedicina;
 using CezihECDSa.Wsdl;
 using CezihECDSa.Wsdl.PrijavaZarazne;
+using CezihECDSa.Wsdl.SkolskaMedicina;
 using ECDSa;
 using ECDSa.ECDSa;
 using ECDSa.Helper;
@@ -78,8 +80,9 @@ namespace CezihECDSa
             //TestXmlSigning(cert);
             //TestOsigInfo(cert);
             //TestPrijavaZarazne(cert);
-            TestInfoOthers(cert);
+            //TestInfoOthers(cert);
             //TestECezdlih(cert);
+            TestSkolskaMedicina(cert);
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()
@@ -535,6 +538,19 @@ namespace CezihECDSa
             //                        transtipSpecified: false,          // False for TransTipSpecified
             //                        autkod: string.Empty               // Empty string for AutKod
             //                    ));
+
+            Console.WriteLine("done");
+        }
+
+        private static void TestSkolskaMedicina(X509Certificate2 cert)
+        {
+            var opts = new SkolskaMedicinaOptions 
+            {
+                BaseUri = new Uri("https://certws.cezih.hr:49443/skolska"),
+                Timeout = TimeSpan.FromSeconds(30)
+            };
+            var client = new SkolskaMedicinaClient(opts, cert);
+            var responseSync = client.StatusIzvjestaja(new StatusIzvjestajaRequestBody("1"));
 
             Console.WriteLine("done");
         }
