@@ -24,6 +24,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Security;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Xml;
 
 namespace CezihECDSa
@@ -83,7 +84,7 @@ namespace CezihECDSa
             //TestInfoOthers(cert);
             //TestECezdlih(cert);
             //TestECezdlih(cert);
-            TestDohvatSmjernica(cert);
+            TestDohvatSmjernica(cert).GetAwaiter().GetResult();
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()
@@ -543,7 +544,7 @@ namespace CezihECDSa
             Console.WriteLine("done");
         }
 
-        private static async void TestDohvatSmjernica(X509Certificate2 cert)
+        private static async Task TestDohvatSmjernica(X509Certificate2 cert)
         {
             // ovo radi sa ECDSA mora se slati potpiani request
             var opts = new DohvatSmjernicaOptions
