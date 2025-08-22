@@ -74,7 +74,8 @@ namespace CezihECDSa
             // good to go
 
             //var cert = ReadFromSoftCert();
-            var cert = ReadFromRsaCard();
+            //var cert = ReadFromRsaCard();
+            var cert = ReadFromEcdsaCard();
 
             //TestXmlSigning(cert);
             //TestOsigInfo(cert);
