@@ -40,8 +40,7 @@ namespace ECDSa.Helper.Soap
                 ClientCertificates = { cert },
                 AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
 #if DEBUG
-                ServerCertificateCustomValidationCallback = delegate { return true; },
-                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+                ServerCertificateCustomValidationCallback = delegate { return true; }
 #endif
             };
 

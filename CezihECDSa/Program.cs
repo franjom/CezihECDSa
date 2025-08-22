@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Policy;
 using System.IO;
+using System.Linq;
 using System.Net.Security;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
@@ -73,13 +74,38 @@ namespace CezihECDSa
             // good to go
 
             //var cert = ReadFromSoftCert();
-            var cert = ReadFromEcdsaCard();
+            var cert = ReadFromRsaCard();
 
             //TestXmlSigning(cert);
             //TestOsigInfo(cert);
             //TestPrijavaZarazne(cert);
             //TestInfoOthers(cert);
             TestECezdlih(cert);
+        }
+
+        private static X509Certificate2 ReadFromRsaCard()
+        {
+            var mbo = "990002049";
+
+            X509Store store = new X509Store(StoreName.My);
+            store.Open(OpenFlags.ReadOnly);
+
+            var found = false;
+
+            var certificates = new List<X509Certificate2>();
+            X509Certificate2 cert = null;
+
+            certificates = store.Certificates.Cast<X509Certificate2>().Where(x => x.FriendlyName.Contains(mbo)).OrderByDescending(x => x.NotAfter).ToList();
+
+
+            cert = certificates.FirstOrDefault();
+
+            if (cert == null)
+            {
+                return null;
+            }
+
+            return cert;
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()
@@ -334,7 +360,7 @@ namespace CezihECDSa
             // ovo radi sa ECDSA mora se slati potpiani request
             var opts = new CezdlihOptions
             {
-                BaseUri = new Uri(""),
+                BaseUri = new Uri("https://evaccert.zdravlje.hr/WebServices2/CEZDLIHWS.asmx"),
                 Timeout = TimeSpan.FromSeconds(30)
             };
 
@@ -489,7 +515,7 @@ namespace CezihECDSa
         {
             var opts = new InfoOthersOptions 
             {
-                BaseUri = new Uri("),
+                BaseUri = new Uri(""),
                 Timeout = TimeSpan.FromSeconds(30)
             };
             var infoOthersClient = new InfoOthersClient(opts, cert);
