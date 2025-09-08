@@ -324,6 +324,15 @@ namespace ECDSa.Helper.Soap
 
             request.Headers.UserAgent.ParseAdd("OpenCezih.NET");
             request.Headers.AcceptEncoding.ParseAdd("gzip,deflate");
+
+            if (!string.IsNullOrWhiteSpace(options.Username) && !string.IsNullOrWhiteSpace(options.Password))
+            {
+                var byteArray = Encoding.ASCII.GetBytes($"{options.Username}:{options.Password}");
+
+                request.Headers.Authorization =
+                    new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+            }
+
             return request;
         }
 

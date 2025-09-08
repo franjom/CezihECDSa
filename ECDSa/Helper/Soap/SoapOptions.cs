@@ -56,5 +56,8 @@ namespace ECDSa.Helper.Soap
         /// Optional but recommended. Included in the WS-Addressing <c>MessageID</c> header.
         /// </summary>
         public Guid MessageId { get; set; }
+
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }
