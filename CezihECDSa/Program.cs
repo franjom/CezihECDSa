@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Policy;
 using System.IO;
+using System.Linq;
 using System.Net.Security;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
@@ -24,6 +25,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Security;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 
@@ -76,7 +78,7 @@ namespace CezihECDSa
             // good to go
 
             //var cert = ReadFromSoftCert();
-            var cert = ReadFromEcdsaCard();
+            var cert = ReadFromRsaCard();
 
             //TestXmlSigning(cert);
             //TestOsigInfo(cert);
@@ -85,6 +87,31 @@ namespace CezihECDSa
             //TestECezdlih(cert);
             //TestECezdlih(cert);
             TestDohvatSmjernica(cert).GetAwaiter().GetResult();
+        }
+
+        private static X509Certificate2 ReadFromRsaCard()
+        {
+            var mbo = "990002049";
+
+            X509Store store = new X509Store(StoreName.My);
+            store.Open(OpenFlags.ReadOnly);
+
+            var found = false;
+
+            var certificates = new List<X509Certificate2>();
+            X509Certificate2 cert = null;
+
+            certificates = store.Certificates.Cast<X509Certificate2>().Where(x => x.FriendlyName.Contains(mbo)).OrderByDescending(x => x.NotAfter).ToList();
+
+
+            cert = certificates.FirstOrDefault();
+
+            if (cert == null)
+            {
+                return null;
+            }
+
+            return cert;
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()
@@ -562,8 +589,11 @@ namespace CezihECDSa
             //            poruka = "<dohvatismjernicerequest><kzn>123</kzn><mkb10>123123</mkb10></dohvatismjernicerequest>"
             //        }
             //    });
+            CancellationTokenSource source = new CancellationTokenSource();
+            CancellationToken token = source.Token;
 
-            var response = await client.DohvatiSmjerniceAsync(new WDohvatiSmjerniceRequest("123", "123"));
+            var response = await client.DohvatiSmjerniceAsync(new WDohvatiSmjerniceRequest("123", "123"), token);
+            var response2 = await client.DohvatiSmjerniceAsync(new WDohvatiSmjerniceRequest("123", "123"), token);
 
             Console.WriteLine("done");
         }
