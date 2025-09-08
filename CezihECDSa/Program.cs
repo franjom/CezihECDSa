@@ -545,7 +545,7 @@ namespace CezihECDSa
         {
             var opts = new EvidencijeOptions 
             {
-                BaseUri = new Uri("https://servistest.hzzo.hr/cezih/Evidencije.svc"),
+                BaseUri = new Uri("https://servis.hzzo.hr/cezih/Evidencije.svc"),
                 Timeout = TimeSpan.FromSeconds(30)
             };
             var infoOthersClient = new EvidencijeClient(opts, cert);
