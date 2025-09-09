@@ -361,7 +361,7 @@ namespace CezihECDSa
             // ovo radi sa ECDSA mora se slati potpiani request
             var opts = new CezdlihOptions
             {
-                BaseUri = new Uri("https://evaccert.zdravlje.hr/WebServices2/CEZDLIHWS.asmx"),
+                BaseUri = new Uri("https://cezdlihws.zdravlje.hr:8443"),
                 Timeout = TimeSpan.FromSeconds(30)
             };
 
