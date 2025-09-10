@@ -80,7 +80,7 @@ namespace CezihECDSa
             //TestXmlSigning(cert);
             //TestOsigInfo(cert);
             //TestPrijavaZarazne(cert);
-            //TestInfoOthers(cert);
+            TestInfoOthers(cert);
             TestECezdlih(cert);
         }
 
@@ -516,7 +516,7 @@ namespace CezihECDSa
         {
             var opts = new InfoOthersOptions 
             {
-                BaseUri = new Uri(""),
+                BaseUri = new Uri("https://servistest.hzzo.hr/InfoOthers/InfoOthers.svc/s11"),
                 Timeout = TimeSpan.FromSeconds(30)
             };
             var infoOthersClient = new InfoOthersClient(opts, cert);
