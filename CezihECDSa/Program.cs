@@ -24,6 +24,7 @@ using System.ServiceModel.Security;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
+using static System.Net.WebRequestMethods;
 
 namespace CezihECDSa
 {
@@ -74,13 +75,13 @@ namespace CezihECDSa
             // good to go
 
             //var cert = ReadFromSoftCert();
-            var cert = ReadFromRsaCard();
-            //var cert = ReadFromEcdsaCard();
+            //var cert = ReadFromRsaCard();
+            var cert = ReadFromEcdsaCard();
 
             //TestXmlSigning(cert);
             //TestOsigInfo(cert);
             //TestPrijavaZarazne(cert);
-            TestInfoOthers(cert);
+            //TestInfoOthers(cert);
             TestECezdlih(cert);
         }
 
@@ -361,7 +362,7 @@ namespace CezihECDSa
             // ovo radi sa ECDSA mora se slati potpiani request
             var opts = new CezdlihOptions
             {
-                BaseUri = new Uri("https://cezdlih-cijepih-test.zdravlje.hr/"),
+                BaseUri = new Uri("https://cezdlih-cijepih-test.zdravlje.hr:8443"), // /WebServices2/CEZDLIHWS.asmx
                 Timeout = TimeSpan.FromSeconds(30)
             };
 
