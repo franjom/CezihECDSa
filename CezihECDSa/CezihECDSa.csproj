@@ -131,6 +131,10 @@
     <Compile Include="SoapClients\Cezdlih\Wrappers\WSlanjeNarudzbenicaResponse.cs" />
     <Compile Include="SoapClients\Cezdlih\Wrappers\WPreuzimanjeOtpremniceResponse.cs" />
     <Compile Include="SoapClients\Cezdlih\Wrappers\WSlanjePlanaImunizacijeResponse.cs" />
+    <Compile Include="SoapClients\CijepniKartonLijecnika\CijepniKartonLijecnikaClient.cs" />
+    <Compile Include="SoapClients\CijepniKartonLijecnika\CijepniKartonLijecnikaOptions.cs" />
+    <Compile Include="SoapClients\CijepniKartonLijecnika\Wrappers\WUpitOCijepnimKartonimaIzabranogLijecnikaRequest.cs" />
+    <Compile Include="SoapClients\CijepniKartonLijecnika\Wrappers\WUpitOCijepnimKartonimaIzabranogLijecnikaResponse.cs" />
     <Compile Include="SoapClients\InfoOthers\InfoOthersClient.cs" />
     <Compile Include="SoapClients\InfoOthers\InfoOthersOptions.cs" />
     <Compile Include="SoapClients\InfoOthers\Wrappers\WStornoOthersRequest.cs" />
@@ -143,6 +147,7 @@
     <Compile Include="SoapClients\InfoOthers\Wrappers\WDohvatiOthersRequest.cs" />
     <Compile Include="SoapClients\InfoOthers\Wrappers\WAutorizacijaOthersResponse.cs" />
     <Compile Include="SoapClients\InfoOthers\Wrappers\WDohvatiOthersResponse.cs" />
+    <Compile Include="Wsdl\CijepniKartonLijecnikaWsdl.cs" />
     <Compile Include="Wsdl\InfoOthers.cs" />
     <Compile Include="SoapClients\OsigInfo\ChosenDoctorRequest.cs" />
     <Compile Include="SoapClients\OsigInfo\ChosenDoctorResponse.cs" />
