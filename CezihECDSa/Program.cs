@@ -362,8 +362,9 @@ namespace CezihECDSa
             Console.WriteLine("done");
         }
 
-        private static void TestInfoOthers(X509Certificate2 cert)
+        private static void TestCijepni(X509Certificate2 cert)
         {
+
             var opts = new CijepniKartonLijecnikaOptions()
             {
                 BaseUri = new Uri("https://evaccert.zdravlje.hr/WebServices2/Karton.asmx"),
@@ -382,46 +383,18 @@ namespace CezihECDSa
                             SifraVrsteCjepivo = 1
                         }
                     });
-        //var responseSync2 = infoOthersClient.DohvatiOthersNaDan(new WDohvatiOthersNaDanRequest("03276147", "990000767", DateTime.Today, true));
-            //var responseSync3 = infoOthersClient.AutorizacijaOthers(new WAutorizacijaOthersRequest(
-            //                        osiguravateljsifra: string.Empty,
-            //                        pacijentoib: "12345678901",
-            //                        brojKartice: string.Empty,
-            //                        dattroska: DateTime.Now,
-            //                        dattroskaSpecified: false,
-            //                        transiznos: 0m,
-            //                        trnsiznosSpecified: false,
-            //                        transtip: 0,
-            //                        transtipSpecified: false,
-            //                        ustanovasifra: string.Empty
-            //                    ));
-            //var responseSync4 = infoOthersClient.AutorizacijaOthersPharmacy(new WAutorizacijaOthersPharmacyRequest(
-            //                        osiguravateljsifra: string.Empty,  // Empty string for OsiguravateljSifra
-            //                        pacijentoib: "12345678901",
-            //                        brojKartice: string.Empty,         // Empty string for BrojKartice
-            //                        dattroska: DateTime.Now,
-            //                        dattroskaSpecified: false,         // False for DatTrosakSpecified
-            //                        transiznos: 0m,                    // Default decimal value (0)
-            //                        trnsiznosSpecified: false,         // False for TrnsIznosSpecified
-            //                        transtip: 0,                       // Default short value (0)
-            //                        transtipSpecified: false,          // False for TransTipSpecified
-            //                        recsb: string.Empty,               // Empty string for Recsb
-            //                        erecid: string.Empty,              // Empty string for Erecid
-            //                        ustanovasifra: string.Empty        // Empty string for UstanovaSifra
-            //                    ));
+        }
 
-            //var responseSync5 = infoOthersClient.StornoOthers(new WStornoOthersRequest(
-            //                        osiguravateljsifra: string.Empty,  // Empty string for OsiguravateljSifra
-            //                        pacijentoib: "12345678901",
-            //                        brojKartice: string.Empty,         // Empty string for BrojKartice
-            //                        dattroska: DateTime.Now,
-            //                        dattroskaSpecified: false,         // False for DatTrosakSpecified
-            //                        transiznos: 0m,                    // Default decimal value (0)
-            //                        trnsiznosSpecified: false,         // False for TrnsIznosSpecified
-            //                        transtip: 0,                       // Default short value (0)
-            //                        transtipSpecified: false,          // False for TransTipSpecified
-            //                        autkod: string.Empty               // Empty string for AutKod
-            //                    ));
+        private static void TestInfoOthers(X509Certificate2 cert)
+        {
+            var opts = new InfoOthersOptions
+            {
+                BaseUri = new Uri("https://hzzo-infoothers-test.gov.hr/InfoOthers/InfoOthers.svc"),
+                Timeout = TimeSpan.FromSeconds(30)
+            };
+            var infoOthersClient = new InfoOthersClient(opts, cert);
+            var responseSync1 = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("", "54968374901"));
+            var responseSync = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("03276147", "990000767"));
 
             Console.WriteLine("done");
         }
