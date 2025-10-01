@@ -2,17 +2,16 @@ using System.Xml.Serialization;
 
 namespace CezihECDSa.SoapClients.CezihWs.Wrappers
 {
-    [XmlRoot("fetchOtisliPacijentiList", Namespace = "urn:publicid:-:CEZIH:WS-types:1.0")]
-    public sealed class WFetchOtisliPacijentiListRequest
+    [XmlRoot("ListaOtisliPacijentiListRequest", Namespace = "urn:publicid:-:CEZIH:WS-types:1.0")]
+    public class WFetchOtisliPacijentiListRequest
     {
         public WFetchOtisliPacijentiListRequest() { }
-
-        public WFetchOtisliPacijentiListRequest(string listaOtisliPacijentiListRequest)
+        public WFetchOtisliPacijentiListRequest(string podatak) 
         {
-            ListaOtisliPacijentiListRequest = listaOtisliPacijentiListRequest;
+            this.Podatak = podatak;
         }
 
-        [XmlElement("ListaOtisliPacijentiListRequest", Namespace = "urn:publicid:-:CEZIH:WS-types:1.0", Order = 0)]
-        public string ListaOtisliPacijentiListRequest { get; set; }
+        [XmlText]
+        public string Podatak { get; set; }
     }
 }

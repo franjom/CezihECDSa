@@ -9,6 +9,7 @@ using CezihECDSa.SoapClients.InfoOthers.Wrappers;
 using CezihECDSa.SoapClients.OsigInfo;
 using CezihECDSa.SoapClients.PrijavaZarazne;
 using CezihECDSa.Wsdl;
+using CezihECDSa.Wsdl.CezihWS;
 using CezihECDSa.Wsdl.CijepniKartonLijecnika;
 using CezihECDSa.Wsdl.PrijavaZarazne;
 using ECDSa;
@@ -413,6 +414,7 @@ namespace CezihECDSa
 
             var responseSync1 = client.Echo(new WEchoRequest("new "));
             var responseSync2 = client.FetchOtisliPacijentiList(new WFetchOtisliPacijentiListRequest(""));
+            var responseSync3 = client.Upload(new WUploadRequest(new UploadRequest {  imeDatoteke = "" }));
 
 
             Console.WriteLine("done");
