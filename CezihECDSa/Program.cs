@@ -1,5 +1,7 @@
 ﻿using CezihECDSa.Logging;
 using CezihECDSa.SoapClients.Cezdlih;
+using CezihECDSa.SoapClients.CezihWs;
+using CezihECDSa.SoapClients.CezihWs.Wrappers;
 using CezihECDSa.SoapClients.CijepniKartonLijecnika;
 using CezihECDSa.SoapClients.CijepniKartonLijecnika.Wrappers;
 using CezihECDSa.SoapClients.InfoOthers;
@@ -83,7 +85,8 @@ namespace CezihECDSa
             //TestPrijavaZarazne(cert);
             //TestInfoOthers(cert);
             //TestECezdlih(cert);
-            TestInfoOthers(cert);
+            //TestInfoOthers(cert);
+            TestCezihWS(cert);
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()
@@ -395,6 +398,22 @@ namespace CezihECDSa
             var infoOthersClient = new InfoOthersClient(opts, cert);
             var responseSync1 = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("", "54968374901"));
             var responseSync = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("03276147", "990000767"));
+
+            Console.WriteLine("done");
+        }
+
+        private static void TestCezihWS(X509Certificate2 cert)
+        {
+            var opts = new CezihWsOptions
+            {
+                BaseUri = new Uri("https://cezihtest.cezih.hr/CezihWs/ws"),
+                Timeout = TimeSpan.FromSeconds(30)
+            };
+            var client = new CezihWsClient(opts, cert);
+
+            var responseSync1 = client.Echo(new WEchoRequest("new "));
+            var responseSync2 = client.FetchOtisliPacijentiList(new WFetchOtisliPacijentiListRequest(""));
+
 
             Console.WriteLine("done");
         }
