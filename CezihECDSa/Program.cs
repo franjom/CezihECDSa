@@ -1,10 +1,12 @@
 ﻿using CezihECDSa.Logging;
 using CezihECDSa.SoapClients.Cezdlih;
+using CezihECDSa.SoapClients.DohvatSmjernica;
 using CezihECDSa.SoapClients.InfoOthers;
 using CezihECDSa.SoapClients.InfoOthers.Wrappers;
 using CezihECDSa.SoapClients.OsigInfo;
 using CezihECDSa.SoapClients.PrijavaZarazne;
 using CezihECDSa.Wsdl;
+using CezihECDSa.Wsdl.DohvatSmjernica;
 using CezihECDSa.Wsdl.PrijavaZarazne;
 using ECDSa;
 using ECDSa.ECDSa;
@@ -22,6 +24,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Security;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Xml;
 
 namespace CezihECDSa
@@ -78,7 +81,8 @@ namespace CezihECDSa
             //TestXmlSigning(cert);
             //TestOsigInfo(cert);
             //TestPrijavaZarazne(cert);
-            TestInfoOthers(cert);
+            //TestInfoOthers(cert);
+            TestDohvatSmjernica(cert).GetAwaiter().GetResult();
             //TestECezdlih(cert);
         }
 
@@ -495,6 +499,67 @@ namespace CezihECDSa
             var infoOthersClient = new InfoOthersClient(opts, cert);
             //var responseSync1 = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("", "54968374901"));
             var responseSync = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("03276147", "990000767"));
+            //var responseSync2 = infoOthersClient.DohvatiOthersNaDan(new WDohvatiOthersNaDanRequest("03276147", "990000767", DateTime.Today, true));
+            //var responseSync3 = infoOthersClient.AutorizacijaOthers(new WAutorizacijaOthersRequest(
+            //                        osiguravateljsifra: string.Empty,
+            //                        pacijentoib: "12345678901",
+            //                        brojKartice: string.Empty,
+            //                        dattroska: DateTime.Now,
+            //                        dattroskaSpecified: false,
+            //                        transiznos: 0m,
+            //                        trnsiznosSpecified: false,
+            //                        transtip: 0,
+            //                        transtipSpecified: false,
+            //                        ustanovasifra: string.Empty
+            //                    ));
+            //var responseSync4 = infoOthersClient.AutorizacijaOthersPharmacy(new WAutorizacijaOthersPharmacyRequest(
+            //                        osiguravateljsifra: string.Empty,  // Empty string for OsiguravateljSifra
+            //                        pacijentoib: "12345678901",
+            //                        brojKartice: string.Empty,         // Empty string for BrojKartice
+            //                        dattroska: DateTime.Now,
+            //                        dattroskaSpecified: false,         // False for DatTrosakSpecified
+            //                        transiznos: 0m,                    // Default decimal value (0)
+            //                        trnsiznosSpecified: false,         // False for TrnsIznosSpecified
+            //                        transtip: 0,                       // Default short value (0)
+            //                        transtipSpecified: false,          // False for TransTipSpecified
+            //                        recsb: string.Empty,               // Empty string for Recsb
+            //                        erecid: string.Empty,              // Empty string for Erecid
+            //                        ustanovasifra: string.Empty        // Empty string for UstanovaSifra
+            //                    ));
+
+            //var responseSync5 = infoOthersClient.StornoOthers(new WStornoOthersRequest(
+            //                        osiguravateljsifra: string.Empty,  // Empty string for OsiguravateljSifra
+            //                        pacijentoib: "12345678901",
+            //                        brojKartice: string.Empty,         // Empty string for BrojKartice
+            //                        dattroska: DateTime.Now,
+            //                        dattroskaSpecified: false,         // False for DatTrosakSpecified
+            //                        transiznos: 0m,                    // Default decimal value (0)
+            //                        trnsiznosSpecified: false,         // False for TrnsIznosSpecified
+            //                        transtip: 0,                       // Default short value (0)
+            //                        transtipSpecified: false,          // False for TransTipSpecified
+            //                        autkod: string.Empty               // Empty string for AutKod
+            //                    ));
+
+            Console.WriteLine("done");
+        }
+
+        private async static Task TestDohvatSmjernica(X509Certificate2 cert)
+        {
+            var opts = new DohvatSmjernicaOptions 
+            {
+                BaseUri = new Uri("https://cezeltest.cezih.hr:32867/NarucivanjeService.asmx"),
+                Timeout = TimeSpan.FromSeconds(60)
+            };
+            var infoOthersClient = new DohvatSmjernicaClient(opts, cert);
+            //var responseSync1 = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("", "54968374901"));
+            var responseSync = infoOthersClient.DohvatiSmjerniceAsync(new DohvatiSmjerniceRequest 
+            { 
+                Body = new DohvatiSmjerniceRequestBody
+                { 
+                    poruka = "<DohvatiSmjerniceRequest><KZN>213</KZN><MKB10>421412</MKB10></DohvatiSmjerniceRequest>"
+                }
+            
+            });
             //var responseSync2 = infoOthersClient.DohvatiOthersNaDan(new WDohvatiOthersNaDanRequest("03276147", "990000767", DateTime.Today, true));
             //var responseSync3 = infoOthersClient.AutorizacijaOthers(new WAutorizacijaOthersRequest(
             //                        osiguravateljsifra: string.Empty,
