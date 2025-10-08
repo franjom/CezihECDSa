@@ -546,7 +546,7 @@ namespace CezihECDSa
         {
             var opts = new InjuryApplicationServiceOptions
             {
-                BaseUri = new Uri("")
+                BaseUri = new Uri("https://cezihtest.cezih.hr/eozljede-webservices/ws")
             };
             var client = new InjuryApplicationServiceClient(opts, cert);
             var responseSync1 = client.Prijava(new prijavaRequest 
