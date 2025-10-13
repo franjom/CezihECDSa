@@ -1,5 +1,6 @@
 ﻿using CezihECDSa.Logging;
 using CezihECDSa.SoapClients.Cezdlih;
+using CezihECDSa.SoapClients.Czo;
 using CezihECDSa.SoapClients.InfoOthers;
 using CezihECDSa.SoapClients.InfoOthers.Wrappers;
 using CezihECDSa.SoapClients.OsigInfo;
@@ -561,8 +562,8 @@ namespace CezihECDSa
                 BaseUri = new Uri("https://b2btest01.crosig.hr/_czo_ac_ljekarne_test_/czoacljekarne.asmx"),
                 Timeout = TimeSpan.FromSeconds(30)
             };
-            var infoOthersClient = new InfoOthersClient(opts, cert);
-            var responseSync = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("03276147", "990000767"));
+            var infoOthersClient = new CzoClient(opts, cert);
+            var responseSync = infoOthersClient.DocumentRepository_RetrieveDocumentSet(new WDohvatiOthersRequest("03276147", "990000767"));
 
 
             Console.WriteLine("done");
