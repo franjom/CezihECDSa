@@ -4,12 +4,12 @@ using System.Xml.Serialization;
 
 namespace CezihECDSa.SoapClients.CezihWs.Wrappers
 {
-    [XmlRoot("NeuspjesnoObradjeniRacuniRequest", Namespace = "urn:publicid:-:CEZIH:WS-types:1.0")]
+    [XmlRoot("NeuspjesnoObradjeniRacuniRequest", Namespace = "urn:publicid:-:FileTransferWebService:WS-types:1.0")]
     public sealed class WFetchNeuspjesnoObradjeniRacuniRequest
     {
         public WFetchNeuspjesnoObradjeniRacuniRequest() { }
 
-        public WFetchNeuspjesnoObradjeniRacuniRequest(NeuspjesnoObradjeniRacuniRequest neuspjesnoObradjeniRacuniRequest)
+        public WFetchNeuspjesnoObradjeniRacuniRequest(fetchNeuspjesnoObradjeniRacuniRequest neuspjesnoObradjeniRacuniRequest)
         {
             DatumOd = neuspjesnoObradjeniRacuniRequest.datumOd;
             DatumDo = neuspjesnoObradjeniRacuniRequest.datumDo;

@@ -3,13 +3,13 @@ using System.Xml.Serialization;
 
 namespace CezihECDSa.SoapClients.CezihWs.Wrappers
 {
-    [XmlRoot("fetchNeuspjesnoObradjeniRacuniResponse", Namespace = "urn:publicid:-:CEZIH:WS-types:1.0")]
+    [XmlRoot("fetchNeuspjesnoObradjeniRacuniResponse", Namespace = "urn:publicid:-:FileTransferWebService:WS-types:1.0")]
     public sealed class WFetchNeuspjesnoObradjeniRacuniResponse
     {
         public WFetchNeuspjesnoObradjeniRacuniResponse() { }
-        public WFetchNeuspjesnoObradjeniRacuniResponse(NeuspjesnoObradjeniRacuniResponse output) => Output = output;
+        public WFetchNeuspjesnoObradjeniRacuniResponse(fetchNeuspjesnoObradjeniRacuniResponse output) => Output = output;
 
         [XmlElement("fetchNeuspjesnoObradjeniRacuniResult", Order = 0)]
-        public NeuspjesnoObradjeniRacuniResponse Output { get; set; }
+        public fetchNeuspjesnoObradjeniRacuniResponse Output { get; set; }
     }
 }

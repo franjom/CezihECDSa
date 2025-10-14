@@ -407,17 +407,43 @@ namespace CezihECDSa
         {
             var opts = new CezihWsOptions
             {
-                BaseUri = new Uri("https://cezihtest.cezih.hr/CezihWs/ws"),
+                BaseUri = new Uri("https://hzzo-portal-test.gov.hr:8443/FileTransferWebService/ws"),
                 Timeout = TimeSpan.FromSeconds(30)
             };
             var client = new CezihWsClient(opts, cert);
 
-            var responseSync1 = client.Echo(new WEchoRequest("new "));
-            var responseSync2 = client.FetchOtisliPacijentiList(new WFetchOtisliPacijentiListRequest(""));
-            var responseSync3 = client.Upload(new WUploadRequest(new UploadRequest {  imeDatoteke = "" }));
+            List<string> optionList = new List<string>
+            { "obavijest04.txt" };
+
+            var responseSync1 = client.Echo(new WEchoRequest("test echo request"));
+            var responseSync2 = client.FetchListaPacijenataList(new WFetchListaPacijenataListRequest(""));
+            var responseSync3 = client.FetchListaPacijenataZip(new WFetchListaPacijenataZipRequest("000000"));
+            var responseSync4 = client.FetchListaPacijenataLastZip(new WFetchListaPacijenataLastZipRequest("000000"));
+            //var responseSync5 = client.Upload(new WUploadRequest(new UploadRequest()));
+            var responseSync5 = client.Upload(new WUploadRequest(new UploadRequest { datoteka = GetByteArray(2), imeDatoteke = "202510.txt" }));
+            var responseSync6 = client.FetchListaRezultataObradeList(new WFetchListaRezultataObradeListRequest(""));
+            var responseSync7 = client.FetchRezultatObrade(new WFetchRezultatObradeRequest("123456789_114_O_Rn_1234567890001.S25.txt"));
+            var responseSync8 = client.ArhivirajRezultatObrade(new WArhivirajRezultatObradeRequest("123456789_114_O_Rn_1234567890001.S25.txt"));
+            var responseSync9 = client.FetchListaEKartonaList(new WFetchListaEKartonaListRequest());
+            var responseSync10 = client.FetchEKarton(new WFetchEKartonRequest("123456789_987654321_g1_12345678901234567890123456789000_7654321"));
+            var responseSync11 = client.ArhivirajEKarton(new WArhivirajEKartonRequest("123456789_123456789_g1_12345678901234567890123456789008"));
+            var responseSync12 = client.FetchOtisliPacijentiList(new WFetchOtisliPacijentiListRequest());
+            var responseSync13 = client.FetchOtisliPacijenti(new WFetchOtisliPacijentiRequest("000000000_isporuciKarton_250901"));
+            var responseSync14 = client.ArhivirajOtisliPacijenti(new WArhivirajOtisliPacijentiRequest("000000000_isporuciKarton_250903"));
+            var responseSync15 = client.FetchListaObavijestiList(new WFetchListaObavijestiListRequest(".*"));
+            var responseSync16 = client.FetchObavijest(new WFetchObavijestRequest(new fetchObavijestRequest { imeDatoteke = optionList.ToArray() }));
+            //var responseSync15 = client.FetchNeuspjesnoObradjeniRacuni(new WFetchNeuspjesnoObradjeniRacuniRequest(new fetchNeuspjesnoObradjeniRacuniRequest { datumDo = DateTime.ParseExact("2025-01-01", System.Globalization.CultureInfo.InvariantCulture), datumOd = "" }));
 
 
             Console.WriteLine("done");
+        }
+
+        private static byte[] GetByteArray(int sizeInKb)
+        {
+            Random rnd = new Random();
+            byte[] b = new byte[sizeInKb * 1024]; // convert kb to byte
+            rnd.NextBytes(b);
+            return b;
         }
 
         private static string GetSafePath(string path1, string path2)

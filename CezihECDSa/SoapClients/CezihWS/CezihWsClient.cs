@@ -68,20 +68,20 @@ namespace CezihECDSa.SoapClients.CezihWs
         Task<Result<ArhivirajOtisliPacijentiResponse>> ArhivirajOtisliPacijentiAsync(WArhivirajOtisliPacijentiRequest request,
             CancellationToken ct = default);
 
-        Result<NeuspjesnoObradjeniRacuniResponse> FetchNeuspjesnoObradjeniRacuni(WFetchNeuspjesnoObradjeniRacuniRequest request);
-        Task<Result<NeuspjesnoObradjeniRacuniResponse>> FetchNeuspjesnoObradjeniRacuniAsync(WFetchNeuspjesnoObradjeniRacuniRequest request,
+        Result<fetchNeuspjesnoObradjeniRacuniResponse> FetchNeuspjesnoObradjeniRacuni(WFetchNeuspjesnoObradjeniRacuniRequest request);
+        Task<Result<fetchNeuspjesnoObradjeniRacuniResponse>> FetchNeuspjesnoObradjeniRacuniAsync(WFetchNeuspjesnoObradjeniRacuniRequest request,
             CancellationToken ct = default);
 
         Result<ListaObavijestiListResponse> FetchListaObavijestiList(WFetchListaObavijestiListRequest request);
         Task<Result<ListaObavijestiListResponse>> FetchListaObavijestiListAsync(WFetchListaObavijestiListRequest request,
             CancellationToken ct = default);
 
-        Result<ObavijestResponse> FetchObavijest(WFetchObavijestRequest request);
-        Task<Result<ObavijestResponse>> FetchObavijestAsync(WFetchObavijestRequest request,
+        Result<fetchObavijestResponse> FetchObavijest(WFetchObavijestRequest request);
+        Task<Result<fetchObavijestResponse>> FetchObavijestAsync(WFetchObavijestRequest request,
             CancellationToken ct = default);
     }
 
-    public class CezihWsClient : SoapClientBase, ICezihWsClient
+    public class CezihWsClient : SoapClientBase//, ICezihWsClient
     {
         private readonly CezihWsOptions _options;
         private readonly X509Certificate2 _cert;
@@ -102,7 +102,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/echo",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/echo",
                     Uri = uri,
                     XmlString = xml
                 });
@@ -124,7 +124,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/echo",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/echo",
                     Uri = uri,
                     XmlString = xml
                 }, ct);
@@ -145,7 +145,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchListaPacijenataList",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchListaPacijenataList",
                     Uri = uri,
                     XmlString = xml
                 });
@@ -166,7 +166,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchListaPacijenataList",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchListaPacijenataList",
                     Uri = uri,
                     XmlString = xml
                 }, ct);
@@ -187,7 +187,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchListaPacijenataZip",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchListaPacijenataZip",
                     Uri = uri,
                     XmlString = xml
                 });
@@ -209,7 +209,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchListaPacijenataZip",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchListaPacijenataZip",
                     Uri = uri,
                     XmlString = xml
                 }, ct);
@@ -231,7 +231,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchListaPacijenataLastZip",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchListaPacijenataLastZip",
                     Uri = uri,
                     XmlString = xml
                 });
@@ -253,7 +253,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchListaPacijenataLastZip",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchListaPacijenataLastZip",
                     Uri = uri,
                     XmlString = xml
                 }, ct);
@@ -275,7 +275,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/upload",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/upload",
                     Uri = uri,
                     XmlString = xml
                 });
@@ -297,7 +297,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/upload",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/upload",
                     Uri = uri,
                     XmlString = xml
                 }, ct);
@@ -319,7 +319,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchListaRezultataObradeList",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchListaRezultataObradeList",
                     Uri = uri,
                     XmlString = xml
                 });
@@ -341,7 +341,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchListaRezultataObradeList",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchListaRezultataObradeList",
                     Uri = uri,
                     XmlString = xml
                 }, ct);
@@ -363,7 +363,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchRezultatObrade",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchRezultatObrade",
                     Uri = uri,
                     XmlString = xml
                 });
@@ -385,7 +385,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchRezultatObrade",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchRezultatObrade",
                     Uri = uri,
                     XmlString = xml
                 }, ct);
@@ -408,7 +408,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/arhivirajRezultatObrade",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/arhivirajRezultatObrade",
                     Uri = uri,
                     XmlString = xml
                 });
@@ -430,7 +430,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/arhivirajRezultatObrade",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/arhivirajRezultatObrade",
                     Uri = uri,
                     XmlString = xml
                 }, ct);
@@ -452,7 +452,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchListaEKartonaList",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchListaEKartonaList",
                     Uri = uri,
                     XmlString = xml
                 });
@@ -474,7 +474,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchListaEKartonaList",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchListaEKartonaList",
                     Uri = uri,
                     XmlString = xml
                 }, ct);
@@ -487,7 +487,7 @@ namespace CezihECDSa.SoapClients.CezihWs
             }
         }
 
-        public Result<EKartonResponse> FetchEKarton(WFetchEKartonRequest request)
+        public Result<WEKartonResponse> FetchEKarton(WFetchEKartonRequest request)
         {
             try
             {
@@ -496,7 +496,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchEKarton",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchEKarton",
                     Uri = uri,
                     XmlString = xml
                 });
@@ -509,7 +509,7 @@ namespace CezihECDSa.SoapClients.CezihWs
             }
         }
 
-        public async Task<Result<EKartonResponse>> FetchEKartonAsync(WFetchEKartonRequest request, CancellationToken ct = default)
+        public async Task<Result<WEKartonResponse>> FetchEKartonAsync(WFetchEKartonRequest request, CancellationToken ct = default)
         {
             try
             {
@@ -518,7 +518,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchEKarton",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchEKarton",
                     Uri = uri,
                     XmlString = xml
                 }, ct);
@@ -540,7 +540,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/arhivirajEKarton",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/arhivirajEKarton",
                     Uri = uri,
                     XmlString = xml
                 });
@@ -562,7 +562,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/arhivirajEKarton",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/arhivirajEKarton",
                     Uri = uri,
                     XmlString = xml
                 }, ct);
@@ -584,7 +584,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchOtisliPacijentiList",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchOtisliPacijentiList",
                     Uri = uri,
                     XmlString = xml
                 });
@@ -606,7 +606,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchOtisliPacijentiList",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchOtisliPacijentiList",
                     Uri = uri,
                     XmlString = xml
                 }, ct);
@@ -628,7 +628,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchOtisliPacijenti",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchOtisliPacijenti",
                     Uri = uri,
                     XmlString = xml
                 });
@@ -650,7 +650,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchOtisliPacijenti",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchOtisliPacijenti",
                     Uri = uri,
                     XmlString = xml
                 }, ct);
@@ -672,7 +672,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/arhivirajOtisliPacijenti",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/arhivirajOtisliPacijenti",
                     Uri = uri,
                     XmlString = xml
                 });
@@ -694,7 +694,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/arhivirajOtisliPacijenti",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/arhivirajOtisliPacijenti",
                     Uri = uri,
                     XmlString = xml
                 }, ct);
@@ -707,7 +707,7 @@ namespace CezihECDSa.SoapClients.CezihWs
             }
         }
 
-        public Result<NeuspjesnoObradjeniRacuniResponse> FetchNeuspjesnoObradjeniRacuni(WFetchNeuspjesnoObradjeniRacuniRequest request)
+        public Result<fetchNeuspjesnoObradjeniRacuniResponse> FetchNeuspjesnoObradjeniRacuni(WFetchNeuspjesnoObradjeniRacuniRequest request)
         {
             try
             {
@@ -716,7 +716,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchNeuspjesnoObradjeniRacuni",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchNeuspjesnoObradjeniRacuni",
                     Uri = uri,
                     XmlString = xml
                 });
@@ -729,7 +729,7 @@ namespace CezihECDSa.SoapClients.CezihWs
             }
         }
 
-        public async Task<Result<NeuspjesnoObradjeniRacuniResponse>> FetchNeuspjesnoObradjeniRacuniAsync(WFetchNeuspjesnoObradjeniRacuniRequest request, CancellationToken ct = default)
+        public async Task<Result<fetchNeuspjesnoObradjeniRacuniResponse>> FetchNeuspjesnoObradjeniRacuniAsync(WFetchNeuspjesnoObradjeniRacuniRequest request, CancellationToken ct = default)
         {
             try
             {
@@ -738,7 +738,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchNeuspjesnoObradjeniRacuni",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchNeuspjesnoObradjeniRacuni",
                     Uri = uri,
                     XmlString = xml
                 }, ct);
@@ -759,7 +759,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchListaObavijestiList",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchListaObavijestiList",
                     Uri = uri,
                     XmlString = xml
                 });
@@ -781,7 +781,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchListaObavijestiList",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchListaObavijestiList",
                     Uri = uri,
                     XmlString = xml
                 }, ct);
@@ -794,7 +794,7 @@ namespace CezihECDSa.SoapClients.CezihWs
             }
         }
 
-        public Result<ObavijestResponse> FetchObavijest(WFetchObavijestRequest request)
+        public Result<fetchObavijestResponse> FetchObavijest(WFetchObavijestRequest request)
         {
             try
             {
@@ -803,7 +803,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchObavijest",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchObavijest",
                     Uri = uri,
                     XmlString = xml
                 });
@@ -816,7 +816,7 @@ namespace CezihECDSa.SoapClients.CezihWs
             }
         }
 
-        public async Task<Result<ObavijestResponse>> FetchObavijestAsync(WFetchObavijestRequest request, CancellationToken ct = default)
+        public async Task<Result<fetchObavijestResponse>> FetchObavijestAsync(WFetchObavijestRequest request, CancellationToken ct = default)
         {
             try
             {
@@ -825,7 +825,7 @@ namespace CezihECDSa.SoapClients.CezihWs
                 var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
-                    SoapAction = "urn:publicid:-:CEZIH:WS:1.0/fetchObavijest",
+                    SoapAction = "urn:publicid:-:FileTransferWebService:WS:1.0/fetchObavijest",
                     Uri = uri,
                     XmlString = xml
                 }, ct);
@@ -849,21 +849,32 @@ namespace CezihECDSa.SoapClients.CezihWs
         {
             return ProcessResponse<WFetchListaPacijenataListResponse, ListaPacijenataListResponse>(
                 result,
-                body => body.Output);
+                wrapper => new ListaPacijenataListResponse { imeMape = wrapper.imeMape }
+            );
         }
 
         private Result<ListaPacijenataZipResponse> ProcesFetchListaPacijenataZipResponse(SoapRequestResult result)
         {
             return ProcessResponse<WFetchListaPacijenataZipResponse, ListaPacijenataZipResponse>(
                 result,
-                body => body.Output);
+                wrapper => new ListaPacijenataZipResponse
+                {
+                    imeDatoteke = wrapper.imeDatoteke,
+                    datoteka = wrapper.datoteka
+                }
+            );
         }
 
         private Result<ListaPacijenataLastZipResponse> ProcesFetchListaPacijenataLastZipResponse(SoapRequestResult result)
         {
             return ProcessResponse<WFetchListaPacijenataLastZipResponse, ListaPacijenataLastZipResponse>(
                 result,
-                body => body.Output);
+                wrapper => new ListaPacijenataLastZipResponse
+                {
+                    imeDatoteke = wrapper.imeDatoteke,
+                    datoteka = wrapper.datoteka
+                }
+            );
         }
 
         private Result<UploadResponse> ProcesUploadResponse(SoapRequestResult result)
@@ -875,16 +886,25 @@ namespace CezihECDSa.SoapClients.CezihWs
 
         private Result<ListaRezultataListResponse> ProcesFetchListaRezultataObradeListResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WFetchListaRezultataObradeListResponse, ListaRezultataListResponse>(
+            return ProcessResponse<WFetchListaRezultataListResponse, ListaRezultataListResponse>(
                 result,
-                body => body.Output);
+                wrapper => new ListaRezultataListResponse
+                {
+                    imeDatoteke = wrapper.imeDatoteke
+                }
+            );
         }
 
         private Result<RezultatObradeResponse> ProcesFetchRezultatObradeResponse(SoapRequestResult result)
         {
             return ProcessResponse<WFetchRezultatObradeResponse, RezultatObradeResponse>(
                 result,
-                body => body.Output);
+                wrapper => new RezultatObradeResponse
+                {
+                    imeDatoteke = wrapper.imeDatoteke,
+                    datoteka = wrapper.datoteka
+                }
+            );
         }
 
         private Result<ArhivirajRezultatObradeResponse> ProcesArhivirajRezultatObradeResponse(SoapRequestResult result)
@@ -898,14 +918,19 @@ namespace CezihECDSa.SoapClients.CezihWs
         {
             return ProcessResponse<WFetchListaEKartonaListResponse, ListaEKartonaListResponse>(
                 result,
-                body => body.Output);
+                wrapper => new ListaEKartonaListResponse
+                {
+                    imeDatoteke = wrapper.imeDatoteke
+                }
+            );
         }
 
-        private Result<EKartonResponse> ProcesFetchEKartonResponse(SoapRequestResult result)
+        private Result<WEKartonResponse> ProcesFetchEKartonResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WFetchEKartonResponse, EKartonResponse>(
+            return ProcessResponse<WEKartonResponse, WEKartonResponse>(
                 result,
-                body => body.Output);
+                wrapper => wrapper
+            );
         }
 
         private Result<ArhivirajEKartonResponse> ProcesArhivirajEKartonResponse(SoapRequestResult result)
@@ -917,28 +942,37 @@ namespace CezihECDSa.SoapClients.CezihWs
 
         private Result<ListaOtisliPacijentiListResponse> ProcesFetchOtisliPacijentiListResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WFetchOtisliPacijentiListResponse, ListaOtisliPacijentiListResponse>(
+            return ProcessResponse<WFetchListaOtisliPacijentiListResponse, ListaOtisliPacijentiListResponse>(
                 result,
-                body => body.Output);
+                wrapper => new ListaOtisliPacijentiListResponse
+                {
+                    imeDatoteke = wrapper.imeDatoteke
+                }
+            );
         }
 
         private Result<OtisliPacijentiResponse> ProcesFetchOtisliPacijentiResponse(SoapRequestResult result)
         {
             return ProcessResponse<WFetchOtisliPacijentiResponse, OtisliPacijentiResponse>(
                 result,
-                body => body.Output);
+                wrapper => new OtisliPacijentiResponse
+                {
+                    datoteka = wrapper.datoteka
+                }
+            );
         }
 
         private Result<ArhivirajOtisliPacijentiResponse> ProcesArhivirajOtisliPacijentiResponse(SoapRequestResult result)
         {
             return ProcessResponse<WArhivirajOtisliPacijentiResponse, ArhivirajOtisliPacijentiResponse>(
                 result,
-                body => body.Output);
+                wrapper => wrapper.Result
+            );
         }
 
-        private Result<NeuspjesnoObradjeniRacuniResponse> ProcesFetchNeuspjesnoObradjeniRacuniResponse(SoapRequestResult result)
+        private Result<fetchNeuspjesnoObradjeniRacuniResponse> ProcesFetchNeuspjesnoObradjeniRacuniResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WFetchNeuspjesnoObradjeniRacuniResponse, NeuspjesnoObradjeniRacuniResponse>(
+            return ProcessResponse<WFetchNeuspjesnoObradjeniRacuniResponse, fetchNeuspjesnoObradjeniRacuniResponse>(
                 result,
                 body => body.Output);
         }
@@ -947,14 +981,22 @@ namespace CezihECDSa.SoapClients.CezihWs
         {
             return ProcessResponse<WFetchListaObavijestiListResponse, ListaObavijestiListResponse>(
                 result,
-                body => body.Output);
+                wrapper => new ListaObavijestiListResponse
+                {
+                    imeDatoteke = wrapper.imeDatoteke
+                }
+            );
         }
 
-        private Result<ObavijestResponse> ProcesFetchObavijestResponse(SoapRequestResult result)
+        private Result<fetchObavijestResponse> ProcesFetchObavijestResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WFetchObavijestResponse, ObavijestResponse>(
+            return ProcessResponse<WFetchObavijestResponse, fetchObavijestResponse>(
                 result,
-                body => body.Output);
+                wrapper => new fetchObavijestResponse
+                {
+                    obavijestDatoteka = wrapper.obavijestDatoteka
+                }
+            );
         }
 
         private XmlSerializerNamespaces Namespaces
@@ -962,7 +1004,7 @@ namespace CezihECDSa.SoapClients.CezihWs
             get
             {
                 var namespaces = new XmlSerializerNamespaces();
-                namespaces.Add("CezihWsSOAP", "urn:publicid:-:CEZIH:WS-types:1.0");
+                namespaces.Add("CezihWsSOAP", "urn:publicid:-:FileTransferWebService:WS-types:1.0");
                 return namespaces;
             }
         }

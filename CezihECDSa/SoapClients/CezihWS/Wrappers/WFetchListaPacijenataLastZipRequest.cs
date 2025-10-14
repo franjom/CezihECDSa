@@ -3,17 +3,17 @@ using System.Xml.Serialization;
 
 namespace CezihECDSa.SoapClients.CezihWs.Wrappers
 {
-    [XmlRoot("ListaPacijenataLastZipRequest", Namespace = "urn:publicid:-:CEZIH:WS-types:1.0")]
+    [XmlRoot("ListaPacijenataLastZipRequest", Namespace = "urn:publicid:-:FileTransferWebService:WS-types:1.0")]
     public sealed class WFetchListaPacijenataLastZipRequest
     {
         public WFetchListaPacijenataLastZipRequest() { }
 
-        public WFetchListaPacijenataLastZipRequest(object listaPacijenataLastZipRequest)
+        public WFetchListaPacijenataLastZipRequest(string listaPacijenataLastZipRequest)
         {
             this.Podatak = listaPacijenataLastZipRequest;
         }
 
-        [XmlAnyElement]
-        public object Podatak { get; set; }
+        [XmlText]
+        public string Podatak { get; set; }
     }
 }

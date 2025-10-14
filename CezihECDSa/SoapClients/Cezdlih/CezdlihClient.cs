@@ -1726,7 +1726,7 @@ namespace CezihECDSa.SoapClients.Cezdlih
             get
             {
                 var namespaces = new XmlSerializerNamespaces();
-
+                namespaces.Add("urn", "urn:publicid:-:FileTransferWebService:WS-types:1.0");
                 return namespaces;
             }
         }

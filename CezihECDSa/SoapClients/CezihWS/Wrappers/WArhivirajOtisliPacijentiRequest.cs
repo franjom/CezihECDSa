@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace CezihECDSa.SoapClients.CezihWs.Wrappers
 {
-    [XmlRoot("ArhivirajOtisliPacijentiRequest", Namespace = "urn:publicid:-:CEZIH:WS-types:1.0")]
+    [XmlRoot("ArhivirajOtisliPacijentiRequest", Namespace = "urn:publicid:-:FileTransferWebService:WS-types:1.0")]
     public sealed class WArhivirajOtisliPacijentiRequest
     {
         public WArhivirajOtisliPacijentiRequest() { }
