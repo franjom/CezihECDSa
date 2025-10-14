@@ -366,7 +366,7 @@ namespace CezihECDSa
         {
             var opts = new InfoOthersOptions 
             {
-                BaseUri = new Uri("),
+                BaseUri = new Uri("https://hzzo-infoothers-test.gov.hr/InfoOthers/InfoOthers.svc"),
                 Timeout = TimeSpan.FromSeconds(30)
             };
             var infoOthersClient = new InfoOthersClient(opts, cert);
