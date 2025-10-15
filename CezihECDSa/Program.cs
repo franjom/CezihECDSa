@@ -547,7 +547,7 @@ namespace CezihECDSa
         {
             var opts = new DohvatSmjernicaOptions 
             {
-                BaseUri = new Uri("https://cezeltest.cezih.hr:32867/NarucivanjeService.asmx"),
+                BaseUri = new Uri("https://cezeltest.cezih.hr:32867/DohvatSmjernica.asmx"),
                 Timeout = TimeSpan.FromSeconds(60)
             };
             var infoOthersClient = new DohvatSmjernicaClient(opts, cert);

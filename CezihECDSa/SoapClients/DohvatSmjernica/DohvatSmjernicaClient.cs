@@ -19,7 +19,7 @@ namespace CezihECDSa.SoapClients.DohvatSmjernica
         private readonly DohvatSmjernicaOptions _options;
         private readonly X509Certificate2 _cert;
 
-        public DohvatSmjernicaClient(DohvatSmjernicaOptions options, X509Certificate2 cert) : base(SoapVersion.Soap11)
+        public DohvatSmjernicaClient(DohvatSmjernicaOptions options, X509Certificate2 cert) : base(SoapVersion.Soap12)
         {
             _options = options;
             _cert = cert;
@@ -29,6 +29,7 @@ namespace CezihECDSa.SoapClients.DohvatSmjernica
         {
             get { return _options.Timeout ?? TimeSpan.FromSeconds(60); }
         }
+
 
         public Result<DohvatiSmjerniceResponse> DohvatiSmjerniceAsync(DohvatiSmjerniceRequest request,
                 CancellationToken ct = default)
@@ -42,7 +43,8 @@ namespace CezihECDSa.SoapClients.DohvatSmjernica
                 {
                     XmlString = xml,
                     Certificate = _cert,
-                    SoapAction = "DohvatiSmjernice",
+                    SoapAction = "http://tempuri.org/DohvatiSmjernice",
+                    IncludeTimestamp = true,
                     Uri = uri,
                     MessageId = Guid.NewGuid()
                 });
@@ -54,6 +56,7 @@ namespace CezihECDSa.SoapClients.DohvatSmjernica
                 return e;
             }
         }
+
         private Result<DohvatiSmjerniceResponse> ProcessRetrieveDocumentSetResponse(
             SoapRequestResult result)
         {
