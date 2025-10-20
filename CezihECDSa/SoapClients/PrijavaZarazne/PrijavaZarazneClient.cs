@@ -32,7 +32,7 @@ namespace CezihECDSa.SoapClients.PrijavaZarazne
         private readonly PrijavaZarazneOptions _options;
         private readonly X509Certificate2 _cert;
 
-        public PrijavaZarazneClient(PrijavaZarazneOptions options, X509Certificate2 cert) : base(SoapVersion.Soap12)
+        public PrijavaZarazneClient(PrijavaZarazneOptions options, X509Certificate2 cert) : base(SoapVersion.Soap11)
         {
             _options = options;
             _cert = cert;

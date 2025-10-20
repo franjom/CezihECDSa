@@ -19,7 +19,7 @@ namespace CezihECDSa.SoapClients.DohvatSmjernica
         private readonly DohvatSmjernicaOptions _options;
         private readonly X509Certificate2 _cert;
 
-        public DohvatSmjernicaClient(DohvatSmjernicaOptions options, X509Certificate2 cert) : base(SoapVersion.Soap12)
+        public DohvatSmjernicaClient(DohvatSmjernicaOptions options, X509Certificate2 cert) : base(SoapVersion.Soap11)
         {
             _options = options;
             _cert = cert;
@@ -31,7 +31,7 @@ namespace CezihECDSa.SoapClients.DohvatSmjernica
         }
 
 
-        public Result<DohvatiSmjerniceResponse> DohvatiSmjerniceAsync(DohvatiSmjerniceRequest request,
+        public Result<DohvatiSmjerniceResponse> DohvatiSmjernica(DohvatiSmjerniceRequest request,
                 CancellationToken ct = default)
         {
             try
@@ -39,7 +39,7 @@ namespace CezihECDSa.SoapClients.DohvatSmjernica
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendRequest(new SoapOptions
+                var result = SendSignedRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
