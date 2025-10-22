@@ -39,7 +39,7 @@ namespace CezihECDSa.SoapClients.DohvatSmjernica
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
