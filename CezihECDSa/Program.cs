@@ -85,8 +85,9 @@ namespace CezihECDSa
             //TestInfoOthers(cert);
             //TestECezdlih(cert);
             //TestInfoOthers(cert);
-            TestCijepni(cert);
-            TestCijepniKarton(cert);
+            //TestCijepni(cert);
+            //TestCijepniKarton(cert);
+            TestCezihWS(cert);
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()

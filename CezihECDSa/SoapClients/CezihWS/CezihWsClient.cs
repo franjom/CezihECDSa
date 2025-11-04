@@ -1,80 +1,83 @@
-//using CezihECDSa.SoapClients.CezihWs.Wrappers;
-//using CezihECDSa.Wsdl.CezihWS;
-//using ECDSa.Helper;
-//using ECDSa.Helper.Soap;
-//using System;
-//using System.Security.Cryptography.X509Certificates;
-//using System.Threading;
-//using System.Threading.Tasks;
-//using System.Xml.Serialization;
+using CezihECDSa.SoapClients.CezihWs.Wrappers;
+using CezihECDSa.Wsdl.CezihWS;
+using CezihECDSa.Wsdl.PrijavaZarazne;
+using ECDSa.Helper;
+using ECDSa.Helper.Soap;
+using System;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
-//namespace CezihECDSa.SoapClients.CezihWs
-//{
-//    public interface ICezihWsClient
-//    {
-//        Result<string> Echo(WEchoRequest request);
-//        Task<Result<string>> EchoAsync(WEchoRequest request,
-//            CancellationToken ct = default);
+namespace CezihECDSa.SoapClients.CezihWs
+{
+    public interface ICezihWsClient
+    {
+        Result<string> Echo(WEchoRequest request);
+        Task<Result<string>> EchoAsync(WEchoRequest request,
+            CancellationToken ct = default);
 
-//        Result<ListaPacijenataListResponse> FetchListaPacijenataList(WFetchListaPacijenataListRequest request);
-//        Task<Result<ListaPacijenataListResponse>> FetchListaPacijenataListAsync(WFetchListaPacijenataListRequest request,
-//            CancellationToken ct = default);
+        Result<ListaPacijenataListResponse> FetchListaPacijenataList(WFetchListaPacijenataListRequest request);
+        Task<Result<ListaPacijenataListResponse>> FetchListaPacijenataListAsync(WFetchListaPacijenataListRequest request,
+            CancellationToken ct = default);
 
-//        Result<ListaPacijenataZipResponse> FetchListaPacijenataZip(WFetchListaPacijenataZipRequest request);
-//        Task<Result<ListaPacijenataZipResponse>> FetchListaPacijenataZipAsync(WFetchListaPacijenataZipRequest request,
-//            CancellationToken ct = default);
+        Result<ListaPacijenataZipResponse> FetchListaPacijenataZip(WFetchListaPacijenataZipRequest request);
+        Task<Result<ListaPacijenataZipResponse>> FetchListaPacijenataZipAsync(WFetchListaPacijenataZipRequest request,
+            CancellationToken ct = default);
 
-//        Result<ListaPacijenataLastZipResponse> FetchListaPacijenataLastZip(WFetchListaPacijenataLastZipRequest request);
-//        Task<Result<ListaPacijenataLastZipResponse>> FetchListaPacijenataLastZipAsync(WFetchListaPacijenataLastZipRequest request,
-//            CancellationToken ct = default);
+        Result<ListaPacijenataLastZipResponse> FetchListaPacijenataLastZip(WFetchListaPacijenataLastZipRequest request);
+        Task<Result<ListaPacijenataLastZipResponse>> FetchListaPacijenataLastZipAsync(WFetchListaPacijenataLastZipRequest request,
+            CancellationToken ct = default);
 
-//        Result<UploadResponse> Upload(WUploadRequest request);
-//        Task<Result<UploadResponse>> UploadAsync(WUploadRequest request,
-//            CancellationToken ct = default);
+        Result<UploadResponse> Upload(WUploadRequest request);
+        Task<Result<UploadResponse>> UploadAsync(WUploadRequest request,
+            CancellationToken ct = default);
 
-//        Result<ListaRezultataListResponse> FetchListaRezultataObradeList(WFetchListaRezultataObradeListRequest request);
-//        Task<Result<ListaRezultataListResponse>> FetchListaRezultataObradeListAsync(WFetchListaRezultataObradeListRequest request,
-//            CancellationToken ct = default);
+        Result<ListaRezultataListResponse> FetchListaRezultataObradeList(WFetchListaRezultataObradeListRequest request);
+        Task<Result<ListaRezultataListResponse>> FetchListaRezultataObradeListAsync(WFetchListaRezultataObradeListRequest request,
+            CancellationToken ct = default);
 
-//        Result<RezultatObradeResponse> FetchRezultatObrade(WFetchRezultatObradeRequest request);
-//        Task<Result<RezultatObradeResponse>> FetchRezultatObradeAsync(WFetchRezultatObradeRequest request,
-//            CancellationToken ct = default);
+        Result<RezultatObradeResponse> FetchRezultatObrade(WFetchRezultatObradeRequest request);
+        Task<Result<RezultatObradeResponse>> FetchRezultatObradeAsync(WFetchRezultatObradeRequest request,
+            CancellationToken ct = default);
 
-//        Result<ArhivirajRezultatObradeResponse> ArhivirajRezultatObrade(WArhivirajRezultatObradeRequest request);
-//        Task<Result<ArhivirajRezultatObradeResponse>> ArhivirajRezultatObradeAsync(WArhivirajRezultatObradeRequest request,
-//            CancellationToken ct = default);
+        Result<ArhivirajRezultatObradeResponse> ArhivirajRezultatObrade(WArhivirajRezultatObradeRequest request);
+        Task<Result<ArhivirajRezultatObradeResponse>> ArhivirajRezultatObradeAsync(WArhivirajRezultatObradeRequest request,
+            CancellationToken ct = default);
 
-//        Result<ListaEKartonaListResponse> FetchListaEKartonaList(WFetchListaEKartonaListRequest request);
-//        Task<Result<ListaEKartonaListResponse>> FetchListaEKartonaListAsync(WFetchListaEKartonaListRequest request,
-//            CancellationToken ct = default);
+        Result<ListaEKartonaListResponse> FetchListaEKartonaList(WFetchListaEKartonaListRequest request);
+        Task<Result<ListaEKartonaListResponse>> FetchListaEKartonaListAsync(WFetchListaEKartonaListRequest request,
+            CancellationToken ct = default);
 
-//        Result<EKartonResponse> FetchEKarton(WFetchEKartonRequest request);
-//        Task<Result<EKartonResponse>> FetchEKartonAsync(WFetchEKartonRequest request,
-//            CancellationToken ct = default);
+        Result<EKartonResponse> FetchEKarton(WFetchEKartonRequest request);
+        Task<Result<EKartonResponse>> FetchEKartonAsync(WFetchEKartonRequest request,
+            CancellationToken ct = default);
 
-//        Result<ArhivirajEKartonResponse> ArhivirajEKarton(WArhivirajEKartonRequest request);
-//        Task<Result<ArhivirajEKartonResponse>> ArhivirajEKartonAsync(WArhivirajEKartonRequest request,
-//            CancellationToken ct = default);
+        Result<ArhivirajEKartonResponse> ArhivirajEKarton(WArhivirajEKartonRequest request);
+        Task<Result<ArhivirajEKartonResponse>> ArhivirajEKartonAsync(WArhivirajEKartonRequest request,
+            CancellationToken ct = default);
 
-//        Result<ListaOtisliPacijentiListResponse> FetchOtisliPacijentiList(WFetchOtisliPacijentiListRequest request);
-//        Task<Result<ListaOtisliPacijentiListResponse>> FetchOtisliPacijentiListAsync(WFetchOtisliPacijentiListRequest request,
-//            CancellationToken ct = default);
+        Result<ListaOtisliPacijentiListResponse> FetchOtisliPacijentiList(WFetchOtisliPacijentiListRequest request);
+        Task<Result<ListaOtisliPacijentiListResponse>> FetchOtisliPacijentiListAsync(WFetchOtisliPacijentiListRequest request,
+            CancellationToken ct = default);
 
-//        Result<OtisliPacijentiResponse> FetchOtisliPacijenti(WFetchOtisliPacijentiRequest request);
-//        Task<Result<OtisliPacijentiResponse>> FetchOtisliPacijentiAsync(WFetchOtisliPacijentiRequest request,
-//            CancellationToken ct = default);
+        Result<OtisliPacijentiResponse> FetchOtisliPacijenti(WFetchOtisliPacijentiRequest request);
+        Task<Result<OtisliPacijentiResponse>> FetchOtisliPacijentiAsync(WFetchOtisliPacijentiRequest request,
+            CancellationToken ct = default);
 
-//        Result<ArhivirajOtisliPacijentiResponse> ArhivirajOtisliPacijenti(WArhivirajOtisliPacijentiRequest request);
-//        Task<Result<ArhivirajOtisliPacijentiResponse>> ArhivirajOtisliPacijentiAsync(WArhivirajOtisliPacijentiRequest request,
-//            CancellationToken ct = default);
+        Result<ArhivirajOtisliPacijentiResponse> ArhivirajOtisliPacijenti(WArhivirajOtisliPacijentiRequest request);
+        Task<Result<ArhivirajOtisliPacijentiResponse>> ArhivirajOtisliPacijentiAsync(WArhivirajOtisliPacijentiRequest request,
+            CancellationToken ct = default);
 
         Result<fetchNeuspjesnoObradjeniRacuniResponse> FetchNeuspjesnoObradjeniRacuni(WFetchNeuspjesnoObradjeniRacuniRequest request);
         Task<Result<fetchNeuspjesnoObradjeniRacuniResponse>> FetchNeuspjesnoObradjeniRacuniAsync(WFetchNeuspjesnoObradjeniRacuniRequest request,
             CancellationToken ct = default);
 
-//        Result<ListaObavijestiListResponse> FetchListaObavijestiList(WFetchListaObavijestiListRequest request);
-//        Task<Result<ListaObavijestiListResponse>> FetchListaObavijestiListAsync(WFetchListaObavijestiListRequest request,
-//            CancellationToken ct = default);
+        Result<ListaObavijestiListResponse> FetchListaObavijestiList(WFetchListaObavijestiListRequest request);
+        Task<Result<ListaObavijestiListResponse>> FetchListaObavijestiListAsync(WFetchListaObavijestiListRequest request,
+            CancellationToken ct = default);
 
         Result<fetchObavijestResponse> FetchObavijest(WFetchObavijestRequest request);
         Task<Result<fetchObavijestResponse>> FetchObavijestAsync(WFetchObavijestRequest request,
@@ -86,18 +89,18 @@
         private readonly CezihWsOptions _options;
         private readonly X509Certificate2 _cert;
 
-//        public CezihWsClient(CezihWsOptions options, X509Certificate2 cert) : base(SoapVersion.Soap11)
-//        {
-//            _options = options;
-//            _cert = cert;
-//        }
+        public CezihWsClient(CezihWsOptions options, X509Certificate2 cert) : base(SoapVersion.Soap11)
+        {
+            _options = options;
+            _cert = cert;
+        }
 
-//        public Result<string> Echo(WEchoRequest request)
-//        {
-//            try
-//            {
-//                var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
-//                var uri = new Uri(_options.BaseUri, "");
+        public Result<string> Echo(WEchoRequest request)
+        {
+            try
+            {
+                var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
+                var uri = new Uri(_options.BaseUri, "");
 
                 var result = SendRequest(new SoapOptions
                 {
@@ -107,13 +110,13 @@
                     XmlString = xml
                 });
 
-//                return ProcesEchoResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesEchoResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public async Task<Result<string>> EchoAsync(WEchoRequest request, CancellationToken ct = default)
         {
@@ -192,13 +195,13 @@
                     XmlString = xml
                 });
 
-//                return ProcesFetchListaPacijenataZipResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchListaPacijenataZipResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public async Task<Result<ListaPacijenataZipResponse>> FetchListaPacijenataZipAsync(WFetchListaPacijenataZipRequest request, CancellationToken ct = default)
         {
@@ -214,13 +217,13 @@
                     XmlString = xml
                 }, ct);
 
-//                return ProcesFetchListaPacijenataZipResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchListaPacijenataZipResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public Result<ListaPacijenataLastZipResponse> FetchListaPacijenataLastZip(WFetchListaPacijenataLastZipRequest request)
         {
@@ -236,13 +239,13 @@
                     XmlString = xml
                 });
 
-//                return ProcesFetchListaPacijenataLastZipResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchListaPacijenataLastZipResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public async Task<Result<ListaPacijenataLastZipResponse>> FetchListaPacijenataLastZipAsync(WFetchListaPacijenataLastZipRequest request, CancellationToken ct = default)
         {
@@ -258,13 +261,13 @@
                     XmlString = xml
                 }, ct);
 
-//                return ProcesFetchListaPacijenataLastZipResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchListaPacijenataLastZipResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public Result<UploadResponse> Upload(WUploadRequest request)
         {
@@ -280,13 +283,13 @@
                     XmlString = xml
                 });
 
-//                return ProcesUploadResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesUploadResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public async Task<Result<UploadResponse>> UploadAsync(WUploadRequest request, CancellationToken ct = default)
         {
@@ -302,13 +305,13 @@
                     XmlString = xml
                 }, ct);
 
-//                return ProcesUploadResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesUploadResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public Result<ListaRezultataListResponse> FetchListaRezultataObradeList(WFetchListaRezultataObradeListRequest request)
         {
@@ -324,13 +327,13 @@
                     XmlString = xml
                 });
 
-//                return ProcesFetchListaRezultataObradeListResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchListaRezultataObradeListResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public async Task<Result<ListaRezultataListResponse>> FetchListaRezultataObradeListAsync(WFetchListaRezultataObradeListRequest request, CancellationToken ct = default)
         {
@@ -346,13 +349,13 @@
                     XmlString = xml
                 }, ct);
 
-//                return ProcesFetchListaRezultataObradeListResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchListaRezultataObradeListResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public Result<RezultatObradeResponse> FetchRezultatObrade(WFetchRezultatObradeRequest request)
         {
@@ -368,13 +371,13 @@
                     XmlString = xml
                 });
 
-//                return ProcesFetchRezultatObradeResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchRezultatObradeResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public async Task<Result<RezultatObradeResponse>> FetchRezultatObradeAsync(WFetchRezultatObradeRequest request, CancellationToken ct = default)
         {
@@ -390,13 +393,13 @@
                     XmlString = xml
                 }, ct);
 
-//                return ProcesFetchRezultatObradeResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchRezultatObradeResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
 
         public Result<ArhivirajRezultatObradeResponse> ArhivirajRezultatObrade(WArhivirajRezultatObradeRequest request)
@@ -413,13 +416,13 @@
                     XmlString = xml
                 });
 
-//                return ProcesArhivirajRezultatObradeResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesArhivirajRezultatObradeResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public async Task<Result<ArhivirajRezultatObradeResponse>> ArhivirajRezultatObradeAsync(WArhivirajRezultatObradeRequest request, CancellationToken ct = default)
         {
@@ -435,13 +438,13 @@
                     XmlString = xml
                 }, ct);
 
-//                return ProcesArhivirajRezultatObradeResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesArhivirajRezultatObradeResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public Result<ListaEKartonaListResponse> FetchListaEKartonaList(WFetchListaEKartonaListRequest request)
         {
@@ -457,13 +460,13 @@
                     XmlString = xml
                 });
 
-//                return ProcesFetchListaEKartonaListResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchListaEKartonaListResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public async Task<Result<ListaEKartonaListResponse>> FetchListaEKartonaListAsync(WFetchListaEKartonaListRequest request, CancellationToken ct = default)
         {
@@ -479,13 +482,13 @@
                     XmlString = xml
                 }, ct);
 
-//                return ProcesFetchListaEKartonaListResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchListaEKartonaListResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public Result<WEKartonResponse> FetchEKarton(WFetchEKartonRequest request)
         {
@@ -501,13 +504,13 @@
                     XmlString = xml
                 });
 
-//                return ProcesFetchEKartonResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchEKartonResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public async Task<Result<WEKartonResponse>> FetchEKartonAsync(WFetchEKartonRequest request, CancellationToken ct = default)
         {
@@ -523,13 +526,13 @@
                     XmlString = xml
                 }, ct);
 
-//                return ProcesFetchEKartonResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchEKartonResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public Result<ArhivirajEKartonResponse> ArhivirajEKarton(WArhivirajEKartonRequest request)
         {
@@ -545,13 +548,13 @@
                     XmlString = xml
                 });
 
-//                return ProcesArhivirajEKartonResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesArhivirajEKartonResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public async Task<Result<ArhivirajEKartonResponse>> ArhivirajEKartonAsync(WArhivirajEKartonRequest request, CancellationToken ct = default)
         {
@@ -567,13 +570,13 @@
                     XmlString = xml
                 }, ct);
 
-//                return ProcesArhivirajEKartonResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesArhivirajEKartonResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public Result<ListaOtisliPacijentiListResponse> FetchOtisliPacijentiList(WFetchOtisliPacijentiListRequest request)
         {
@@ -589,13 +592,13 @@
                     XmlString = xml
                 });
 
-//                return ProcesFetchOtisliPacijentiListResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchOtisliPacijentiListResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public async Task<Result<ListaOtisliPacijentiListResponse>> FetchOtisliPacijentiListAsync(WFetchOtisliPacijentiListRequest request, CancellationToken ct = default)
         {
@@ -611,13 +614,13 @@
                     XmlString = xml
                 }, ct);
 
-//                return ProcesFetchOtisliPacijentiListResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchOtisliPacijentiListResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public Result<OtisliPacijentiResponse> FetchOtisliPacijenti(WFetchOtisliPacijentiRequest request)
         {
@@ -633,13 +636,13 @@
                     XmlString = xml
                 });
 
-//                return ProcesFetchOtisliPacijentiResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchOtisliPacijentiResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public async Task<Result<OtisliPacijentiResponse>> FetchOtisliPacijentiAsync(WFetchOtisliPacijentiRequest request, CancellationToken ct = default)
         {
@@ -655,13 +658,13 @@
                     XmlString = xml
                 }, ct);
 
-//                return ProcesFetchOtisliPacijentiResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchOtisliPacijentiResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public Result<ArhivirajOtisliPacijentiResponse> ArhivirajOtisliPacijenti(WArhivirajOtisliPacijentiRequest request)
         {
@@ -677,13 +680,13 @@
                     XmlString = xml
                 });
 
-//                return ProcesArhivirajOtisliPacijentiResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesArhivirajOtisliPacijentiResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public async Task<Result<ArhivirajOtisliPacijentiResponse>> ArhivirajOtisliPacijentiAsync(WArhivirajOtisliPacijentiRequest request, CancellationToken ct = default)
         {
@@ -699,13 +702,13 @@
                     XmlString = xml
                 }, ct);
 
-//                return ProcesArhivirajOtisliPacijentiResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesArhivirajOtisliPacijentiResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public Result<fetchNeuspjesnoObradjeniRacuniResponse> FetchNeuspjesnoObradjeniRacuni(WFetchNeuspjesnoObradjeniRacuniRequest request)
         {
@@ -721,13 +724,13 @@
                     XmlString = xml
                 });
 
-//                return ProcesFetchNeuspjesnoObradjeniRacuniResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchNeuspjesnoObradjeniRacuniResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public async Task<Result<fetchNeuspjesnoObradjeniRacuniResponse>> FetchNeuspjesnoObradjeniRacuniAsync(WFetchNeuspjesnoObradjeniRacuniRequest request, CancellationToken ct = default)
         {
@@ -764,13 +767,13 @@
                     XmlString = xml
                 });
 
-//                return ProcesFetchListaObavijestiListResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchListaObavijestiListResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public async Task<Result<ListaObavijestiListResponse>> FetchListaObavijestiListAsync(WFetchListaObavijestiListRequest request, CancellationToken ct = default)
         {
@@ -786,13 +789,13 @@
                     XmlString = xml
                 }, ct);
 
-//                return ProcesFetchListaObavijestiListResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchListaObavijestiListResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public Result<fetchObavijestResponse> FetchObavijest(WFetchObavijestRequest request)
         {
@@ -808,13 +811,13 @@
                     XmlString = xml
                 });
 
-//                return ProcesFetchObavijestResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchObavijestResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
         public async Task<Result<fetchObavijestResponse>> FetchObavijestAsync(WFetchObavijestRequest request, CancellationToken ct = default)
         {
@@ -830,173 +833,372 @@
                     XmlString = xml
                 }, ct);
 
-//                return ProcesFetchObavijestResponse(result);
-//            }
-//            catch (Exception e)
-//            {
-//                return e;
-//            }
-//        }
+                return ProcesFetchObavijestResponse(result);
+            }
+            catch (Exception e)
+            {
+                return e;
+            }
+        }
 
-//        private Result<string> ProcesEchoResponse(SoapRequestResult result)
-//        {
-//            return ProcessResponse<WEchoResponse, string>(
-//                result,
-//                body => body.Output);
-//        }
+
+
+        private Result<string> ProcesEchoResponse(
+            SoapRequestResult result)
+        {
+            var soapBody = ProcessResponse(result);
+
+            if (soapBody.IsError)
+            {
+                var messages = new List<ErrorMessage>();
+                foreach (var item in soapBody.ErrorMessages)
+                {
+                    messages.Add(new ErrorMessage(item.Message));
+                }
+
+                return messages;
+            }
+
+            var body = SoapSerializer.Instance.Deserialize<echoResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName);
+
+            return body.EchoResponse1;
+        }
 
         private Result<ListaPacijenataListResponse> ProcesFetchListaPacijenataListResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WFetchListaPacijenataListResponse, ListaPacijenataListResponse>(
-                result,
-                wrapper => new ListaPacijenataListResponse { imeMape = wrapper.imeMape }
-            );
+            var soapBody = ProcessResponse(result);
+
+            if (soapBody.IsError)
+            {
+                var messages = new List<ErrorMessage>();
+                foreach (var item in soapBody.ErrorMessages)
+                {
+                    messages.Add(new ErrorMessage(item.Message));
+                }
+
+                return messages;
+            }
+
+            var body = SoapSerializer.Instance.Deserialize<ListaPacijenataListResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", "urn:publicid:-:FileTransferWebService:WS-types:1.0"));
+
+            return body;
         }
 
         private Result<ListaPacijenataZipResponse> ProcesFetchListaPacijenataZipResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WFetchListaPacijenataZipResponse, ListaPacijenataZipResponse>(
-                result,
-                wrapper => new ListaPacijenataZipResponse
+            var soapBody = ProcessResponse(result);
+
+            if (soapBody.IsError)
+            {
+                var messages = new List<ErrorMessage>();
+                foreach (var item in soapBody.ErrorMessages)
                 {
-                    imeDatoteke = wrapper.imeDatoteke,
-                    datoteka = wrapper.datoteka
+                    messages.Add(new ErrorMessage(item.Message));
                 }
-            );
+
+                return messages;
+            }
+
+            var body = SoapSerializer.Instance.Deserialize<ListaPacijenataZipResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", "urn:publicid:-:FileTransferWebService:WS-types:1.0"));
+
+            return body;
         }
 
         private Result<ListaPacijenataLastZipResponse> ProcesFetchListaPacijenataLastZipResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WFetchListaPacijenataLastZipResponse, ListaPacijenataLastZipResponse>(
-                result,
-                wrapper => new ListaPacijenataLastZipResponse
+            var soapBody = ProcessResponse(result);
+
+            if (soapBody.IsError)
+            {
+                var messages = new List<ErrorMessage>();
+                foreach (var item in soapBody.ErrorMessages)
                 {
-                    imeDatoteke = wrapper.imeDatoteke,
-                    datoteka = wrapper.datoteka
+                    messages.Add(new ErrorMessage(item.Message));
                 }
-            );
+
+                return messages;
+            }
+
+            var body = SoapSerializer.Instance.Deserialize<ListaPacijenataLastZipResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", "urn:publicid:-:FileTransferWebService:WS-types:1.0"));
+
+            return body;
         }
 
-//        private Result<UploadResponse> ProcesUploadResponse(SoapRequestResult result)
-//        {
-//            return ProcessResponse<WUploadResponse, UploadResponse>(
-//                result,
-//                body => body.Output);
-//        }
+        private Result<UploadResponse> ProcesUploadResponse(SoapRequestResult result)
+        {
+            var soapBody = ProcessResponse(result);
+
+            if (soapBody.IsError)
+            {
+                var messages = new List<ErrorMessage>();
+                foreach (var item in soapBody.ErrorMessages)
+                {
+                    messages.Add(new ErrorMessage(item.Message));
+                }
+
+                return messages;
+            }
+
+            var body = SoapSerializer.Instance.Deserialize<UploadResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", "urn:publicid:-:FileTransferWebService:WS-types:1.0"));
+
+            return body;
+        }
 
         private Result<ListaRezultataListResponse> ProcesFetchListaRezultataObradeListResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WFetchListaRezultataListResponse, ListaRezultataListResponse>(
-                result,
-                wrapper => new ListaRezultataListResponse
+            var soapBody = ProcessResponse(result);
+
+            if (soapBody.IsError)
+            {
+                var messages = new List<ErrorMessage>();
+                foreach (var item in soapBody.ErrorMessages)
                 {
-                    imeDatoteke = wrapper.imeDatoteke
+                    messages.Add(new ErrorMessage(item.Message));
                 }
-            );
+
+                return messages;
+            }
+
+            var body = SoapSerializer.Instance.Deserialize<ListaRezultataListResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", "urn:publicid:-:FileTransferWebService:WS-types:1.0"));
+
+            return body;
         }
 
         private Result<RezultatObradeResponse> ProcesFetchRezultatObradeResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WFetchRezultatObradeResponse, RezultatObradeResponse>(
-                result,
-                wrapper => new RezultatObradeResponse
+            var soapBody = ProcessResponse(result);
+
+            if (soapBody.IsError)
+            {
+                var messages = new List<ErrorMessage>();
+                foreach (var item in soapBody.ErrorMessages)
                 {
-                    imeDatoteke = wrapper.imeDatoteke,
-                    datoteka = wrapper.datoteka
+                    messages.Add(new ErrorMessage(item.Message));
                 }
-            );
+
+                return messages;
+            }
+
+            var body = SoapSerializer.Instance.Deserialize<RezultatObradeResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", "urn:publicid:-:FileTransferWebService:WS-types:1.0"));
+
+            return body;
         }
 
-//        private Result<ArhivirajRezultatObradeResponse> ProcesArhivirajRezultatObradeResponse(SoapRequestResult result)
-//        {
-//            return ProcessResponse<WArhivirajRezultatObradeResponse, ArhivirajRezultatObradeResponse>(
-//                result,
-//                body => body.Output);
-//        }
+        private Result<ArhivirajRezultatObradeResponse> ProcesArhivirajRezultatObradeResponse(SoapRequestResult result)
+        {
+            var soapBody = ProcessResponse(result);
+
+            if (soapBody.IsError)
+            {
+                var messages = new List<ErrorMessage>();
+                foreach (var item in soapBody.ErrorMessages)
+                {
+                    messages.Add(new ErrorMessage(item.Message));
+                }
+
+                return messages;
+            }
+
+            var body = SoapSerializer.Instance.Deserialize<ArhivirajRezultatObradeResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", "urn:publicid:-:FileTransferWebService:WS-types:1.0"));
+
+            return body;
+        }
 
         private Result<ListaEKartonaListResponse> ProcesFetchListaEKartonaListResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WFetchListaEKartonaListResponse, ListaEKartonaListResponse>(
-                result,
-                wrapper => new ListaEKartonaListResponse
+            var soapBody = ProcessResponse(result);
+
+            if (soapBody.IsError)
+            {
+                var messages = new List<ErrorMessage>();
+                foreach (var item in soapBody.ErrorMessages)
                 {
-                    imeDatoteke = wrapper.imeDatoteke
+                    messages.Add(new ErrorMessage(item.Message));
                 }
-            );
+
+                return messages;
+            }
+
+            var body = SoapSerializer.Instance.Deserialize<ListaEKartonaListResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", "urn:publicid:-:FileTransferWebService:WS-types:1.0"));
+
+            return body;
         }
 
         private Result<WEKartonResponse> ProcesFetchEKartonResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WEKartonResponse, WEKartonResponse>(
-                result,
-                wrapper => wrapper
-            );
+            var soapBody = ProcessResponse(result);
+
+            if (soapBody.IsError)
+            {
+                var messages = new List<ErrorMessage>();
+                foreach (var item in soapBody.ErrorMessages)
+                {
+                    messages.Add(new ErrorMessage(item.Message));
+                }
+
+                return messages;
+            }
+
+            var body = SoapSerializer.Instance.Deserialize<WEKartonResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", "urn:publicid:-:FileTransferWebService:WS-types:1.0"));
+
+            return body;
         }
 
-//        private Result<ArhivirajEKartonResponse> ProcesArhivirajEKartonResponse(SoapRequestResult result)
-//        {
-//            return ProcessResponse<WArhivirajEKartonResponse, ArhivirajEKartonResponse>(
-//                result,
-//                body => body.Output);
-//        }
+        private Result<ArhivirajEKartonResponse> ProcesArhivirajEKartonResponse(SoapRequestResult result)
+        {
+            var soapBody = ProcessResponse(result);
+
+            if (soapBody.IsError)
+            {
+                var messages = new List<ErrorMessage>();
+                foreach (var item in soapBody.ErrorMessages)
+                {
+                    messages.Add(new ErrorMessage(item.Message));
+                }
+
+                return messages;
+            }
+
+            var body = SoapSerializer.Instance.Deserialize<ArhivirajEKartonResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", "urn:publicid:-:FileTransferWebService:WS-types:1.0"));
+
+            return body;
+        }
 
         private Result<ListaOtisliPacijentiListResponse> ProcesFetchOtisliPacijentiListResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WFetchListaOtisliPacijentiListResponse, ListaOtisliPacijentiListResponse>(
-                result,
-                wrapper => new ListaOtisliPacijentiListResponse
+            var soapBody = ProcessResponse(result);
+
+            if (soapBody.IsError)
+            {
+                var messages = new List<ErrorMessage>();
+                foreach (var item in soapBody.ErrorMessages)
                 {
-                    imeDatoteke = wrapper.imeDatoteke
+                    messages.Add(new ErrorMessage(item.Message));
                 }
-            );
+
+                return messages;
+            }
+
+            var body = SoapSerializer.Instance.Deserialize<ListaOtisliPacijentiListResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", "urn:publicid:-:FileTransferWebService:WS-types:1.0"));
+
+            return body;
         }
 
         private Result<OtisliPacijentiResponse> ProcesFetchOtisliPacijentiResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WFetchOtisliPacijentiResponse, OtisliPacijentiResponse>(
-                result,
-                wrapper => new OtisliPacijentiResponse
+            var soapBody = ProcessResponse(result);
+
+            if (soapBody.IsError)
+            {
+                var messages = new List<ErrorMessage>();
+                foreach (var item in soapBody.ErrorMessages)
                 {
-                    datoteka = wrapper.datoteka
+                    messages.Add(new ErrorMessage(item.Message));
                 }
-            );
+
+                return messages;
+            }
+
+            var body = SoapSerializer.Instance.Deserialize<OtisliPacijentiResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", "urn:publicid:-:FileTransferWebService:WS-types:1.0"));
+
+            return body;
         }
 
         private Result<ArhivirajOtisliPacijentiResponse> ProcesArhivirajOtisliPacijentiResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WArhivirajOtisliPacijentiResponse, ArhivirajOtisliPacijentiResponse>(
-                result,
-                wrapper => wrapper.Result
-            );
+            var soapBody = ProcessResponse(result);
+
+            if (soapBody.IsError)
+            {
+                var messages = new List<ErrorMessage>();
+                foreach (var item in soapBody.ErrorMessages)
+                {
+                    messages.Add(new ErrorMessage(item.Message));
+                }
+
+                return messages;
+            }
+
+            var body = SoapSerializer.Instance.Deserialize<ArhivirajOtisliPacijentiResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", "urn:publicid:-:FileTransferWebService:WS-types:1.0"));
+
+            return body;
         }
 
         private Result<fetchNeuspjesnoObradjeniRacuniResponse> ProcesFetchNeuspjesnoObradjeniRacuniResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WFetchNeuspjesnoObradjeniRacuniResponse, fetchNeuspjesnoObradjeniRacuniResponse>(
-                result,
-                body => body.Output);
+            var soapBody = ProcessResponse(result);
+
+            if (soapBody.IsError)
+            {
+                var messages = new List<ErrorMessage>();
+                foreach (var item in soapBody.ErrorMessages)
+                {
+                    messages.Add(new ErrorMessage(item.Message));
+                }
+
+                return messages;
+            }
+
+            var body = SoapSerializer.Instance.Deserialize<fetchNeuspjesnoObradjeniRacuniResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", "urn:publicid:-:FileTransferWebService:WS-types:1.0"));
+
+            return body;
         }
 
         private Result<ListaObavijestiListResponse> ProcesFetchListaObavijestiListResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WFetchListaObavijestiListResponse, ListaObavijestiListResponse>(
-                result,
-                wrapper => new ListaObavijestiListResponse
+            var soapBody = ProcessResponse(result);
+
+            if (soapBody.IsError)
+            {
+                var messages = new List<ErrorMessage>();
+                foreach (var item in soapBody.ErrorMessages)
                 {
-                    imeDatoteke = wrapper.imeDatoteke
+                    messages.Add(new ErrorMessage(item.Message));
                 }
-            );
+
+                return messages;
+            }
+
+            var body = SoapSerializer.Instance.Deserialize<ListaObavijestiListResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", "urn:publicid:-:FileTransferWebService:WS-types:1.0"));
+
+            return body;
         }
 
         private Result<fetchObavijestResponse> ProcesFetchObavijestResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WFetchObavijestResponse, fetchObavijestResponse>(
-                result,
-                wrapper => new fetchObavijestResponse
+            var soapBody = ProcessResponse(result);
+
+            if (soapBody.IsError)
+            {
+                var messages = new List<ErrorMessage>();
+                foreach (var item in soapBody.ErrorMessages)
                 {
-                    obavijestDatoteka = wrapper.obavijestDatoteka
+                    messages.Add(new ErrorMessage(item.Message));
                 }
-            );
+
+                return messages;
+            }
+
+            var body = SoapSerializer.Instance.Deserialize<fetchObavijestResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", "urn:publicid:-:FileTransferWebService:WS-types:1.0"));
+
+            return body;
         }
 
         private XmlSerializerNamespaces Namespaces
