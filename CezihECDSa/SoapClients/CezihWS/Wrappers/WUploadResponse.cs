@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace CezihECDSa.SoapClients.CezihWs.Wrappers
 {
-    [XmlRoot("uploadResponse", Namespace = "urn:publicid:-:CEZIH:WS-types:1.0")]
+    [XmlRoot("uploadResponse", Namespace = "urn:publicid:-:FileTransferWebService:WS-types:1.0")]
     public sealed class WUploadResponse
     {
         public WUploadResponse() { }

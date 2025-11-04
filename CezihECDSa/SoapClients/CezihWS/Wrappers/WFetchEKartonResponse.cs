@@ -3,13 +3,13 @@ using System.Xml.Serialization;
 
 namespace CezihECDSa.SoapClients.CezihWs.Wrappers
 {
-    [XmlRoot("fetchEKartonResponse", Namespace = "urn:publicid:-:CEZIH:WS-types:1.0")]
-    public sealed class WFetchEKartonResponse
+    [XmlRoot("EKartonResponse", Namespace = "urn:publicid:-:FileTransferWebService:WS-types:1.0")]
+    public sealed class WEKartonResponse
     {
-        public WFetchEKartonResponse() { }
-        public WFetchEKartonResponse(EKartonResponse output) => Output = output;
+        [XmlElement("imeDatoteke")]
+        public string[] ImeDatoteke { get; set; }
 
-        [XmlElement("fetchEKartonResult", Order = 0)]
-        public EKartonResponse Output { get; set; }
+        [XmlElement("datoteka", DataType = "base64Binary")]
+        public byte[][] Datoteke { get; set; }
     }
 }

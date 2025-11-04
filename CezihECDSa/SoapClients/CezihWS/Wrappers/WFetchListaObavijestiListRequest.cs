@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace CezihECDSa.SoapClients.CezihWs.Wrappers
 {
-    [XmlRoot("ListaObavijestiListRequest", Namespace = "urn:publicid:-:CEZIH:WS-types:1.0")]
+    [XmlRoot("ListaObavijestiListRequest", Namespace = "urn:publicid:-:FileTransferWebService:WS-types:1.0")]
     public sealed class WFetchListaObavijestiListRequest
     {
         public WFetchListaObavijestiListRequest() { }

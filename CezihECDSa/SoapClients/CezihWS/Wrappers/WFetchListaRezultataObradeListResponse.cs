@@ -3,13 +3,17 @@ using System.Xml.Serialization;
 
 namespace CezihECDSa.SoapClients.CezihWs.Wrappers
 {
-    [XmlRoot("fetchListaRezultataObradeListResponse", Namespace = "urn:publicid:-:CEZIH:WS-types:1.0")]
-    public sealed class WFetchListaRezultataObradeListResponse
+    [XmlRoot("ListaRezultataListResponse", Namespace = "urn:publicid:-:FileTransferWebService:WS-types:1.0")]
+    public sealed class WFetchListaRezultataListResponse
     {
-        public WFetchListaRezultataObradeListResponse() { }
-        public WFetchListaRezultataObradeListResponse(ListaRezultataListResponse output) => Output = output;
+        public WFetchListaRezultataListResponse() { }
 
-        [XmlElement("fetchListaRezultataObradeListResult", Order = 0)]
-        public ListaRezultataListResponse Output { get; set; }
+        public WFetchListaRezultataListResponse(string[] imeDatoteke)
+        {
+            this.imeDatoteke = imeDatoteke;
+        }
+
+        [XmlElement("imeDatoteke")]
+        public string[] imeDatoteke { get; set; }
     }
 }

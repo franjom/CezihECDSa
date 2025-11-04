@@ -3,13 +3,21 @@ using System.Xml.Serialization;
 
 namespace CezihECDSa.SoapClients.CezihWs.Wrappers
 {
-    [XmlRoot("fetchListaPacijenataLastZipResponse", Namespace = "urn:publicid:-:CEZIH:WS-types:1.0")]
+    [XmlRoot("ListaPacijenataLastZipResponse", Namespace = "urn:publicid:-:FileTransferWebService:WS-types:1.0")]
     public sealed class WFetchListaPacijenataLastZipResponse
     {
         public WFetchListaPacijenataLastZipResponse() { }
-        public WFetchListaPacijenataLastZipResponse(ListaPacijenataLastZipResponse output) => Output = output;
 
-        [XmlElement("fetchListaPacijenataLastZipResult", Order = 0)]
-        public ListaPacijenataLastZipResponse Output { get; set; }
+        public WFetchListaPacijenataLastZipResponse(string imeDatoteke, byte[] datoteka)
+        {
+            this.imeDatoteke = imeDatoteke;
+            this.datoteka = datoteka;
+        }
+
+        [XmlElement(Order = 0)]
+        public string imeDatoteke { get; set; }
+
+        [XmlElement(DataType = "base64Binary", Order = 1)]
+        public byte[] datoteka { get; set; }
     }
 }
