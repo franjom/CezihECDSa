@@ -8,13 +8,14 @@ using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace CezihECDSa.SoapClients.CijepniKartonLijecnika
 {
     public interface ICijepniKartonLijecnikaClient
     {
-        Result<UpitOCijepnimKartonimaIzabranogLijecnikaResponseUpitOCijepnimKartonimaIzabranogLijecnikaResult> UpitOCijepnimKartonimaIzabranogLijecnika(WUpitOCijepnimKartonimaIzabranogLijecnikaRequest request);
+        Result<UpitOCijepnimKartonimaIzabranogLijecnikaResponseUpitOCijepnimKartonimaIzabranogLijecnikaResult> UpitOCijepnimKartonimaIzabranogLijecnika(UpitOCijepnimKartonimaIzabranogLijecnikaRequest request);
         Task<Result<UpitOCijepnimKartonimaIzabranogLijecnikaResponseUpitOCijepnimKartonimaIzabranogLijecnikaResult>> UpitOCijepnimKartonimaIzabranogLijecnikaAsync(WUpitOCijepnimKartonimaIzabranogLijecnikaRequest request,
             CancellationToken ct = default);
 
@@ -35,20 +36,22 @@ namespace CezihECDSa.SoapClients.CijepniKartonLijecnika
             get { return _options.Timeout ?? TimeSpan.FromSeconds(30); }
         }
 
-        public Result<UpitOCijepnimKartonimaIzabranogLijecnikaResponseUpitOCijepnimKartonimaIzabranogLijecnikaResult> UpitOCijepnimKartonimaIzabranogLijecnika(WUpitOCijepnimKartonimaIzabranogLijecnikaRequest request)
+        public Result<UpitOCijepnimKartonimaIzabranogLijecnikaResponseUpitOCijepnimKartonimaIzabranogLijecnikaResult> UpitOCijepnimKartonimaIzabranogLijecnika(UpitOCijepnimKartonimaIzabranogLijecnikaRequest request)
         {
             try
             {
-                var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
+                var rootNs = new XmlQualifiedName("x", "http://www.cezdlih.hr/CEZDLIH/WebServices");
+                var xml = SoapSerializer.Instance.Serialize(request, Namespaces, "UpitOCijepnimKartonimaIzabranogLijecnikaRequest", rootNs);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/UpitOCijepnimKartonimaIzabranogLijecnika",
                     Uri = uri,
                     XmlString = xml,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true,
                 });
 
                 return ProcesUpitOCijepnimKartonimaIzabranogLijecnika(result);
@@ -66,12 +69,13 @@ namespace CezihECDSa.SoapClients.CijepniKartonLijecnika
                 var xml = SoapSerializer.Instance.Serialize(request, Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/UpitOCijepnimKartonimaIzabranogLijecnika",
                     Uri = uri,
-                    XmlString = xml
+                    XmlString = xml,
+                    SignEnvelope = true,
                 }, ct);
 
                 return ProcesUpitOCijepnimKartonimaIzabranogLijecnika(result);
@@ -86,9 +90,12 @@ namespace CezihECDSa.SoapClients.CijepniKartonLijecnika
 
         private Result<UpitOCijepnimKartonimaIzabranogLijecnikaResponseUpitOCijepnimKartonimaIzabranogLijecnikaResult> ProcesUpitOCijepnimKartonimaIzabranogLijecnika(SoapRequestResult result)
         {
-            return ProcessResponse<WUpitOCijepnimKartonimaIzabranogLijecnikaResponse, UpitOCijepnimKartonimaIzabranogLijecnikaResponseUpitOCijepnimKartonimaIzabranogLijecnikaResult>(
-                result,
-                body => body.Output);
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<UpitOCijepnimKartonimaIzabranogLijecnikaResponseUpitOCijepnimKartonimaIzabranogLijecnikaResult>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", "http://www.cezdlih.hr/CEZDLIH/WebServices"));
+
+            return othersResponse;
         }
 
         #endregion
@@ -98,7 +105,6 @@ namespace CezihECDSa.SoapClients.CijepniKartonLijecnika
             get
             {
                 var namespaces = new XmlSerializerNamespaces();
-                namespaces.Add("tempuri", "http://www.cezdlih.hr/CEZDLIH/WebServices");
 
                 return namespaces;
             }

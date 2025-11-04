@@ -80,12 +80,13 @@ namespace CezihECDSa
             //var cert = ReadFromEcdsaCard();
 
             //TestXmlSigning(cert);
-            TestOsigInfo(cert);
+            //TestOsigInfo(cert);
             //TestPrijavaZarazne(cert);
             //TestInfoOthers(cert);
             //TestECezdlih(cert);
             //TestInfoOthers(cert);
-            TestCezihWS(cert);
+            TestCijepni(cert);
+            TestCijepniKarton(cert);
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()
@@ -206,7 +207,7 @@ namespace CezihECDSa
 
         private static X509Certificate2 ReadFromSoftCert()
         {
-            const string thumb = "d6d708bb76ca6812f07d8ec6a0dd032ddc8884c6";
+            const string thumb = "9b9296ec7a955eb6d37c335fb08949c1e0ab7130";
 
             var store = new X509Store();
             store.Open(OpenFlags.ReadOnly);
@@ -340,7 +341,7 @@ namespace CezihECDSa
             // ovo radi sa ECDSA mora se slati potpiani request
             var opts = new CezdlihOptions
             {
-                BaseUri = new Uri(""),
+                BaseUri = new Uri("https://cezdlih-cijepih-test.zdravlje.hr:8443/"),
                 Timeout = TimeSpan.FromSeconds(30)
             };
 
@@ -374,17 +375,21 @@ namespace CezihECDSa
             };
             var infoOthersClient = new CijepniKartonLijecnikaClient(opts, cert);
             //var responseSync1 = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("", "54968374901"));
+            //var responseSync =
+            //    infoOthersClient.UpitOCijepnimKartonimaIzabranogLijecnika(new UpitOCijepnimKartonimaIzabranogLijecnikaUpitOCijepnimKartonimaIzabranogLijecnikaRequest
+            //            {
+            //                identifikatorZahtjev = new ZaglavljeZahtjevType(),
+            //                SifraLijecnika = "123",
+            //                SifraVrsteCjepivo = 1
+            //            });
+            
             var responseSync =
-                infoOthersClient.UpitOCijepnimKartonimaIzabranogLijecnika(
-                    new WUpitOCijepnimKartonimaIzabranogLijecnikaRequest
-                    {
-                        UpitOCijepnimKartonimaIzabranogLijecnikaRequest1 = new UpitOCijepnimKartonimaIzabranogLijecnikaUpitOCijepnimKartonimaIzabranogLijecnikaRequest
-                        {
-                            identifikatorZahtjev = new ZaglavljeZahtjevType(),
-                            SifraLijecnika = "123",
-                            SifraVrsteCjepivo = 1
-                        }
-                    });
+                infoOthersClient.UpitOCijepnimKartonimaIzabranogLijecnika(new UpitOCijepnimKartonimaIzabranogLijecnikaRequest(new UpitOCijepnimKartonimaIzabranogLijecnikaUpitOCijepnimKartonimaIzabranogLijecnikaRequest
+                {
+                    identifikatorZahtjev = new ZaglavljeZahtjevType(),
+                    SifraLijecnika = "123",
+                    SifraVrsteCjepivo = 1
+                }));
         }
 
         private static void TestInfoOthers(X509Certificate2 cert)
@@ -401,22 +406,6 @@ namespace CezihECDSa
             Console.WriteLine("done");
         }
 
-        private static void TestCezihWS(X509Certificate2 cert)
-        {
-            var opts = new CezihWsOptions
-            {
-                BaseUri = new Uri("https://cezihtest.cezih.hr/CezihWs/ws"),
-                Timeout = TimeSpan.FromSeconds(30)
-            };
-            var client = new CezihWsClient(opts, cert);
-
-            var responseSync1 = client.Echo(new WEchoRequest("new "));
-            var responseSync2 = client.FetchOtisliPacijentiList(new WFetchOtisliPacijentiListRequest(""));
-            var responseSync3 = client.Upload(new WUploadRequest(new UploadRequest {  imeDatoteke = "" }));
-
-
-            Console.WriteLine("done");
-        }
 
         private static string GetSafePath(string path1, string path2)
         {

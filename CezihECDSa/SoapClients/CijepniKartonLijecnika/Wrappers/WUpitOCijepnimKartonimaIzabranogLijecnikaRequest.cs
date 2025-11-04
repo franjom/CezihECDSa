@@ -1,21 +1,29 @@
-﻿using CezihECDSa.Wsdl.CijepniKartonLijecnika;
-using CezihECDSa.Wsdl.InfoOthers;
-using System;
+﻿using CezihECDSa.Wsdl;
 using System.Xml.Serialization;
 
 namespace CezihECDSa.SoapClients.CijepniKartonLijecnika.Wrappers
 {
-    [XmlRoot("UpitOCijepnimKartonimaIzabranogLijecnika", Namespace = "http://www.cezdlih.hr/CEZDLIH/WebServices")]
+    [XmlRoot("UpitOCijepnimKartonimaIzabranogLijecnikaRequest", Namespace = "http://tempuri.org/")]
     public sealed class WUpitOCijepnimKartonimaIzabranogLijecnikaRequest
     {
         public WUpitOCijepnimKartonimaIzabranogLijecnikaRequest() { }
-        public WUpitOCijepnimKartonimaIzabranogLijecnikaRequest(UpitOCijepnimKartonimaIzabranogLijecnikaUpitOCijepnimKartonimaIzabranogLijecnikaRequest upitOCijepnimKartonimaIzabranogLijecnikaRequest1)
+        public WUpitOCijepnimKartonimaIzabranogLijecnikaRequest(
+            ZaglavljeZahtjevType identifikatorZahtjevField,
+            string sifraLijecnikaField,
+            int sifraVrsteCjepivoField)
         {
-            UpitOCijepnimKartonimaIzabranogLijecnikaRequest1 = upitOCijepnimKartonimaIzabranogLijecnikaRequest1;
+            IdentifikatorZahtjevField = identifikatorZahtjevField;
+            SifraLijecnikaField = sifraLijecnikaField;
+            SifraVrsteCjepivoField = sifraVrsteCjepivoField;
         }
 
-        [XmlElement("UpitOCijepnimKartonimaIzabranogLijecnikaRequest", Namespace = "http://www.cezdlih.hr/CEZDLIH/WebServices", Order = 0)]
+        [XmlElement("identifikatorZahtjevField", Order = 0)]
+        public ZaglavljeZahtjevType IdentifikatorZahtjevField { get; set; }
 
-        public UpitOCijepnimKartonimaIzabranogLijecnikaUpitOCijepnimKartonimaIzabranogLijecnikaRequest UpitOCijepnimKartonimaIzabranogLijecnikaRequest1;
+        [XmlElement("sifraLijecnikaField", Order = 1)]
+        public string SifraLijecnikaField { get; set; }
+
+        [XmlElement("sifraVrsteCjepivoField", Order = 2)]
+        public int SifraVrsteCjepivoField { get; set; }
     }
 }
