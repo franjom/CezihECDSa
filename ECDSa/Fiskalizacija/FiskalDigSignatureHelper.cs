@@ -80,7 +80,7 @@ public static class FiskalDigSignatureHelper
         keyInfo.AddClause(new RSAKeyValue(cert.GetRSAPublicKey()!));
 
         var keyInfoX509Data = new KeyInfoX509Data(cert);
-        keyInfoX509Data.AddIssuerSerial(cert.Issuer, cert.GetSerialNumberString());
+        keyInfoX509Data.AddIssuerSerial(cert.Issuer, cert.GetSerial());
         keyInfoX509Data.AddSubjectName(cert.Subject);
         keyInfo.AddClause(keyInfoX509Data);
 
@@ -216,7 +216,7 @@ public static class FiskalDigSignatureHelper
                             IssuerSerial = new X509IssuerSerialType
                             {
                                 X509IssuerName = cert.Issuer,
-                                X509SerialNumber = cert.GetSerialNumberString()
+                                X509SerialNumber = cert.GetSerial()
                             }
                         }
                     }

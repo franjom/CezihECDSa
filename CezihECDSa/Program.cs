@@ -74,10 +74,10 @@ namespace CezihECDSa
             //var cert = ReadFromEcdsaCard();
 
             //TestXmlSigning(cert);
-            TestOsigInfo(cert);
+            //TestOsigInfo(cert);
             //TestPrijavaZarazne(cert);
             //TestInfoOthers(cert);
-            //TestECezdlih(cert);
+            TestECezdlih(cert);
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()
@@ -332,7 +332,7 @@ namespace CezihECDSa
             // ovo radi sa ECDSA mora se slati potpiani request
             var opts = new CezdlihOptions
             {
-                BaseUri = new Uri(""),
+                BaseUri = new Uri("https://cezdlih-cijepih-test.zdravlje.hr:8443/"),
                 Timeout = TimeSpan.FromSeconds(30)
             };
 
