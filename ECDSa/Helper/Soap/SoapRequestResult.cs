@@ -1,4 +1,4 @@
-﻿namespace ECDSa.Helper
+﻿namespace ECDSa.Helper.Soap
 {
     public class SoapRequestResult
     {
@@ -10,19 +10,19 @@
             get
             {
                 return !string.IsNullOrWhiteSpace(Content) &&
-                       (Content.Contains(SoapEnvelopeHelper.SoapNs11)
-                        || Content.Contains(SoapEnvelopeHelper.SoapNs12));
+                       (Content.Contains(XmlNamespaces.SoapNs11)
+                        || Content.Contains(XmlNamespaces.SoapNs12));
             }
         }
 
         public bool IsSoap11
         {
-            get { return IsXml && Content.Contains(SoapEnvelopeHelper.SoapNs11); }
+            get { return IsXml && Content.Contains(XmlNamespaces.SoapNs11); }
         }
 
         public bool IsSoap12
         {
-            get { return IsXml && Content.Contains(SoapEnvelopeHelper.SoapNs12); }
+            get { return IsXml && Content.Contains(XmlNamespaces.SoapNs12); }
         }
 
         public string Content { get; set; }

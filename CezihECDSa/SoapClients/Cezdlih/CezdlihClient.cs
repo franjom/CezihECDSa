@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace CezihECDSa.SoapClients.Cezdlih
@@ -39,9 +40,11 @@ namespace CezihECDSa.SoapClients.Cezdlih
         Task<Result<SlanjePrimkeResponse>> SlanjePrimkeAsync(SlanjePrimkeRequest request,
             CancellationToken ct = default);
 
-        Result<ObavijestOPovratuOtpisuCjepivaResponse> ObavijestOPovratuOtpisuCjepiva(ObavijestOPovratuOtpisuCjepivaRequest request);
+        Result<ObavijestOPovratuOtpisuCjepivaResponse> ObavijestOPovratuOtpisuCjepiva(
+            ObavijestOPovratuOtpisuCjepivaRequest request);
 
-        Task<Result<ObavijestOPovratuOtpisuCjepivaResponse>> ObavijestOPovratuOtpisuCjepivaAsync(ObavijestOPovratuOtpisuCjepivaRequest request,
+        Task<Result<ObavijestOPovratuOtpisuCjepivaResponse>> ObavijestOPovratuOtpisuCjepivaAsync(
+            ObavijestOPovratuOtpisuCjepivaRequest request,
             CancellationToken ct = default);
 
         Result<SlanjeOtpremniceResponse> SlanjeOtpremnice(SlanjeOtpremniceRequest request);
@@ -49,9 +52,11 @@ namespace CezihECDSa.SoapClients.Cezdlih
         Task<Result<SlanjeOtpremniceResponse>> SlanjeOtpremniceAsync(SlanjeOtpremniceRequest request,
             CancellationToken ct = default);
 
-        Result<ObavijestONedolazakNaCijepljenjeResponse> ObavijestONedolazakNaCijepljenje(ObavijestONedolazakNaCijepljenjeRequest request);
+        Result<ObavijestONedolazakNaCijepljenjeResponse> ObavijestONedolazakNaCijepljenje(
+            ObavijestONedolazakNaCijepljenjeRequest request);
 
-        Task<Result<ObavijestONedolazakNaCijepljenjeResponse>> ObavijestONedolazakNaCijepljenjeAsync(ObavijestONedolazakNaCijepljenjeRequest request,
+        Task<Result<ObavijestONedolazakNaCijepljenjeResponse>> ObavijestONedolazakNaCijepljenjeAsync(
+            ObavijestONedolazakNaCijepljenjeRequest request,
             CancellationToken ct = default);
 
         Result<ObavijestOCijepljenjeResponse> ObavijestOCijepljenje(ObavijestOCijepljenjeRequest request);
@@ -59,19 +64,24 @@ namespace CezihECDSa.SoapClients.Cezdlih
         Task<Result<ObavijestOCijepljenjeResponse>> ObavijestOCijepljenjeAsync(ObavijestOCijepljenjeRequest request,
             CancellationToken ct = default);
 
-        Result<OtkazivanjeObavijestOCijepljenjeResponse> OtkazivanjeObavijestOCijepljenje(OtkazivanjeObavijestOCijepljenjeRequest request);
+        Result<OtkazivanjeObavijestOCijepljenjeResponse> OtkazivanjeObavijestOCijepljenje(
+            OtkazivanjeObavijestOCijepljenjeRequest request);
 
-        Task<Result<OtkazivanjeObavijestOCijepljenjeResponse>> OtkazivanjeObavijestOCijepljenjeAsync(OtkazivanjeObavijestOCijepljenjeRequest request,
+        Task<Result<OtkazivanjeObavijestOCijepljenjeResponse>> OtkazivanjeObavijestOCijepljenjeAsync(
+            OtkazivanjeObavijestOCijepljenjeRequest request,
             CancellationToken ct = default);
 
-        Result<PrijavaNuspojaveCijepljenjaResponse> PrijavaNuspojaveCijepljenja(PrijavaNuspojaveCijepljenjaRequest request);
+        Result<PrijavaNuspojaveCijepljenjaResponse> PrijavaNuspojaveCijepljenja(
+            PrijavaNuspojaveCijepljenjaRequest request);
 
-        Task<Result<PrijavaNuspojaveCijepljenjaResponse>> PrijavaNuspojaveCijepljenjaAsync(PrijavaNuspojaveCijepljenjaRequest request,
+        Task<Result<PrijavaNuspojaveCijepljenjaResponse>> PrijavaNuspojaveCijepljenjaAsync(
+            PrijavaNuspojaveCijepljenjaRequest request,
             CancellationToken ct = default);
 
         Result<UpitOCijepnomKartonuOsobeResponse> UpitOCijepnomKartonuOsobe(UpitOCijepnomKartonuOsobeRequest request);
 
-        Task<Result<UpitOCijepnomKartonuOsobeResponse>> UpitOCijepnomKartonuOsobeAsync(UpitOCijepnomKartonuOsobeRequest request,
+        Task<Result<UpitOCijepnomKartonuOsobeResponse>> UpitOCijepnomKartonuOsobeAsync(
+            UpitOCijepnomKartonuOsobeRequest request,
             CancellationToken ct = default);
 
         Result<PreuzimanjeZipResponse> PreuzimanjeZip(PreuzimanjeZipRequest request);
@@ -89,9 +99,11 @@ namespace CezihECDSa.SoapClients.Cezdlih
         Task<Result<SlanjeLagerResponse>> SlanjeLagerAsync(SlanjeLagerRequest request,
             CancellationToken ct = default);
 
-        Result<StatusLijecenjaPacijentaResponseStatusLijecenjaPacijentaResult> StatusLijecenjaPacijenta(StatusLijecenjaPacijentaZahtjevZaStatusLijecenjaPacijenta request);
+        Result<StatusLijecenjaPacijentaResponseStatusLijecenjaPacijentaResult> StatusLijecenjaPacijenta(
+            StatusLijecenjaPacijentaZahtjevZaStatusLijecenjaPacijenta request);
 
-        Task<Result<StatusLijecenjaPacijentaResponseStatusLijecenjaPacijentaResult>> StatusLijecenjaPacijentaAsync(StatusLijecenjaPacijentaZahtjevZaStatusLijecenjaPacijenta request,
+        Task<Result<StatusLijecenjaPacijentaResponseStatusLijecenjaPacijentaResult>> StatusLijecenjaPacijentaAsync(
+            StatusLijecenjaPacijentaZahtjevZaStatusLijecenjaPacijenta request,
             CancellationToken ct = default);
 
         Result<PrijavaZainteresiranihResponse> PrijavaZainteresiranih(PrijavaZainteresiranihRequest request);
@@ -99,14 +111,18 @@ namespace CezihECDSa.SoapClients.Cezdlih
         Task<Result<PrijavaZainteresiranihResponse>> PrijavaZainteresiranihAsync(PrijavaZainteresiranihRequest request,
             CancellationToken ct = default);
 
-        Result<OtkazivanjePrijavaZainteresiranihResponse> OtkazivanjePrijavaZainteresiranih(OtkazivanjePrijavaZainteresiranihRequest request);
+        Result<OtkazivanjePrijavaZainteresiranihResponse> OtkazivanjePrijavaZainteresiranih(
+            OtkazivanjePrijavaZainteresiranihRequest request);
 
-        Task<Result<OtkazivanjePrijavaZainteresiranihResponse>> OtkazivanjePrijavaZainteresiranihAsync(OtkazivanjePrijavaZainteresiranihRequest request,
+        Task<Result<OtkazivanjePrijavaZainteresiranihResponse>> OtkazivanjePrijavaZainteresiranihAsync(
+            OtkazivanjePrijavaZainteresiranihRequest request,
             CancellationToken ct = default);
 
-        Result<PreuzimanjePrijavaZainteresiranihResponse> PreuzimanjePrijavaZainteresiranih(PreuzimanjePrijavaZainteresiranihRequest request);
+        Result<PreuzimanjePrijavaZainteresiranihResponse> PreuzimanjePrijavaZainteresiranih(
+            PreuzimanjePrijavaZainteresiranihRequest request);
 
-        Task<Result<PreuzimanjePrijavaZainteresiranihResponse>> PreuzimanjePrijavaZainteresiranihAsync(PreuzimanjePrijavaZainteresiranihRequest request,
+        Task<Result<PreuzimanjePrijavaZainteresiranihResponse>> PreuzimanjePrijavaZainteresiranihAsync(
+            PreuzimanjePrijavaZainteresiranihRequest request,
             CancellationToken ct = default);
     }
 
@@ -114,6 +130,8 @@ namespace CezihECDSa.SoapClients.Cezdlih
     {
         private readonly CezdlihOptions _options;
         private readonly X509Certificate2 _cert;
+
+        private const string Namespace = "http://www.cezdlih.hr/CEZDLIH/WebServices";
 
         public CezdlihClient(CezdlihOptions options, X509Certificate2 cert) : base(SoapVersion.Soap12)
         {
@@ -130,13 +148,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WPreuzimanjePlanaImunizacijeRequest(request.PreuzimanjePlanaImunizacijeRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/PreuzimanjePlanaImunizacije",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 });
 
                 var response = ProcessPreuzimanjePlanaImunizacijeResponse(result);
@@ -170,13 +189,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WPreuzimanjePlanaImunizacijeRequest(request.PreuzimanjePlanaImunizacijeRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/PreuzimanjePlanaImunizacije",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true,
                 }, ct);
 
                 var response = ProcessPreuzimanjePlanaImunizacijeResponse(result);
@@ -209,13 +229,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WSlanjePlanaImunizacijeRequest(request.SlanjePlanaImunizacijeRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/SlanjePlanaImunizacije",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 });
 
                 var response = ProcessSlanjePlanaImunizacijeResponse(result);
@@ -249,13 +270,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WSlanjePlanaImunizacijeRequest(request.SlanjePlanaImunizacijeRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/SlanjePlanaImunizacije",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 }, ct);
 
                 var response = ProcessSlanjePlanaImunizacijeResponse(result);
@@ -288,13 +310,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WSlanjeNarudzbenicaRequest(request.SlanjeNarudzbenicaRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/SlanjeNarudzbenica",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 });
 
                 var response = ProcessSlanjeNarudzbenicaResponse(result);
@@ -319,7 +342,8 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public async Task<Result<SlanjeNarudzbenicaResponse>> SlanjeNarudzbenicaAsync(SlanjeNarudzbenicaRequest request, CancellationToken ct = default)
+        public async Task<Result<SlanjeNarudzbenicaResponse>> SlanjeNarudzbenicaAsync(SlanjeNarudzbenicaRequest request,
+            CancellationToken ct = default)
         {
             try
             {
@@ -327,13 +351,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WSlanjeNarudzbenicaRequest(request.SlanjeNarudzbenicaRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/SlanjeNarudzbenica",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 }, ct);
 
                 var response = ProcessSlanjeNarudzbenicaResponse(result);
@@ -366,13 +391,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WPreuzimanjeOtpremniceRequest(request.PreuzimanjeOtpremniceRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/PreuzimanjeOtpremnice",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 });
 
                 var response = ProcessPreuzimanjeOtpremniceResponse(result);
@@ -397,7 +423,8 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public async Task<Result<PreuzimanjeOtpremniceResponse>> PreuzimanjeOtpremniceAsync(PreuzimanjeOtpremniceRequest request, CancellationToken ct = default)
+        public async Task<Result<PreuzimanjeOtpremniceResponse>> PreuzimanjeOtpremniceAsync(
+            PreuzimanjeOtpremniceRequest request, CancellationToken ct = default)
         {
             try
             {
@@ -405,13 +432,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WPreuzimanjeOtpremniceRequest(request.PreuzimanjeOtpremniceRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/PreuzimanjeOtpremnice",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 }, ct);
 
                 var response = ProcessPreuzimanjeOtpremniceResponse(result);
@@ -444,13 +472,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WSlanjePrimkeRequest(request.SlanjePrimkeRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/SlanjePrimke",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 });
 
                 var response = ProcessSlanjePrimkeResponse(result);
@@ -475,7 +504,8 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public async Task<Result<SlanjePrimkeResponse>> SlanjePrimkeAsync(SlanjePrimkeRequest request, CancellationToken ct = default)
+        public async Task<Result<SlanjePrimkeResponse>> SlanjePrimkeAsync(SlanjePrimkeRequest request,
+            CancellationToken ct = default)
         {
             try
             {
@@ -483,13 +513,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WSlanjePrimkeRequest(request.SlanjePrimkeRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/SlanjePrimke",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 }, ct);
 
                 var response = ProcessSlanjePrimkeResponse(result);
@@ -514,21 +545,24 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public Result<ObavijestOPovratuOtpisuCjepivaResponse> ObavijestOPovratuOtpisuCjepiva(ObavijestOPovratuOtpisuCjepivaRequest request)
+        public Result<ObavijestOPovratuOtpisuCjepivaResponse> ObavijestOPovratuOtpisuCjepiva(
+            ObavijestOPovratuOtpisuCjepivaRequest request)
         {
             try
             {
                 var xml = SoapSerializer.Instance.Serialize(
-                    new WObavijestOPovratuOtpisuCjepivaRequest(request.ObavijestOPovratuOtpisuCjepivaRequest1), Namespaces);
+                    new WObavijestOPovratuOtpisuCjepivaRequest(request.ObavijestOPovratuOtpisuCjepivaRequest1),
+                    Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/ObavijestOPovratuOtpisuCjepiva",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 });
 
                 var response = ProcessObavijestOPovratuOtpisuCjepivaResponse(result);
@@ -553,21 +587,24 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public async Task<Result<ObavijestOPovratuOtpisuCjepivaResponse>> ObavijestOPovratuOtpisuCjepivaAsync(ObavijestOPovratuOtpisuCjepivaRequest request, CancellationToken ct = default)
+        public async Task<Result<ObavijestOPovratuOtpisuCjepivaResponse>> ObavijestOPovratuOtpisuCjepivaAsync(
+            ObavijestOPovratuOtpisuCjepivaRequest request, CancellationToken ct = default)
         {
             try
             {
                 var xml = SoapSerializer.Instance.Serialize(
-                    new WObavijestOPovratuOtpisuCjepivaRequest(request.ObavijestOPovratuOtpisuCjepivaRequest1), Namespaces);
+                    new WObavijestOPovratuOtpisuCjepivaRequest(request.ObavijestOPovratuOtpisuCjepivaRequest1),
+                    Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/ObavijestOPovratuOtpisuCjepiva",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 }, ct);
 
                 var response = ProcessObavijestOPovratuOtpisuCjepivaResponse(result);
@@ -600,13 +637,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WSlanjeOtpremniceRequest(request.SlanjeOtpremniceRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/SlanjeOtpremnice",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 });
 
                 var response = ProcessSlanjeOtpremniceResponse(result);
@@ -631,7 +669,8 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public async Task<Result<SlanjeOtpremniceResponse>> SlanjeOtpremniceAsync(SlanjeOtpremniceRequest request, CancellationToken ct = default)
+        public async Task<Result<SlanjeOtpremniceResponse>> SlanjeOtpremniceAsync(SlanjeOtpremniceRequest request,
+            CancellationToken ct = default)
         {
             try
             {
@@ -639,13 +678,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WSlanjeOtpremniceRequest(request.SlanjeOtpremniceRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/SlanjeOtpremnice",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 }, ct);
 
                 var response = ProcessSlanjeOtpremniceResponse(result);
@@ -670,21 +710,24 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public Result<ObavijestONedolazakNaCijepljenjeResponse> ObavijestONedolazakNaCijepljenje(ObavijestONedolazakNaCijepljenjeRequest request)
+        public Result<ObavijestONedolazakNaCijepljenjeResponse> ObavijestONedolazakNaCijepljenje(
+            ObavijestONedolazakNaCijepljenjeRequest request)
         {
             try
             {
                 var xml = SoapSerializer.Instance.Serialize(
-                    new WObavijestONedolazakNaCijepljenjeRequest(request.ObavijestONedolazakNaCijepljenjeRequest1), Namespaces);
+                    new WObavijestONedolazakNaCijepljenjeRequest(request.ObavijestONedolazakNaCijepljenjeRequest1),
+                    Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/ObavijestONedolazakNaCijepljenje",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 });
 
                 var response = ProcessObavijestONedolazakNaCijepljenjeResponse(result);
@@ -709,21 +752,24 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public async Task<Result<ObavijestONedolazakNaCijepljenjeResponse>> ObavijestONedolazakNaCijepljenjeAsync(ObavijestONedolazakNaCijepljenjeRequest request, CancellationToken ct = default)
+        public async Task<Result<ObavijestONedolazakNaCijepljenjeResponse>> ObavijestONedolazakNaCijepljenjeAsync(
+            ObavijestONedolazakNaCijepljenjeRequest request, CancellationToken ct = default)
         {
             try
             {
                 var xml = SoapSerializer.Instance.Serialize(
-                    new WObavijestONedolazakNaCijepljenjeRequest(request.ObavijestONedolazakNaCijepljenjeRequest1), Namespaces);
+                    new WObavijestONedolazakNaCijepljenjeRequest(request.ObavijestONedolazakNaCijepljenjeRequest1),
+                    Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/ObavijestONedolazakNaCijepljenje",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 }, ct);
 
                 var response = ProcessObavijestONedolazakNaCijepljenjeResponse(result);
@@ -756,13 +802,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WObavijestOCijepljenjeRequest(request.ObavijestOCijepljenjeRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/ObavijestOCijepljenje",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 });
 
                 var response = ProcessObavijestOCijepljenjeResponse(result);
@@ -787,7 +834,8 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public async Task<Result<ObavijestOCijepljenjeResponse>> ObavijestOCijepljenjeAsync(ObavijestOCijepljenjeRequest request, CancellationToken ct = default)
+        public async Task<Result<ObavijestOCijepljenjeResponse>> ObavijestOCijepljenjeAsync(
+            ObavijestOCijepljenjeRequest request, CancellationToken ct = default)
         {
             try
             {
@@ -795,13 +843,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WObavijestOCijepljenjeRequest(request.ObavijestOCijepljenjeRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/ObavijestOCijepljenje",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 }, ct);
 
                 var response = ProcessObavijestOCijepljenjeResponse(result);
@@ -826,21 +875,24 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public Result<OtkazivanjeObavijestOCijepljenjeResponse> OtkazivanjeObavijestOCijepljenje(OtkazivanjeObavijestOCijepljenjeRequest request)
+        public Result<OtkazivanjeObavijestOCijepljenjeResponse> OtkazivanjeObavijestOCijepljenje(
+            OtkazivanjeObavijestOCijepljenjeRequest request)
         {
             try
             {
                 var xml = SoapSerializer.Instance.Serialize(
-                    new WOtkazivanjeObavijestOCijepljenjeRequest(request.OtkazivanjeObavijestOCijepljenjeRequest1), Namespaces);
+                    new WOtkazivanjeObavijestOCijepljenjeRequest(request.OtkazivanjeObavijestOCijepljenjeRequest1),
+                    Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/OtkazivanjeObavijestOCijepljenje",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 });
 
                 var response = ProcessOtkazivanjeObavijestOCijepljenjeResponse(result);
@@ -865,21 +917,24 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public async Task<Result<OtkazivanjeObavijestOCijepljenjeResponse>> OtkazivanjeObavijestOCijepljenjeAsync(OtkazivanjeObavijestOCijepljenjeRequest request, CancellationToken ct = default)
+        public async Task<Result<OtkazivanjeObavijestOCijepljenjeResponse>> OtkazivanjeObavijestOCijepljenjeAsync(
+            OtkazivanjeObavijestOCijepljenjeRequest request, CancellationToken ct = default)
         {
             try
             {
                 var xml = SoapSerializer.Instance.Serialize(
-                    new WOtkazivanjeObavijestOCijepljenjeRequest(request.OtkazivanjeObavijestOCijepljenjeRequest1), Namespaces);
+                    new WOtkazivanjeObavijestOCijepljenjeRequest(request.OtkazivanjeObavijestOCijepljenjeRequest1),
+                    Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/OtkazivanjeObavijestOCijepljenje",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 }, ct);
 
                 var response = ProcessOtkazivanjeObavijestOCijepljenjeResponse(result);
@@ -904,7 +959,8 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public Result<PrijavaNuspojaveCijepljenjaResponse> PrijavaNuspojaveCijepljenja(PrijavaNuspojaveCijepljenjaRequest request)
+        public Result<PrijavaNuspojaveCijepljenjaResponse> PrijavaNuspojaveCijepljenja(
+            PrijavaNuspojaveCijepljenjaRequest request)
         {
             try
             {
@@ -912,13 +968,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WPrijavaNuspojaveCijepljenjaRequest(request.PrijavaNuspojaveCijepljenjaRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/PrijavaNuspojaveCijepljenja",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 });
 
                 var response = ProcessPrijavaNuspojaveCijepljenjaResponse(result);
@@ -943,7 +1000,8 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public async Task<Result<PrijavaNuspojaveCijepljenjaResponse>> PrijavaNuspojaveCijepljenjaAsync(PrijavaNuspojaveCijepljenjaRequest request, CancellationToken ct = default)
+        public async Task<Result<PrijavaNuspojaveCijepljenjaResponse>> PrijavaNuspojaveCijepljenjaAsync(
+            PrijavaNuspojaveCijepljenjaRequest request, CancellationToken ct = default)
         {
             try
             {
@@ -951,13 +1009,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WPrijavaNuspojaveCijepljenjaRequest(request.PrijavaNuspojaveCijepljenjaRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/PrijavaNuspojaveCijepljenja",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 }, ct);
 
                 var response = ProcessPrijavaNuspojaveCijepljenjaResponse(result);
@@ -982,7 +1041,8 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public Result<UpitOCijepnomKartonuOsobeResponse> UpitOCijepnomKartonuOsobe(UpitOCijepnomKartonuOsobeRequest request)
+        public Result<UpitOCijepnomKartonuOsobeResponse> UpitOCijepnomKartonuOsobe(
+            UpitOCijepnomKartonuOsobeRequest request)
         {
             try
             {
@@ -990,13 +1050,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WUpitOCijepnomKartonuOsobeRequest(request.UpitOCijepnomKartonuOsobeRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/UpitOCijepnomKartonuOsobe",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 });
 
                 var response = ProcessUpitOCijepnomKartonuOsobeResponse(result);
@@ -1021,7 +1082,8 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public async Task<Result<UpitOCijepnomKartonuOsobeResponse>> UpitOCijepnomKartonuOsobeAsync(UpitOCijepnomKartonuOsobeRequest request, CancellationToken ct = default)
+        public async Task<Result<UpitOCijepnomKartonuOsobeResponse>> UpitOCijepnomKartonuOsobeAsync(
+            UpitOCijepnomKartonuOsobeRequest request, CancellationToken ct = default)
         {
             try
             {
@@ -1029,13 +1091,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WUpitOCijepnomKartonuOsobeRequest(request.UpitOCijepnomKartonuOsobeRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/UpitOCijepnomKartonuOsobe",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 }, ct);
 
                 var response = ProcessUpitOCijepnomKartonuOsobeResponse(result);
@@ -1068,13 +1131,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WPreuzimanjeZipRequest(request.PreuzimanjeZipRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/PreuzimanjeZip",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 });
 
                 var response = ProcessPreuzimanjeZipResponse(result);
@@ -1087,7 +1151,8 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public async Task<Result<PreuzimanjeZipResponse>> PreuzimanjeZipAsync(PreuzimanjeZipRequest request, CancellationToken ct = default)
+        public async Task<Result<PreuzimanjeZipResponse>> PreuzimanjeZipAsync(PreuzimanjeZipRequest request,
+            CancellationToken ct = default)
         {
             try
             {
@@ -1095,13 +1160,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WPreuzimanjeZipRequest(request.PreuzimanjeZipRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/PreuzimanjeZip",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 }, ct);
 
                 var response = ProcessPreuzimanjeZipResponse(result);
@@ -1122,13 +1188,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WSlanjeZipRequest(request.SlanjeZipRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/SlanjeZip",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 });
 
                 var response = ProcessSlanjeZipResponse(result);
@@ -1153,7 +1220,8 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public async Task<Result<SlanjeZipResponse>> SlanjeZipAsync(SlanjeZipRequest request, CancellationToken ct = default)
+        public async Task<Result<SlanjeZipResponse>> SlanjeZipAsync(SlanjeZipRequest request,
+            CancellationToken ct = default)
         {
             try
             {
@@ -1161,13 +1229,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WSlanjeZipRequest(request.SlanjeZipRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/SlanjeZip",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 }, ct);
 
                 var response = ProcessSlanjeZipResponse(result);
@@ -1200,13 +1269,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WSlanjeLagerRequest(request.SlanjeLagerRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/SlanjeLager",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 });
 
                 var response = ProcessSlanjeLagerResponse(result);
@@ -1231,7 +1301,8 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public async Task<Result<SlanjeLagerResponse>> SlanjeLagerAsync(SlanjeLagerRequest request, CancellationToken ct = default)
+        public async Task<Result<SlanjeLagerResponse>> SlanjeLagerAsync(SlanjeLagerRequest request,
+            CancellationToken ct = default)
         {
             try
             {
@@ -1239,13 +1310,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WSlanjeLagerRequest(request.SlanjeLagerRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/SlanjeLager",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 }, ct);
 
                 var response = ProcessSlanjeLagerResponse(result);
@@ -1270,7 +1342,8 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public Result<StatusLijecenjaPacijentaResponseStatusLijecenjaPacijentaResult> StatusLijecenjaPacijenta(StatusLijecenjaPacijentaZahtjevZaStatusLijecenjaPacijenta request)
+        public Result<StatusLijecenjaPacijentaResponseStatusLijecenjaPacijentaResult> StatusLijecenjaPacijenta(
+            StatusLijecenjaPacijentaZahtjevZaStatusLijecenjaPacijenta request)
         {
             try
             {
@@ -1279,13 +1352,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
 
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/StatusLijecenjaPacijenta",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 });
 
                 var response = ProcessStatusLijecenjaPacijentaResponse(result);
@@ -1307,7 +1381,9 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public async Task<Result<StatusLijecenjaPacijentaResponseStatusLijecenjaPacijentaResult>> StatusLijecenjaPacijentaAsync(StatusLijecenjaPacijentaZahtjevZaStatusLijecenjaPacijenta request, CancellationToken ct = default)
+        public async Task<Result<StatusLijecenjaPacijentaResponseStatusLijecenjaPacijentaResult>>
+            StatusLijecenjaPacijentaAsync(StatusLijecenjaPacijentaZahtjevZaStatusLijecenjaPacijenta request,
+                CancellationToken ct = default)
         {
             try
             {
@@ -1316,13 +1392,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
 
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/StatusLijecenjaPacijenta",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 }, ct);
 
                 var response = ProcessStatusLijecenjaPacijentaResponse(result);
@@ -1352,13 +1429,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WPrijavaZainteresiranihRequest(request.PrijavaZainteresiranihRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/PrijavaZainteresiranih",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 });
 
                 var response = ProcessPrijavaZainteresiranihResponse(result);
@@ -1367,7 +1445,8 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     && response.Value.PrijavaZainteresiranihResult?.ListaGresaka != null
                     && response.Value.PrijavaZainteresiranihResult.ListaGresaka.Any())
                 {
-                    return response.Value.PrijavaZainteresiranihResult.ListaGresaka.Select(o => new ErrorMessage(o.NazivGreske)).ToList();
+                    return response.Value.PrijavaZainteresiranihResult.ListaGresaka
+                        .Select(o => new ErrorMessage(o.NazivGreske)).ToList();
                 }
 
                 return response;
@@ -1378,7 +1457,8 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public async Task<Result<PrijavaZainteresiranihResponse>> PrijavaZainteresiranihAsync(PrijavaZainteresiranihRequest request, CancellationToken ct = default)
+        public async Task<Result<PrijavaZainteresiranihResponse>> PrijavaZainteresiranihAsync(
+            PrijavaZainteresiranihRequest request, CancellationToken ct = default)
         {
             try
             {
@@ -1386,13 +1466,14 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     new WPrijavaZainteresiranihRequest(request.PrijavaZainteresiranihRequest1), Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/PrijavaZainteresiranih",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 }, ct);
 
                 var response = ProcessPrijavaZainteresiranihResponse(result);
@@ -1401,7 +1482,8 @@ namespace CezihECDSa.SoapClients.Cezdlih
                     && response.Value.PrijavaZainteresiranihResult?.ListaGresaka != null
                     && response.Value.PrijavaZainteresiranihResult.ListaGresaka.Any())
                 {
-                    return response.Value.PrijavaZainteresiranihResult.ListaGresaka.Select(o => new ErrorMessage(o.NazivGreske)).ToList();
+                    return response.Value.PrijavaZainteresiranihResult.ListaGresaka
+                        .Select(o => new ErrorMessage(o.NazivGreske)).ToList();
                 }
 
                 return response;
@@ -1412,21 +1494,24 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public Result<OtkazivanjePrijavaZainteresiranihResponse> OtkazivanjePrijavaZainteresiranih(OtkazivanjePrijavaZainteresiranihRequest request)
+        public Result<OtkazivanjePrijavaZainteresiranihResponse> OtkazivanjePrijavaZainteresiranih(
+            OtkazivanjePrijavaZainteresiranihRequest request)
         {
             try
             {
                 var xml = SoapSerializer.Instance.Serialize(
-                    new WOtkazivanjePrijavaZainteresiranihRequest(request.OtkazivanjePrijavaZainteresiranihRequest1), Namespaces);
+                    new WOtkazivanjePrijavaZainteresiranihRequest(request.OtkazivanjePrijavaZainteresiranihRequest1),
+                    Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/OtkazivanjePrijavaZainteresiranih",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 });
 
                 var response = ProcessOtkazivanjePrijavaZainteresiranihResponse(result);
@@ -1451,21 +1536,24 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public async Task<Result<OtkazivanjePrijavaZainteresiranihResponse>> OtkazivanjePrijavaZainteresiranihAsync(OtkazivanjePrijavaZainteresiranihRequest request, CancellationToken ct = default)
+        public async Task<Result<OtkazivanjePrijavaZainteresiranihResponse>> OtkazivanjePrijavaZainteresiranihAsync(
+            OtkazivanjePrijavaZainteresiranihRequest request, CancellationToken ct = default)
         {
             try
             {
                 var xml = SoapSerializer.Instance.Serialize(
-                    new WOtkazivanjePrijavaZainteresiranihRequest(request.OtkazivanjePrijavaZainteresiranihRequest1), Namespaces);
+                    new WOtkazivanjePrijavaZainteresiranihRequest(request.OtkazivanjePrijavaZainteresiranihRequest1),
+                    Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/OtkazivanjePrijavaZainteresiranih",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 }, ct);
 
                 var response = ProcessOtkazivanjePrijavaZainteresiranihResponse(result);
@@ -1490,21 +1578,24 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public Result<PreuzimanjePrijavaZainteresiranihResponse> PreuzimanjePrijavaZainteresiranih(PreuzimanjePrijavaZainteresiranihRequest request)
+        public Result<PreuzimanjePrijavaZainteresiranihResponse> PreuzimanjePrijavaZainteresiranih(
+            PreuzimanjePrijavaZainteresiranihRequest request)
         {
             try
             {
                 var xml = SoapSerializer.Instance.Serialize(
-                    new WPreuzimanjePrijavaZainteresiranihRequest(request.PreuzimanjePrijavaZainteresiranihRequest1), Namespaces);
+                    new WPreuzimanjePrijavaZainteresiranihRequest(request.PreuzimanjePrijavaZainteresiranihRequest1),
+                    Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = SendSignedRequest(new SoapOptions
+                var result = SendRequest(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/PreuzimanjePrijavaZainteresiranih",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 });
 
                 var response = ProcessPreuzimanjePrijavaZainteresiranihResponse(result);
@@ -1529,21 +1620,24 @@ namespace CezihECDSa.SoapClients.Cezdlih
             }
         }
 
-        public async Task<Result<PreuzimanjePrijavaZainteresiranihResponse>> PreuzimanjePrijavaZainteresiranihAsync(PreuzimanjePrijavaZainteresiranihRequest request, CancellationToken ct = default)
+        public async Task<Result<PreuzimanjePrijavaZainteresiranihResponse>> PreuzimanjePrijavaZainteresiranihAsync(
+            PreuzimanjePrijavaZainteresiranihRequest request, CancellationToken ct = default)
         {
             try
             {
                 var xml = SoapSerializer.Instance.Serialize(
-                    new WPreuzimanjePrijavaZainteresiranihRequest(request.PreuzimanjePrijavaZainteresiranihRequest1), Namespaces);
+                    new WPreuzimanjePrijavaZainteresiranihRequest(request.PreuzimanjePrijavaZainteresiranihRequest1),
+                    Namespaces);
                 var uri = new Uri(_options.BaseUri, "");
 
-                var result = await SendSignedRequestAsync(new SoapOptions
+                var result = await SendRequestAsync(new SoapOptions
                 {
                     XmlString = xml,
                     Certificate = _cert,
                     SoapAction = "http://www.cezdlih.hr/CEZDLIH/WebServices/PreuzimanjePrijavaZainteresiranih",
                     Uri = uri,
-                    MessageId = Guid.NewGuid()
+                    MessageId = Guid.NewGuid(),
+                    SignEnvelope = true
                 }, ct);
 
                 var response = ProcessPreuzimanjePrijavaZainteresiranihResponse(result);
@@ -1571,154 +1665,200 @@ namespace CezihECDSa.SoapClients.Cezdlih
         private Result<PreuzimanjePlanaImunizacijeResponse> ProcessPreuzimanjePlanaImunizacijeResponse(
             SoapRequestResult result)
         {
-            return ProcessResponse<WPreuzimanjePlanaImunizacijeResponse,
-                PreuzimanjePlanaImunizacijeResponse>(
-                result,
-                response => new PreuzimanjePlanaImunizacijeResponse(response.Result));
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WPreuzimanjePlanaImunizacijeResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return new PreuzimanjePlanaImunizacijeResponse(othersResponse.Result);
         }
 
         private Result<SlanjePlanaImunizacijeResponse> ProcessSlanjePlanaImunizacijeResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WSlanjePlanaImunizacijeResponse,
-                SlanjePlanaImunizacijeResponse>(
-                result,
-                response => new SlanjePlanaImunizacijeResponse(response.Result));
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WSlanjePlanaImunizacijeResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return new SlanjePlanaImunizacijeResponse(othersResponse.Result);
         }
 
         private Result<SlanjeNarudzbenicaResponse> ProcessSlanjeNarudzbenicaResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WSlanjeNarudzbenicaResponse,
-                SlanjeNarudzbenicaResponse>(
-                result,
-                response => new SlanjeNarudzbenicaResponse(response.Result));
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WSlanjeNarudzbenicaResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return new SlanjeNarudzbenicaResponse(othersResponse.Result);
         }
 
         private Result<PreuzimanjeOtpremniceResponse> ProcessPreuzimanjeOtpremniceResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WPreuzimanjeOtpremniceResponse,
-                PreuzimanjeOtpremniceResponse>(
-                result,
-                response => new PreuzimanjeOtpremniceResponse(response.Result));
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WPreuzimanjeOtpremniceResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return new PreuzimanjeOtpremniceResponse(othersResponse.Result);
         }
 
         private Result<SlanjePrimkeResponse> ProcessSlanjePrimkeResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WSlanjePrimkeResponse,
-                SlanjePrimkeResponse>(
-                result,
-                response => new SlanjePrimkeResponse(response.Result));
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WSlanjePrimkeResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return new SlanjePrimkeResponse(othersResponse.Result);
         }
 
-        private Result<ObavijestOPovratuOtpisuCjepivaResponse> ProcessObavijestOPovratuOtpisuCjepivaResponse(SoapRequestResult result)
+        private Result<ObavijestOPovratuOtpisuCjepivaResponse> ProcessObavijestOPovratuOtpisuCjepivaResponse(
+            SoapRequestResult result)
         {
-            return ProcessResponse<WObavijestOPovratuOtpisuCjepivaResponse,
-                ObavijestOPovratuOtpisuCjepivaResponse>(
-                result,
-                response => new ObavijestOPovratuOtpisuCjepivaResponse(response.Result));
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WObavijestOPovratuOtpisuCjepivaResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return new ObavijestOPovratuOtpisuCjepivaResponse(othersResponse.Result);
         }
 
         private Result<SlanjeOtpremniceResponse> ProcessSlanjeOtpremniceResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WSlanjeOtpremniceResponse,
-                SlanjeOtpremniceResponse>(
-                result,
-                response => new SlanjeOtpremniceResponse(response.Result));
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WSlanjeOtpremniceResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return new SlanjeOtpremniceResponse(othersResponse.Result);
         }
 
-        private Result<ObavijestONedolazakNaCijepljenjeResponse> ProcessObavijestONedolazakNaCijepljenjeResponse(SoapRequestResult result)
+        private Result<ObavijestONedolazakNaCijepljenjeResponse> ProcessObavijestONedolazakNaCijepljenjeResponse(
+            SoapRequestResult result)
         {
-            return ProcessResponse<WObavijestONedolazakNaCijepljenjeResponse,
-                ObavijestONedolazakNaCijepljenjeResponse>(
-                result,
-                response => new ObavijestONedolazakNaCijepljenjeResponse(response.Result));
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WObavijestONedolazakNaCijepljenjeResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return new ObavijestONedolazakNaCijepljenjeResponse(othersResponse.Result);
         }
 
         private Result<ObavijestOCijepljenjeResponse> ProcessObavijestOCijepljenjeResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WObavijestOCijepljenjeResponse,
-                ObavijestOCijepljenjeResponse>(
-                result,
-                response => new ObavijestOCijepljenjeResponse(response.Result));
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WObavijestOCijepljenjeResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return new ObavijestOCijepljenjeResponse(othersResponse.Result);
         }
 
-        private Result<OtkazivanjeObavijestOCijepljenjeResponse> ProcessOtkazivanjeObavijestOCijepljenjeResponse(SoapRequestResult result)
+        private Result<OtkazivanjeObavijestOCijepljenjeResponse> ProcessOtkazivanjeObavijestOCijepljenjeResponse(
+            SoapRequestResult result)
         {
-            return ProcessResponse<WOtkazivanjeObavijestOCijepljenjeResponse,
-                OtkazivanjeObavijestOCijepljenjeResponse>(
-                result,
-                response => new OtkazivanjeObavijestOCijepljenjeResponse(response.Result));
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WOtkazivanjeObavijestOCijepljenjeResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return new OtkazivanjeObavijestOCijepljenjeResponse(othersResponse.Result);
         }
 
-        private Result<PrijavaNuspojaveCijepljenjaResponse> ProcessPrijavaNuspojaveCijepljenjaResponse(SoapRequestResult result)
+        private Result<PrijavaNuspojaveCijepljenjaResponse> ProcessPrijavaNuspojaveCijepljenjaResponse(
+            SoapRequestResult result)
         {
-            return ProcessResponse<WPrijavaNuspojaveCijepljenjaResponse,
-                PrijavaNuspojaveCijepljenjaResponse>(
-                result,
-                response => new PrijavaNuspojaveCijepljenjaResponse(response.Result));
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WPrijavaNuspojaveCijepljenjaResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return new PrijavaNuspojaveCijepljenjaResponse(othersResponse.Result);
         }
 
-        private Result<UpitOCijepnomKartonuOsobeResponse> ProcessUpitOCijepnomKartonuOsobeResponse(SoapRequestResult result)
+        private Result<UpitOCijepnomKartonuOsobeResponse> ProcessUpitOCijepnomKartonuOsobeResponse(
+            SoapRequestResult result)
         {
-            return ProcessResponse<WUpitOCijepnomKartonuOsobeResponse,
-                UpitOCijepnomKartonuOsobeResponse>(
-                result,
-                response => new UpitOCijepnomKartonuOsobeResponse(response.Result));
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WUpitOCijepnomKartonuOsobeResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return new UpitOCijepnomKartonuOsobeResponse(othersResponse.Result);
         }
 
         private Result<PreuzimanjeZipResponse> ProcessPreuzimanjeZipResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WPreuzimanjeZipResponse,
-                PreuzimanjeZipResponse>(
-                result,
-                response => new PreuzimanjeZipResponse(response.Result));
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WPreuzimanjeZipResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return new PreuzimanjeZipResponse(othersResponse.Result);
         }
 
         private Result<SlanjeZipResponse> ProcessSlanjeZipResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WSlanjeZipResponse,
-                SlanjeZipResponse>(
-                result,
-                response => new SlanjeZipResponse(response.Result));
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WSlanjeZipResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return new SlanjeZipResponse(othersResponse.Result);
         }
 
         private Result<SlanjeLagerResponse> ProcessSlanjeLagerResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WSlanjeLagerResponse,
-                SlanjeLagerResponse>(
-                result,
-                response => new SlanjeLagerResponse(response.Result));
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WSlanjeLagerResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return new SlanjeLagerResponse(othersResponse.Result);
         }
 
-        private Result<StatusLijecenjaPacijentaResponseStatusLijecenjaPacijentaResult> ProcessStatusLijecenjaPacijentaResponse(SoapRequestResult result)
+        private Result<StatusLijecenjaPacijentaResponseStatusLijecenjaPacijentaResult>
+            ProcessStatusLijecenjaPacijentaResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WStatusLijecenjaPacijentaResponse,
-                StatusLijecenjaPacijentaResponseStatusLijecenjaPacijentaResult>(
-                result,
-                response => response?.Result);
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WStatusLijecenjaPacijentaResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return othersResponse.Result;
         }
 
         private Result<PrijavaZainteresiranihResponse> ProcessPrijavaZainteresiranihResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WPrijavaZainteresiranihResponse, PrijavaZainteresiranihResponse>(
-                result,
-                response => new PrijavaZainteresiranihResponse(response.Result)
-            );
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WPrijavaZainteresiranihResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return new PrijavaZainteresiranihResponse(othersResponse.Result);
         }
 
-        private Result<OtkazivanjePrijavaZainteresiranihResponse> ProcessOtkazivanjePrijavaZainteresiranihResponse(SoapRequestResult result)
+        private Result<OtkazivanjePrijavaZainteresiranihResponse> ProcessOtkazivanjePrijavaZainteresiranihResponse(
+            SoapRequestResult result)
         {
-            return ProcessResponse<WOtkazivanjePrijavaZainteresiranihResponse, OtkazivanjePrijavaZainteresiranihResponse>(
-                result,
-                response => new OtkazivanjePrijavaZainteresiranihResponse(response.Result)
-            );
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WOtkazivanjePrijavaZainteresiranihResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return new OtkazivanjePrijavaZainteresiranihResponse(othersResponse.Result);
         }
 
-        private Result<PreuzimanjePrijavaZainteresiranihResponse> ProcessPreuzimanjePrijavaZainteresiranihResponse(SoapRequestResult result)
+        private Result<PreuzimanjePrijavaZainteresiranihResponse> ProcessPreuzimanjePrijavaZainteresiranihResponse(
+            SoapRequestResult result)
         {
-            return ProcessResponse<WPreuzimanjePrijavaZainteresiranihResponse, PreuzimanjePrijavaZainteresiranihResponse>(
-                result,
-                response => new PreuzimanjePrijavaZainteresiranihResponse(response.Result)
-            );
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WPreuzimanjePrijavaZainteresiranihResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return new PreuzimanjePrijavaZainteresiranihResponse(othersResponse.Result);
         }
 
         private XmlSerializerNamespaces Namespaces

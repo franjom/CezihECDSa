@@ -1,7 +1,11 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
 namespace ECDSa.Helper.Soap._1_1
 {
+    [Serializable]
+    [XmlType(Namespace = XmlNamespaces.SoapNs11)]
+    [XmlRoot("Fault", Namespace = XmlNamespaces.SoapNs11)]
     public class Fault11
     {
         [XmlElement(ElementName = "faultcode", Namespace = "")]

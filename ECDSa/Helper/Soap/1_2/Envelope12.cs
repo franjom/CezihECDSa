@@ -1,20 +1,17 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
 namespace ECDSa.Helper.Soap._1_2
 {
-    [XmlRoot(ElementName = "Envelope", Namespace = SoapEnvelopeHelper.SoapNs12)]
+    [Serializable]
+    [XmlType(Namespace = XmlNamespaces.SoapNs12)]
+    [XmlRoot(ElementName = "Envelope", Namespace = XmlNamespaces.SoapNs12, IsNullable = false)]
     public class Envelope12
     {
-        [XmlNamespaceDeclarations] 
-        public XmlSerializerNamespaces xmlns = new XmlSerializerNamespaces();
+        [XmlElement(ElementName = "Header", Namespace = XmlNamespaces.SoapNs12)]
+        public Header12? Header { get; set; }
 
-        public Envelope12()
-        {
-            xmlns.Add("env", SoapEnvelopeHelper.SoapNs12);
-            xmlns.Add("ws", "http://ws.cezih.hr/error");
-        }
-
-        [XmlElement(ElementName = "Body", Namespace = SoapEnvelopeHelper.SoapNs12)]
+        [XmlElement(ElementName = "Body", Namespace = XmlNamespaces.SoapNs12)]
         public Body12 Body { get; set; }
     }
 }

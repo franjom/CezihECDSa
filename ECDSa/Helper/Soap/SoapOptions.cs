@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography.X509Certificates;
+using System.Xml;
 
 namespace ECDSa.Helper.Soap
 {
@@ -15,10 +16,6 @@ namespace ECDSa.Helper.Soap
         /// </summary>
         public X509Certificate2 Certificate { get; set; }
 
-        /// <summary>
-        /// Gets or sets the raw XML payload to be included in the SOAP body.
-        /// <b>Mandatory.</b> This is the actual business payload of the SOAP message.
-        /// </summary>
         public string XmlString { get; set; }
 
         /// <summary>
@@ -26,6 +23,10 @@ namespace ECDSa.Helper.Soap
         /// <b>Mandatory.</b> Included in the WS-Addressing <c>Action</c> header.
         /// </summary>
         public string SoapAction { get; set; }
+
+        public bool ActionMustUnderstand { get; set; }
+
+        public bool SignEnvelope { get; set; }
 
         /// <summary>
         /// Gets or sets the target endpoint URI of the SOAP service.
@@ -55,8 +56,15 @@ namespace ECDSa.Helper.Soap
         /// Gets or sets the unique message identifier (UUID) for the SOAP message.
         /// Optional but recommended. Included in the WS-Addressing <c>MessageID</c> header.
         /// </summary>
-        public Guid MessageId { get; set; }
+        public Guid? MessageId { get; set; }
 
+        public BasicSecurity? Security { get; set; }
+
+        public TimeSpan? Timeout { get; set; }
+    }
+
+    public struct BasicSecurity
+    {
         public string Username { get; set; }
         public string Password { get; set; }
     }

@@ -1,19 +1,17 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
 namespace ECDSa.Helper.Soap._1_1
 {
-    [XmlRoot(ElementName = "Envelope", Namespace = SoapEnvelopeHelper.SoapNs11)]
+    [Serializable]
+    [XmlType(Namespace = XmlNamespaces.SoapNs11)]
+    [XmlRoot(ElementName = "Envelope", Namespace = XmlNamespaces.SoapNs11, IsNullable = false)]
     public class Envelope11
     {
-        [XmlNamespaceDeclarations] 
-        public XmlSerializerNamespaces xmlns = new XmlSerializerNamespaces();
+        [XmlElement(ElementName = "Header", Namespace = XmlNamespaces.SoapNs11)]
+        public Header11? Header { get; set; }
 
-        public Envelope11()
-        {
-            xmlns.Add("env", SoapEnvelopeHelper.SoapNs11);
-        }
-
-        [XmlElement(ElementName = "Body", Namespace = SoapEnvelopeHelper.SoapNs11)]
+        [XmlElement(ElementName = "Body", Namespace = XmlNamespaces.SoapNs11)]
         public Body11 Body { get; set; }
     }
 }

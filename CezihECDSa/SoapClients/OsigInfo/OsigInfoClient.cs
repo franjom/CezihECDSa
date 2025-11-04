@@ -5,7 +5,10 @@ using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
+using CezihECDSa.SoapClients.Cezdlih.Wrappers;
+using CezihECDSa.Wsdl;
 
 namespace CezihECDSa.SoapClients.OsigInfo
 {
@@ -88,6 +91,8 @@ namespace CezihECDSa.SoapClients.OsigInfo
     {
         private readonly OsigInfoOptions _options;
         private readonly X509Certificate2 _cert;
+
+        private const string Namespace = "http://www.hzzo-net.hr/";
 
         public OsigInfoClient(OsigInfoOptions options, X509Certificate2 cert) : base(SoapVersion.Soap11)
         {
@@ -591,60 +596,77 @@ namespace CezihECDSa.SoapClients.OsigInfo
         private Result<osigInfoForDoctorResponseOsigInfoForDoctorOutput[]> ProcessOsigInfoForDoctorResponse(
             SoapRequestResult result)
         {
-            return ProcessResponse<OsigInfoForDoctorResponse, osigInfoForDoctorResponseOsigInfoForDoctorOutput[]>(
-                result,
-                body => body.Output);
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<OsigInfoForDoctorResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return othersResponse.Output;
         }
 
         private Result<osigInfoForBISResponseOsigInfoForBISOutput[]> ProcessOsigInfoForBisResponse(
             SoapRequestResult result)
         {
-            return ProcessResponse<OsigInfoForBisResponse, osigInfoForBISResponseOsigInfoForBISOutput[]>(
-                result,
-                body => body.Output);
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<OsigInfoForBisResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return othersResponse.Output;
         }
 
         private Result<osigInfoForSKZZResponseOsigInfoForSKZZOutput> ProcessOsigInfoForSKZZResponse(
             SoapRequestResult result)
         {
-            return ProcessResponse<OsigInfoForSKZZResponse, osigInfoForSKZZResponseOsigInfoForSKZZOutput>(
-                result,
-                body => body.Output);
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<OsigInfoForSKZZResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return othersResponse.Output;
         }
 
         private Result<osigInfoForPharmacyResponseOsigInfoForPharmacyOutput> ProcessOsigInfoForPharmacyResponse(
             SoapRequestResult result)
         {
-            return ProcessResponse<OsigInfoForPharmacyResponse,
-                osigInfoForPharmacyResponseOsigInfoForPharmacyOutput>(
-                result,
-                body => body.Output);
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<OsigInfoForPharmacyResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return othersResponse.Output;
         }
 
         private Result<infoGlavarinaResponseGlavarina[]> ProcessInfoGlavarinaResponse(SoapRequestResult result)
         {
-            return ProcessResponse<InfoGlavarinaCheckResponse,
-                infoGlavarinaResponseGlavarina[]>(
-                result,
-                body => body.Output);
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<InfoGlavarinaCheckResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return othersResponse.Output;
         }
 
         private Result<chosenDoctorResponseChosenDoctorOutput> ProcessChosenDoctorResponse(
             SoapRequestResult result)
         {
-            return ProcessResponse<ChosenDoctorResponse,
-                chosenDoctorResponseChosenDoctorOutput>(
-                result,
-                body => body.Output);
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<ChosenDoctorResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return othersResponse.Output;
         }
 
         private Result<orthopedicAidCheckResponseOrthopedicAidCheckOutput> ProcessOrtopedicAidResponse(
             SoapRequestResult result)
         {
-            return ProcessResponse<OrtopedicAidCheckResponse,
-                orthopedicAidCheckResponseOrthopedicAidCheckOutput>(
-                result,
-                body => body.Output);
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<OrtopedicAidCheckResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return othersResponse.Output;
         }
 
         private XmlSerializerNamespaces Namespaces

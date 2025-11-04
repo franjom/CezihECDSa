@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
 using System.Xml;
+using ECDSa.Helper.Soap.Security;
 
 namespace ECDSa
 {
@@ -81,13 +82,6 @@ namespace ECDSa
             AsymmetricAlgorithm privateKey, string signatureMethod, string digestMethod,
             KeyInfoClause extraKeyInfoClause = null)
         {
-            var serialBytes = cert.GetSerialNumber();
-            Array.Reverse(serialBytes);
-
-            var unsignedSerialBytes = serialBytes.Concat(new byte[] { 0 }).ToArray();
-
-            var serialNumber = new BigInteger(unsignedSerialBytes);
-
             var keyInfo = new KeyInfo();
             if (extraKeyInfoClause != null)
             {
@@ -96,7 +90,7 @@ namespace ECDSa
 
             var keyInfoX509Data = new KeyInfoX509Data();
             keyInfoX509Data.AddCertificate(cert);
-            keyInfoX509Data.AddIssuerSerial(cert.Issuer, serialNumber.ToString());
+            keyInfoX509Data.AddIssuerSerial(cert.Issuer, cert.GetSerialNumberString());
             keyInfoX509Data.AddSubjectName(cert.Subject);
             keyInfo.AddClause(keyInfoX509Data);
 

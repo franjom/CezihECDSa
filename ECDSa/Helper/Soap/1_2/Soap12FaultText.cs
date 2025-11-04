@@ -5,10 +5,12 @@ namespace ECDSa.Helper.Soap._1_2
 {
     [Serializable]
     [XmlType(Namespace = XmlNamespaces.SoapNs12)]
-    [XmlRoot("FaultSubcode", Namespace = XmlNamespaces.SoapNs12)]
-    public class FaultSubcode12
+    public class Soap12FaultText
     {
-        [XmlElement(ElementName = "Value", Namespace = XmlNamespaces.SoapNs12)]
+        [XmlAttribute("lang", Namespace = "http://www.w3.org/XML/1998/namespace")]
+        public string Lang { get; set; }
+
+        [XmlText]
         public string Value { get; set; }
     }
 }

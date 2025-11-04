@@ -6,6 +6,7 @@ using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace CezihECDSa.SoapClients.InfoOthers
@@ -13,29 +14,37 @@ namespace CezihECDSa.SoapClients.InfoOthers
     public interface IInfoOthersClient
     {
         Result<OsigStatus> DohvatiOthers(WDohvatiOthersRequest request);
+
         Task<Result<OsigStatus>> DohvatiOthersAsync(WDohvatiOthersRequest request,
             CancellationToken ct = default);
 
         Result<OsigStatus> DohvatiOthersNaDan(WDohvatiOthersNaDanRequest request);
+
         Task<Result<OsigStatus>> DohvatiOthersNaDanAsync(WDohvatiOthersNaDanRequest request,
             CancellationToken ct = default);
 
         Result<AutStatus> AutorizacijaOthers(WAutorizacijaOthersRequest request);
+
         Task<Result<AutStatus>> AutorizacijaOthersAsync(WAutorizacijaOthersRequest request,
             CancellationToken ct = default);
 
         Result<AutStatus> AutorizacijaOthersPharmacy(WAutorizacijaOthersPharmacyRequest request);
+
         Task<Result<AutStatus>> AutorizacijaOthersPharmacyAsync(WAutorizacijaOthersPharmacyRequest request,
             CancellationToken ct = default);
 
         Result<StornoStatus> StornoOthers(WStornoOthersRequest request);
+
         Task<Result<StornoStatus>> StornoOthersAsync(WStornoOthersRequest request,
             CancellationToken ct = default);
     }
+
     public class InfoOthersClient : SoapClientBase, IInfoOthersClient
     {
         private readonly InfoOthersOptions _options;
         private readonly X509Certificate2 _cert;
+
+        private const string Namespace = "http://tempuri.org/";
 
         public InfoOthersClient(InfoOthersOptions options, X509Certificate2 cert) : base(SoapVersion.Soap11)
         {
@@ -72,7 +81,8 @@ namespace CezihECDSa.SoapClients.InfoOthers
             }
         }
 
-        public async Task<Result<OsigStatus>> DohvatiOthersAsync(WDohvatiOthersRequest request, CancellationToken ct = default)
+        public async Task<Result<OsigStatus>> DohvatiOthersAsync(WDohvatiOthersRequest request,
+            CancellationToken ct = default)
         {
             try
             {
@@ -108,7 +118,7 @@ namespace CezihECDSa.SoapClients.InfoOthers
                     Certificate = _cert,
                     SoapAction = "http://tempuri.org/IInfoOthers/DohvatiOthersNaDan",
                     Uri = uri,
-                    XmlString = xml 
+                    XmlString = xml
                 });
 
                 return ProcesDohvatiOthersNaDanResponse(result);
@@ -119,7 +129,8 @@ namespace CezihECDSa.SoapClients.InfoOthers
             }
         }
 
-        public async Task<Result<OsigStatus>> DohvatiOthersNaDanAsync(WDohvatiOthersNaDanRequest request, CancellationToken ct = default)
+        public async Task<Result<OsigStatus>> DohvatiOthersNaDanAsync(WDohvatiOthersNaDanRequest request,
+            CancellationToken ct = default)
         {
             try
             {
@@ -166,7 +177,8 @@ namespace CezihECDSa.SoapClients.InfoOthers
             }
         }
 
-        public async Task<Result<AutStatus>> AutorizacijaOthersAsync(WAutorizacijaOthersRequest request, CancellationToken ct = default)
+        public async Task<Result<AutStatus>> AutorizacijaOthersAsync(WAutorizacijaOthersRequest request,
+            CancellationToken ct = default)
         {
             try
             {
@@ -213,7 +225,8 @@ namespace CezihECDSa.SoapClients.InfoOthers
             }
         }
 
-        public async Task<Result<AutStatus>> AutorizacijaOthersPharmacyAsync(WAutorizacijaOthersPharmacyRequest request, CancellationToken ct = default)
+        public async Task<Result<AutStatus>> AutorizacijaOthersPharmacyAsync(WAutorizacijaOthersPharmacyRequest request,
+            CancellationToken ct = default)
         {
             try
             {
@@ -259,7 +272,8 @@ namespace CezihECDSa.SoapClients.InfoOthers
             }
         }
 
-        public async Task<Result<StornoStatus>> StornoOthersAsync(WStornoOthersRequest request, CancellationToken ct = default)
+        public async Task<Result<StornoStatus>> StornoOthersAsync(WStornoOthersRequest request,
+            CancellationToken ct = default)
         {
             try
             {
@@ -286,37 +300,52 @@ namespace CezihECDSa.SoapClients.InfoOthers
 
         private Result<OsigStatus> ProcesDohvatiOthersResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WDohvatiOthersResponse, OsigStatus>(
-                result,
-                body => body.Output);
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WDohvatiOthersResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return othersResponse.Output;
         }
 
         private Result<OsigStatus> ProcesDohvatiOthersNaDanResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WDohvatiOthersNaDanResponse, OsigStatus>(
-                result,
-                body => body.Output);
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WDohvatiOthersNaDanResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return othersResponse.Output;
         }
 
         private Result<AutStatus> ProcesAutorizacijaOthersResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WAutorizacijaOthersResponse, AutStatus>(
-                result,
-                body => body.Output);
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WAutorizacijaOthersResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return othersResponse.Output;
         }
 
         private Result<AutStatus> ProcesAutorizacijaOthersPharmacyResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WAutorizacijaOthersPharmacyResponse, AutStatus>(
-                result,
-                body => body.Output);
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WAutorizacijaOthersPharmacyResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return othersResponse.Output;
         }
 
         private Result<StornoStatus> ProcesStornoOthersResponse(SoapRequestResult result)
         {
-            return ProcessResponse<WStornoOthersResponse, StornoStatus>(
-                result,
-                body => body.Output);
+            var soapBody = ProcessResponse(result);
+
+            var othersResponse = SoapSerializer.Instance.Deserialize<WStornoOthersResponse>(
+                soapBody.Value, soapBody.Value.DocumentElement.LocalName, new XmlQualifiedName("", Namespace));
+
+            return othersResponse.Output;
         }
 
         #endregion

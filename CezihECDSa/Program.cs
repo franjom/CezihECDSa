@@ -1,5 +1,4 @@
-﻿using CezihECDSa.Logging;
-using CezihECDSa.SoapClients.Cezdlih;
+﻿using CezihECDSa.SoapClients.Cezdlih;
 using CezihECDSa.SoapClients.InfoOthers;
 using CezihECDSa.SoapClients.InfoOthers.Wrappers;
 using CezihECDSa.SoapClients.OsigInfo;
@@ -9,16 +8,15 @@ using CezihECDSa.Wsdl.PrijavaZarazne;
 using ECDSa;
 using ECDSa.ECDSa;
 using ECDSa.Helper;
+using ECDSa.Helper.Soap.Security;
 using Net.Pkcs11Interop.X509Store;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Policy;
 using System.IO;
-using System.Net.Security;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
-using System.ServiceModel.Channels;
 using System.ServiceModel.Security;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -72,13 +70,13 @@ namespace CezihECDSa
 
             // good to go
 
-            //var cert = ReadFromSoftCert();
-            var cert = ReadFromEcdsaCard();
+            var cert = ReadFromSoftCert();
+            //var cert = ReadFromEcdsaCard();
 
             //TestXmlSigning(cert);
-            //TestOsigInfo(cert);
+            TestOsigInfo(cert);
             //TestPrijavaZarazne(cert);
-            TestInfoOthers(cert);
+            //TestInfoOthers(cert);
             //TestECezdlih(cert);
         }
 
@@ -231,13 +229,13 @@ namespace CezihECDSa
         {
             var opts = new OsigInfoOptions
             {
-                BaseUri = new Uri(""),
+                BaseUri = new Uri("https://certws.cezih.hr:40443/osiginfo-3"),
                 Timeout = TimeSpan.FromSeconds(10)
             };
             var osigInfoClient = new OsigInfoClient(opts, cert);
-            var responseSync1 = osigInfoClient.osigInfoForSKZZ("");
-            var responseSync2 = osigInfoClient.osigInfoForDoctor("");
-            var responseSync3 = osigInfoClient.osigInfoForBIS("");
+            var responseSync1 = osigInfoClient.osigInfoForSKZZ("990000818");
+            var responseSync2 = osigInfoClient.osigInfoForDoctor("990000818");
+            var responseSync3 = osigInfoClient.osigInfoForBIS("990000818");
             var glavarina = osigInfoClient.infoGlavarina("", DateTime.MinValue);
             var chosen = osigInfoClient.chosenDoctor("");
         }
