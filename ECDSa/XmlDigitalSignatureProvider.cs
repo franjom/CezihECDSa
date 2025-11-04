@@ -90,7 +90,7 @@ namespace ECDSa
 
             var keyInfoX509Data = new KeyInfoX509Data();
             keyInfoX509Data.AddCertificate(cert);
-            keyInfoX509Data.AddIssuerSerial(cert.Issuer, cert.GetSerialNumberString());
+            keyInfoX509Data.AddIssuerSerial(cert.Issuer, cert.GetSerial());
             keyInfoX509Data.AddSubjectName(cert.Subject);
             keyInfo.AddClause(keyInfoX509Data);
 
