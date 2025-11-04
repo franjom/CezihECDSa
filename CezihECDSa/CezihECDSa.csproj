@@ -78,6 +78,7 @@
     <Reference Include="System.ServiceModel.Security, Version=8.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ServiceModel.Primitives.8.1.2\lib\net462\System.ServiceModel.Security.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -131,6 +132,46 @@
     <Compile Include="SoapClients\Cezdlih\Wrappers\WSlanjeNarudzbenicaResponse.cs" />
     <Compile Include="SoapClients\Cezdlih\Wrappers\WPreuzimanjeOtpremniceResponse.cs" />
     <Compile Include="SoapClients\Cezdlih\Wrappers\WSlanjePlanaImunizacijeResponse.cs" />
+    <Compile Include="SoapClients\CezihWS\CezihWsClient.cs" />
+    <Compile Include="SoapClients\CezihWS\CezihWsOptions.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WEchoResponse.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchListaPacijenataListResponse.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchListaRezultataObradeListResponse.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WUploadResponse.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchListaPacijenataLastZipResponse.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchListaPacijenataZipResponse.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchRezultatObradeResponse.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchNeuspjesnoObradjeniRacuniResponse.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WArhivirajOtisliPacijentiResponse.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchOtisliPacijentiResponse.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchOtisliPacijentiListResponse.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WArhivirajEKartonResponse.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchEKartonResponse.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WArhivirajRezultatObradeResponse.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchListaEKartonaListResponse.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchListaObavijestiListResponse.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchObavijestResponse.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WArhivirajEKartonRequest.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WArhivirajOtisliPacijentiRequest.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WArhivirajRezultatObradeRequest.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WEchoRequest.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchEKartonRequest.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchListaEKartonaListRequest.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchListaObavijestiListRequest.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchListaPacijenataLastZipRequest.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchListaPacijenataListRequest.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchListaPacijenataZipRequest.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchListaRezultataObradeListRequest.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchNeuspjesnoObradjeniRacuniRequest.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchObavijestRequest.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchOtisliPacijentiListRequest.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchOtisliPacijentiRequest.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WFetchRezultatObradeRequest.cs" />
+    <Compile Include="SoapClients\CezihWS\Wrappers\WUploadRequest.cs" />
+    <Compile Include="SoapClients\CijepniKartonLijecnika\CijepniKartonLijecnikaClient.cs" />
+    <Compile Include="SoapClients\CijepniKartonLijecnika\CijepniKartonLijecnikaOptions.cs" />
+    <Compile Include="SoapClients\CijepniKartonLijecnika\Wrappers\WUpitOCijepnimKartonimaIzabranogLijecnikaRequest.cs" />
+    <Compile Include="SoapClients\CijepniKartonLijecnika\Wrappers\WUpitOCijepnimKartonimaIzabranogLijecnikaResponse.cs" />
     <Compile Include="SoapClients\InfoOthers\InfoOthersClient.cs" />
     <Compile Include="SoapClients\InfoOthers\InfoOthersOptions.cs" />
     <Compile Include="SoapClients\InfoOthers\Wrappers\WStornoOthersRequest.cs" />
@@ -143,6 +184,8 @@
     <Compile Include="SoapClients\InfoOthers\Wrappers\WDohvatiOthersRequest.cs" />
     <Compile Include="SoapClients\InfoOthers\Wrappers\WAutorizacijaOthersResponse.cs" />
     <Compile Include="SoapClients\InfoOthers\Wrappers\WDohvatiOthersResponse.cs" />
+    <Compile Include="Wsdl\CezihWs.cs" />
+    <Compile Include="Wsdl\CijepniKartonLijecnikaWsdl.cs" />
     <Compile Include="Wsdl\InfoOthers.cs" />
     <Compile Include="SoapClients\OsigInfo\ChosenDoctorRequest.cs" />
     <Compile Include="SoapClients\OsigInfo\ChosenDoctorResponse.cs" />

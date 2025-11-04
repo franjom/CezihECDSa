@@ -1,9 +1,15 @@
 ﻿using CezihECDSa.SoapClients.Cezdlih;
+using CezihECDSa.SoapClients.CezihWs;
+using CezihECDSa.SoapClients.CezihWs.Wrappers;
+using CezihECDSa.SoapClients.CijepniKartonLijecnika;
+using CezihECDSa.SoapClients.CijepniKartonLijecnika.Wrappers;
 using CezihECDSa.SoapClients.InfoOthers;
 using CezihECDSa.SoapClients.InfoOthers.Wrappers;
 using CezihECDSa.SoapClients.OsigInfo;
 using CezihECDSa.SoapClients.PrijavaZarazne;
 using CezihECDSa.Wsdl;
+using CezihECDSa.Wsdl.CezihWS;
+using CezihECDSa.Wsdl.CijepniKartonLijecnika;
 using CezihECDSa.Wsdl.PrijavaZarazne;
 using ECDSa;
 using ECDSa.ECDSa;
@@ -78,6 +84,8 @@ namespace CezihECDSa
             //TestPrijavaZarazne(cert);
             //TestInfoOthers(cert);
             //TestECezdlih(cert);
+            //TestInfoOthers(cert);
+            TestCezihWS(cert);
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()
@@ -327,7 +335,7 @@ namespace CezihECDSa
                     }));
         }
 
-        private static void TestECezdlih(X509Certificate2 cert)
+        private static void TestCijepniKarton(X509Certificate2 cert)
         {
             // ovo radi sa ECDSA mora se slati potpiani request
             var opts = new CezdlihOptions
@@ -353,186 +361,59 @@ namespace CezihECDSa
                         }
                 });
 
-            var response2 = cezdlihClient.SlanjePlanaImunizacije(new SlanjePlanaImunizacijeRequest(
-                new SlanjePlanaImunizacijeSlanjePlanaImunizacijeRequest
-                {
-                    GodinuZaKojuSeTraziPlan = 2025,
-                    SifraUstanove = ""
-                }));
-
-            var response3 = cezdlihClient.SlanjeNarudzbenica(new SlanjeNarudzbenicaRequest(
-                new SlanjeNarudzbenicaSlanjeNarudzbenicaRequest
-                {
-                    SifraUstanoveNarucitelj = "",
-                    PodaciOSkladistu = "",
-                    PodaciOLokacijiSkladista = "",
-                    SifraUstanoveOdKojegSeNarucuje = "",
-                    BrojNarudzbenice = "",
-                    DatumKreiranjaNarudzbenice = DateTime.Now,
-                    Cjepiva = new List<ArrayOfSlanjeNarudzbenicaZahtjevCjepivoCjepivo>
-                    {
-                        new ArrayOfSlanjeNarudzbenicaZahtjevCjepivoCjepivo
-                        {
-                            SifraVrsteCjepivo = 0,
-                            TrazenaKolicina = 0,
-                            Napomena = ""
-                        }
-                    }.ToArray(),
-                    IdentifikatorZahtjev = new ZaglavljeZahtjevType
-                    {
-                        PorukaID = $"{Guid.NewGuid()}",
-                        VrijemeSlanja = DateTime.Now
-                    }
-                }));
-
-            var response4 = cezdlihClient.PreuzimanjeOtpremnice(new PreuzimanjeOtpremniceRequest(
-                new PreuzimanjeOtpremnicePreuzimanjeOtpremniceRequest
-                {
-                    SifraUstanove = "",
-                    BrojNarudzbenice = "",
-                    IdentifikatorZahtjev = new ZaglavljeZahtjevType
-                    {
-                        PorukaID = $"{Guid.NewGuid()}",
-                        VrijemeSlanja = DateTime.Now
-                    }
-                }));
-
-            var response5 = cezdlihClient.SlanjePrimke(new SlanjePrimkeRequest(
-                new SlanjePrimkeSlanjePrimkeRequest
-                {
-                    SifraUstanove = "",
-                    BrojNarudzbenice = "",
-                    BrojOtpremnice = "",
-                    BrojPrimke = "",
-                    Cjepiva = new List<ArrayOfStavkeCjepivaTypeCjepivoCjepivo>
-                    {
-                        new ArrayOfStavkeCjepivaTypeCjepivoCjepivo
-                        {
-                            JedinstvenaSifraCjepiva = "",
-                            GenerickoImeCjepiva = "",
-                            ZasticenoImeCjepiva = "",
-                            SifraVrsteCjepiva = 0,
-                            NazivProizvodacaCjepiva = "",
-                            ATK10SifraCjepiva = "",
-                            JedinicaMjere = "",
-                            Serija = "",
-                            RokUporabe = DateTime.Now,
-                            Doza = 0,
-                            KolicinaOriginalnihPakiranja = null,
-                            PrezentacijaCjepiva = "",
-                        }
-                    }.ToArray(),
-                    IdentifikatorZahtjev = new ZaglavljeZahtjevType
-                    {
-                        PorukaID = $"{Guid.NewGuid()}",
-                        VrijemeSlanja = DateTime.Now
-                    }
-                }));
-
-            var response13 = cezdlihClient.PreuzimanjeZip(new PreuzimanjeZipRequest(
-                new PreuzimanjeZipPreuzimanjeZipRequest
-                {
-                    SifraUstanove = "",
-                    IdentifikatorZahtjev = new ZaglavljeZahtjevType
-                    {
-                        PorukaID = $"{Guid.NewGuid()}",
-                        VrijemeSlanja = DateTime.Now
-                    }
-                }));
-
-            var response15 = cezdlihClient.StatusLijecenjaPacijenta(new StatusLijecenjaPacijentaZahtjevZaStatusLijecenjaPacijenta
-            {
-                StatusLijecenjaPacijenta = new List<ArrayOfStatusLijecenjaPacijentaTypeStatusLijecenjaPacijentaType>
-                {
-                    new ArrayOfStatusLijecenjaPacijentaTypeStatusLijecenjaPacijentaType
-                    {
-                        SifraUstanoveKojaUpucuje = "",
-                        DatumVrijemeStatusa = DateTime.Now,
-                        Status = 0,
-                        Covid = false,
-                        AsimptomatskiIzDomova = false,
-                        IntenzitetSimptoma = 0,
-                        IshodLijecenja = 0,
-                        Oprema = "",
-                        Pacijent = new ArrayOfStatusLijecenjaPacijentaTypeStatusLijecenjaPacijentaTypePacijent
-                        {
-                            Item = "",
-                            ItemElementName = ItemChoiceType2.EUKartica,
-                            Ime = "",
-                            Prezime = "",
-                            Spol = Spol.Nepoznato,
-                            DatumRodjenja = DateTime.Now,
-                            DrzavaOsiguranjaZaStrance = ""
-                        },
-                        Dijagnoza = new List<ArrayOfStatusLijecenjaPacijentaTypeStatusLijecenjaPacijentaTypeDijagnoza>
-                        {
-                            new ArrayOfStatusLijecenjaPacijentaTypeStatusLijecenjaPacijentaTypeDijagnoza
-                            {
-                                Sifra = "",
-                            }
-                        }.ToArray(),
-                    }
-                }.ToArray(),
-                IdentifikatorZahtjev = new ZaglavljeZahtjevType
-                {
-                    PorukaID = $"{Guid.NewGuid()}",
-                    VrijemeSlanja = DateTime.Now
-                }
-            });
-
             Console.WriteLine("done");
+        }
+
+        private static void TestCijepni(X509Certificate2 cert)
+        {
+
+            var opts = new CijepniKartonLijecnikaOptions()
+            {
+                BaseUri = new Uri("https://evaccert.zdravlje.hr/WebServices2/Karton.asmx"),
+                Timeout = TimeSpan.FromSeconds(30)
+            };
+            var infoOthersClient = new CijepniKartonLijecnikaClient(opts, cert);
+            //var responseSync1 = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("", "54968374901"));
+            var responseSync =
+                infoOthersClient.UpitOCijepnimKartonimaIzabranogLijecnika(
+                    new WUpitOCijepnimKartonimaIzabranogLijecnikaRequest
+                    {
+                        UpitOCijepnimKartonimaIzabranogLijecnikaRequest1 = new UpitOCijepnimKartonimaIzabranogLijecnikaUpitOCijepnimKartonimaIzabranogLijecnikaRequest
+                        {
+                            identifikatorZahtjev = new ZaglavljeZahtjevType(),
+                            SifraLijecnika = "123",
+                            SifraVrsteCjepivo = 1
+                        }
+                    });
         }
 
         private static void TestInfoOthers(X509Certificate2 cert)
         {
-            var opts = new InfoOthersOptions 
+            var opts = new InfoOthersOptions
             {
-                BaseUri = new Uri("https://servistest.hzzo.hr/InfoOthers/InfoOthers.svc/s11"),
+                BaseUri = new Uri("https://hzzo-infoothers-test.gov.hr/InfoOthers/InfoOthers.svc"),
                 Timeout = TimeSpan.FromSeconds(30)
             };
             var infoOthersClient = new InfoOthersClient(opts, cert);
-            //var responseSync1 = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("", "54968374901"));
+            var responseSync1 = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("", "54968374901"));
             var responseSync = infoOthersClient.DohvatiOthers(new WDohvatiOthersRequest("03276147", "990000767"));
-            //var responseSync2 = infoOthersClient.DohvatiOthersNaDan(new WDohvatiOthersNaDanRequest("03276147", "990000767", DateTime.Today, true));
-            //var responseSync3 = infoOthersClient.AutorizacijaOthers(new WAutorizacijaOthersRequest(
-            //                        osiguravateljsifra: string.Empty,
-            //                        pacijentoib: "12345678901",
-            //                        brojKartice: string.Empty,
-            //                        dattroska: DateTime.Now,
-            //                        dattroskaSpecified: false,
-            //                        transiznos: 0m,
-            //                        trnsiznosSpecified: false,
-            //                        transtip: 0,
-            //                        transtipSpecified: false,
-            //                        ustanovasifra: string.Empty
-            //                    ));
-            //var responseSync4 = infoOthersClient.AutorizacijaOthersPharmacy(new WAutorizacijaOthersPharmacyRequest(
-            //                        osiguravateljsifra: string.Empty,  // Empty string for OsiguravateljSifra
-            //                        pacijentoib: "12345678901",
-            //                        brojKartice: string.Empty,         // Empty string for BrojKartice
-            //                        dattroska: DateTime.Now,
-            //                        dattroskaSpecified: false,         // False for DatTrosakSpecified
-            //                        transiznos: 0m,                    // Default decimal value (0)
-            //                        trnsiznosSpecified: false,         // False for TrnsIznosSpecified
-            //                        transtip: 0,                       // Default short value (0)
-            //                        transtipSpecified: false,          // False for TransTipSpecified
-            //                        recsb: string.Empty,               // Empty string for Recsb
-            //                        erecid: string.Empty,              // Empty string for Erecid
-            //                        ustanovasifra: string.Empty        // Empty string for UstanovaSifra
-            //                    ));
 
-            //var responseSync5 = infoOthersClient.StornoOthers(new WStornoOthersRequest(
-            //                        osiguravateljsifra: string.Empty,  // Empty string for OsiguravateljSifra
-            //                        pacijentoib: "12345678901",
-            //                        brojKartice: string.Empty,         // Empty string for BrojKartice
-            //                        dattroska: DateTime.Now,
-            //                        dattroskaSpecified: false,         // False for DatTrosakSpecified
-            //                        transiznos: 0m,                    // Default decimal value (0)
-            //                        trnsiznosSpecified: false,         // False for TrnsIznosSpecified
-            //                        transtip: 0,                       // Default short value (0)
-            //                        transtipSpecified: false,          // False for TransTipSpecified
-            //                        autkod: string.Empty               // Empty string for AutKod
-            //                    ));
+            Console.WriteLine("done");
+        }
+
+        private static void TestCezihWS(X509Certificate2 cert)
+        {
+            var opts = new CezihWsOptions
+            {
+                BaseUri = new Uri("https://cezihtest.cezih.hr/CezihWs/ws"),
+                Timeout = TimeSpan.FromSeconds(30)
+            };
+            var client = new CezihWsClient(opts, cert);
+
+            var responseSync1 = client.Echo(new WEchoRequest("new "));
+            var responseSync2 = client.FetchOtisliPacijentiList(new WFetchOtisliPacijentiListRequest(""));
+            var responseSync3 = client.Upload(new WUploadRequest(new UploadRequest {  imeDatoteke = "" }));
+
 
             Console.WriteLine("done");
         }
