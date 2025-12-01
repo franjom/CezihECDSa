@@ -1,6 +1,8 @@
 ﻿using CezihECDSa.Logging;
 using CezihECDSa.SoapClients.Cezdlih;
 using CezihECDSa.SoapClients.Evidencije;
+using CezihECDSa.SoapClients.Fin;
+using CezihECDSa.SoapClients.Fin.Wrappers;
 using CezihECDSa.SoapClients.InfoOthers;
 using CezihECDSa.SoapClients.InfoOthers.Wrappers;
 using CezihECDSa.SoapClients.OsigInfo;
@@ -73,15 +75,16 @@ namespace CezihECDSa
 
             // good to go
 
-            //var cert = ReadFromSoftCert();
-            var cert = ReadFromEcdsaCard();
+            var cert = ReadFromSoftCert();
+            //var cert = ReadFromEcdsaCard();
 
             //TestXmlSigning(cert);
             //TestOsigInfo(cert);
             //TestPrijavaZarazne(cert);
             //TestInfoOthers(cert);
             //TestECezdlih(cert);
-            TestEvidencije(cert);
+            //TestEvidencije(cert);
+            TestFin(cert);
         }
 
         private static X509Certificate2 ReadFromEcdsaCard()
@@ -202,7 +205,7 @@ namespace CezihECDSa
 
         private static X509Certificate2 ReadFromSoftCert()
         {
-            const string thumb = "d6d708bb76ca6812f07d8ec6a0dd032ddc8884c6";
+            const string thumb = "9b9296ec7a955eb6d37c335fb08949c1e0ab7130";
 
             var store = new X509Store();
             store.Open(OpenFlags.ReadOnly);
@@ -553,6 +556,27 @@ namespace CezihECDSa
             var responseSync2 = infoOthersClient.PrijedlogZaProvjeruVozaca(new WPrijedlogZaProvjeruVozacaRequest("990000767", "03276147"));
             var responseSync3 = infoOthersClient.PrijedlogZaProvjeruVozaca(new WPrijedlogZaProvjeruVozacaRequest("990000767", "03276147"));
             var responseSync4 = infoOthersClient.PrijedlogZaProvjeruVozaca(new WPrijedlogZaProvjeruVozacaRequest("990000767", "03276147"));
+
+            Console.WriteLine("done");
+        }
+
+        private static void TestFin(X509Certificate2 cert)
+        {
+            var opts = new FinOptions
+            {
+                BaseUri = new Uri("https://e-usluge.hzzo.hr/testws/ews/Fin.svc"),
+                Timeout = TimeSpan.FromSeconds(30)
+            };
+            var infoOthersClient = new FinClient(opts, cert);
+            var responseSync = infoOthersClient.GetSpecificationForInvoiceRecap(
+                new WGetSpecificationForInvoiceRecapRequest(
+                    "", 
+                    "", 
+                    "", 
+                    "", 
+                    "", 
+                    ""
+                ));
 
             Console.WriteLine("done");
         }

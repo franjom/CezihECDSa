@@ -136,6 +136,10 @@
     <Compile Include="SoapClients\Evidencije\EvidencijeOptions.cs" />
     <Compile Include="SoapClients\Evidencije\Wrappers\WPrijedlogZaProvjeruVozacaRequest.cs" />
     <Compile Include="SoapClients\Evidencije\Wrappers\WPrijedlogZaProvjeruVozacaResponse.cs" />
+    <Compile Include="SoapClients\Fin\FinOptions.cs" />
+    <Compile Include="SoapClients\Fin\FinClient.cs" />
+    <Compile Include="SoapClients\Fin\Wrappers\GetSpecificationForInvoiceRecapResponse.cs" />
+    <Compile Include="SoapClients\Fin\Wrappers\WGetSpecificationForInvoiceRecapRequest.cs" />
     <Compile Include="SoapClients\InfoOthers\InfoOthersClient.cs" />
     <Compile Include="SoapClients\InfoOthers\InfoOthersOptions.cs" />
     <Compile Include="SoapClients\InfoOthers\Wrappers\WStornoOthersRequest.cs" />
@@ -149,6 +153,7 @@
     <Compile Include="SoapClients\InfoOthers\Wrappers\WAutorizacijaOthersResponse.cs" />
     <Compile Include="SoapClients\InfoOthers\Wrappers\WDohvatiOthersResponse.cs" />
     <Compile Include="Wsdl\Evidencije.cs" />
+    <Compile Include="Wsdl\Fin.cs" />
     <Compile Include="Wsdl\InfoOthers.cs" />
     <Compile Include="SoapClients\OsigInfo\ChosenDoctorRequest.cs" />
     <Compile Include="SoapClients\OsigInfo\ChosenDoctorResponse.cs" />
