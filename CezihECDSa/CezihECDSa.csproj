@@ -138,7 +138,9 @@
     <Compile Include="SoapClients\Evidencije\Wrappers\WPrijedlogZaProvjeruVozacaResponse.cs" />
     <Compile Include="SoapClients\Fin\FinOptions.cs" />
     <Compile Include="SoapClients\Fin\FinClient.cs" />
-    <Compile Include="SoapClients\Fin\Wrappers\GetSpecificationForInvoiceRecapResponse.cs" />
+    <Compile Include="SoapClients\Fin\Wrappers\WCapitationCalculationsResponse.cs" />
+    <Compile Include="SoapClients\Fin\Wrappers\WGetSpecificationForInvoiceRecapResponse.cs" />
+    <Compile Include="SoapClients\Fin\Wrappers\WCapitationCalculationsRequest.cs" />
     <Compile Include="SoapClients\Fin\Wrappers\WGetSpecificationForInvoiceRecapRequest.cs" />
     <Compile Include="SoapClients\InfoOthers\InfoOthersClient.cs" />
     <Compile Include="SoapClients\InfoOthers\InfoOthersOptions.cs" />

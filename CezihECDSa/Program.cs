@@ -570,11 +570,19 @@ namespace CezihECDSa
             var infoOthersClient = new FinClient(opts, cert);
             var responseSync = infoOthersClient.GetSpecificationForInvoiceRecap(
                 new WGetSpecificationForInvoiceRecapRequest(
-                    "", 
-                    "", 
-                    "", 
-                    "", 
-                    "", 
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ));
+
+            var responseSync1 = infoOthersClient.GetCapitationCalculations(
+                new WCapitationCalculationsRequest(
+                    "",
+                    "",
+                    "",
                     ""
                 ));
 

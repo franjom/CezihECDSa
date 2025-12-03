@@ -9,25 +9,172 @@
 
 namespace ECDSAClientServices.Wsdl.Fin
 {
-
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace = "https://e-usluge.hzzo.hr/ews/finance", ConfigurationName = "Fin.IFin")]
-    public interface IFin
+    /// <remarks/>
+    // CODEGEN: The optional WSDL extension element 'PolicyReference' from namespace 'http://schemas.xmlsoap.org/ws/2004/09/policy' was not handled.
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Web.Services.WebServiceBindingAttribute(Name = "BasicHttpBinding_IFin", Namespace = "https://e-usluge.hzzo.hr/ews/finance")]
+    public partial class Fin : System.Web.Services.Protocols.SoapHttpClientProtocol
     {
 
-        [System.ServiceModel.OperationContractAttribute(Action = "https://e-usluge.hzzo.hr/ews/finance/IFin/GetSpecificationForInvoiceRecap", ReplyAction = "https://e-usluge.hzzo.hr/ews/finance/IFin/GetSpecificationForInvoiceRecapResponse" +
-            "")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
-        System.Threading.Tasks.Task<Fin.GetSpecificationForInvoiceRecapResponse> GetSpecificationForInvoiceRecapAsync(Fin.GetSpecificationForInvoiceRecapRequest request);
+        private System.Threading.SendOrPostCallback GetCapitationCalculationsOperationCompleted;
+
+        private System.Threading.SendOrPostCallback GetSpecificationForInvoiceRecapOperationCompleted;
+
+        /// <remarks/>
+        public Fin()
+        {
+            this.Url = "https://e-usluge.hzzo.hr/testws/ews/Fin.svc";
+        }
+
+        /// <remarks/>
+        public event GetCapitationCalculationsCompletedEventHandler GetCapitationCalculationsCompleted;
+
+        /// <remarks/>
+        public event GetSpecificationForInvoiceRecapCompletedEventHandler GetSpecificationForInvoiceRecapCompleted;
+
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("https://e-usluge.hzzo.hr/ews/finance/IFin/GetCapitationCalculations", RequestNamespace = "https://e-usluge.hzzo.hr/ews/finance", ResponseNamespace = "https://e-usluge.hzzo.hr/ews/finance", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public CapitationCalculations GetCapitationCalculations([System.Xml.Serialization.XmlElementAttribute(IsNullable = true)] string HealthcareInstitutionCode, [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)] string UnitCode, [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)] string ControlDateFrom, [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)] string ControlDateTo)
+        {
+            object[] results = this.Invoke("GetCapitationCalculations", new object[] {
+                    HealthcareInstitutionCode,
+                    UnitCode,
+                    ControlDateFrom,
+                    ControlDateTo});
+            return ((CapitationCalculations)(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginGetCapitationCalculations(string HealthcareInstitutionCode, string UnitCode, string ControlDateFrom, string ControlDateTo, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("GetCapitationCalculations", new object[] {
+                    HealthcareInstitutionCode,
+                    UnitCode,
+                    ControlDateFrom,
+                    ControlDateTo}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public CapitationCalculations EndGetCapitationCalculations(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((CapitationCalculations)(results[0]));
+        }
+
+        /// <remarks/>
+        public void GetCapitationCalculationsAsync(string HealthcareInstitutionCode, string UnitCode, string ControlDateFrom, string ControlDateTo)
+        {
+            this.GetCapitationCalculationsAsync(HealthcareInstitutionCode, UnitCode, ControlDateFrom, ControlDateTo, null);
+        }
+
+        /// <remarks/>
+        public void GetCapitationCalculationsAsync(string HealthcareInstitutionCode, string UnitCode, string ControlDateFrom, string ControlDateTo, object userState)
+        {
+            if ((this.GetCapitationCalculationsOperationCompleted == null))
+            {
+                this.GetCapitationCalculationsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetCapitationCalculationsOperationCompleted);
+            }
+            this.InvokeAsync("GetCapitationCalculations", new object[] {
+                    HealthcareInstitutionCode,
+                    UnitCode,
+                    ControlDateFrom,
+                    ControlDateTo}, this.GetCapitationCalculationsOperationCompleted, userState);
+        }
+
+        private void OnGetCapitationCalculationsOperationCompleted(object arg)
+        {
+            if ((this.GetCapitationCalculationsCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetCapitationCalculationsCompleted(this, new GetCapitationCalculationsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("https://e-usluge.hzzo.hr/ews/finance/IFin/GetSpecificationForInvoiceRecap", RequestNamespace = "https://e-usluge.hzzo.hr/ews/finance", ResponseNamespace = "https://e-usluge.hzzo.hr/ews/finance", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public SpecificationForInvoicesRecap GetSpecificationForInvoiceRecap([System.Xml.Serialization.XmlElementAttribute(IsNullable = true)] string HealthcareInstitutionCode, [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)] string UnitCode, [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)] string DateReceivedFrom, [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)] string DateReceivedTo, [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)] string InvoiceType, [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)] string InvoiceNumber)
+        {
+            object[] results = this.Invoke("GetSpecificationForInvoiceRecap", new object[] {
+                    HealthcareInstitutionCode,
+                    UnitCode,
+                    DateReceivedFrom,
+                    DateReceivedTo,
+                    InvoiceType,
+                    InvoiceNumber});
+            return ((SpecificationForInvoicesRecap)(results[0]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginGetSpecificationForInvoiceRecap(string HealthcareInstitutionCode, string UnitCode, string DateReceivedFrom, string DateReceivedTo, string InvoiceType, string InvoiceNumber, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("GetSpecificationForInvoiceRecap", new object[] {
+                    HealthcareInstitutionCode,
+                    UnitCode,
+                    DateReceivedFrom,
+                    DateReceivedTo,
+                    InvoiceType,
+                    InvoiceNumber}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public SpecificationForInvoicesRecap EndGetSpecificationForInvoiceRecap(System.IAsyncResult asyncResult)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((SpecificationForInvoicesRecap)(results[0]));
+        }
+
+        /// <remarks/>
+        public void GetSpecificationForInvoiceRecapAsync(string HealthcareInstitutionCode, string UnitCode, string DateReceivedFrom, string DateReceivedTo, string InvoiceType, string InvoiceNumber)
+        {
+            this.GetSpecificationForInvoiceRecapAsync(HealthcareInstitutionCode, UnitCode, DateReceivedFrom, DateReceivedTo, InvoiceType, InvoiceNumber, null);
+        }
+
+        /// <remarks/>
+        public void GetSpecificationForInvoiceRecapAsync(string HealthcareInstitutionCode, string UnitCode, string DateReceivedFrom, string DateReceivedTo, string InvoiceType, string InvoiceNumber, object userState)
+        {
+            if ((this.GetSpecificationForInvoiceRecapOperationCompleted == null))
+            {
+                this.GetSpecificationForInvoiceRecapOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSpecificationForInvoiceRecapOperationCompleted);
+            }
+            this.InvokeAsync("GetSpecificationForInvoiceRecap", new object[] {
+                    HealthcareInstitutionCode,
+                    UnitCode,
+                    DateReceivedFrom,
+                    DateReceivedTo,
+                    InvoiceType,
+                    InvoiceNumber}, this.GetSpecificationForInvoiceRecapOperationCompleted, userState);
+        }
+
+        private void OnGetSpecificationForInvoiceRecapOperationCompleted(object arg)
+        {
+            if ((this.GetSpecificationForInvoiceRecapCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetSpecificationForInvoiceRecapCompleted(this, new GetSpecificationForInvoiceRecapCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
+        public new void CancelAsync(object userState)
+        {
+            base.CancelAsync(userState);
+        }
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "https://e-usluge.hzzo.hr/ews/finance")]
-    public partial class SpecificationForInvoicesRecap
+    public partial class CapitationCalculations
     {
+
+        private CapitationCalculation[] capitationsField;
 
         private string deliveryCriteriaField;
 
@@ -36,8 +183,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         private string identificationCertificateField;
 
         private string identificationCertificateAbstractField;
-
-        private SpecificationInvoiceRecap[] invoicesField;
 
         private string requestedOnField;
 
@@ -50,7 +195,21 @@ namespace ECDSAClientServices.Wsdl.Fin
         private SignatureType signatureField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Order = 0)]
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
+        public CapitationCalculation[] Capitations
+        {
+            get
+            {
+                return this.capitationsField;
+            }
+            set
+            {
+                this.capitationsField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
         public string DeliveryCriteria
         {
             get
@@ -64,7 +223,7 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Order = 1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
         public string HealthcareInstitutionCode
         {
             get
@@ -78,7 +237,7 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Order = 2)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
         public string IdentificationCertificate
         {
             get
@@ -92,7 +251,7 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Order = 3)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
         public string IdentificationCertificateAbstract
         {
             get
@@ -106,21 +265,7 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true, Order = 4)]
-        public SpecificationInvoiceRecap[] Invoices
-        {
-            get
-            {
-                return this.invoicesField;
-            }
-            set
-            {
-                this.invoicesField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Order = 5)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
         public string RequestedOn
         {
             get
@@ -134,7 +279,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 6)]
         public int ResponseCode
         {
             get
@@ -162,7 +306,7 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Order = 7)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
         public string ResponseMessage
         {
             get
@@ -176,7 +320,7 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#", Order = 8)]
+        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
         public SignatureType Signature
         {
             get
@@ -191,8 +335,345 @@ namespace ECDSAClientServices.Wsdl.Fin
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "https://e-usluge.hzzo.hr/ews/finance")]
+    public partial class CapitationCalculation
+    {
+
+        private decimal amountField;
+
+        private bool amountFieldSpecified;
+
+        private int bT10Field;
+
+        private bool bT10FieldSpecified;
+
+        private string bT23Field;
+
+        private string calculationDateFromField;
+
+        private string calculationDateToField;
+
+        private string calculationTypeCodeField;
+
+        private string controlDateField;
+
+        private string medicalActivityCodeField;
+
+        private int monthField;
+
+        private bool monthFieldSpecified;
+
+        private string unitCodeField;
+
+        private int yearField;
+
+        private bool yearFieldSpecified;
+
+        /// <remarks/>
+        public decimal Amount
+        {
+            get
+            {
+                return this.amountField;
+            }
+            set
+            {
+                this.amountField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool AmountSpecified
+        {
+            get
+            {
+                return this.amountFieldSpecified;
+            }
+            set
+            {
+                this.amountFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public int BT10
+        {
+            get
+            {
+                return this.bT10Field;
+            }
+            set
+            {
+                this.bT10Field = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool BT10Specified
+        {
+            get
+            {
+                return this.bT10FieldSpecified;
+            }
+            set
+            {
+                this.bT10FieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string BT23
+        {
+            get
+            {
+                return this.bT23Field;
+            }
+            set
+            {
+                this.bT23Field = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string CalculationDateFrom
+        {
+            get
+            {
+                return this.calculationDateFromField;
+            }
+            set
+            {
+                this.calculationDateFromField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string CalculationDateTo
+        {
+            get
+            {
+                return this.calculationDateToField;
+            }
+            set
+            {
+                this.calculationDateToField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string CalculationTypeCode
+        {
+            get
+            {
+                return this.calculationTypeCodeField;
+            }
+            set
+            {
+                this.calculationTypeCodeField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string ControlDate
+        {
+            get
+            {
+                return this.controlDateField;
+            }
+            set
+            {
+                this.controlDateField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string MedicalActivityCode
+        {
+            get
+            {
+                return this.medicalActivityCodeField;
+            }
+            set
+            {
+                this.medicalActivityCodeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public int Month
+        {
+            get
+            {
+                return this.monthField;
+            }
+            set
+            {
+                this.monthField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool MonthSpecified
+        {
+            get
+            {
+                return this.monthFieldSpecified;
+            }
+            set
+            {
+                this.monthFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string UnitCode
+        {
+            get
+            {
+                return this.unitCodeField;
+            }
+            set
+            {
+                this.unitCodeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public int Year
+        {
+            get
+            {
+                return this.yearField;
+            }
+            set
+            {
+                this.yearField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool YearSpecified
+        {
+            get
+            {
+                return this.yearFieldSpecified;
+            }
+            set
+            {
+                this.yearFieldSpecified = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "https://e-usluge.hzzo.hr/ews/finance")]
+    public partial class SpecificationInvoiceRecapErrors
+    {
+
+        private string errorMessageField;
+
+        private int errorMessageCodeField;
+
+        private bool errorMessageCodeFieldSpecified;
+
+        private string errorTypeField;
+
+        private string noteField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string ErrorMessage
+        {
+            get
+            {
+                return this.errorMessageField;
+            }
+            set
+            {
+                this.errorMessageField = value;
+            }
+        }
+
+        /// <remarks/>
+        public int ErrorMessageCode
+        {
+            get
+            {
+                return this.errorMessageCodeField;
+            }
+            set
+            {
+                this.errorMessageCodeField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ErrorMessageCodeSpecified
+        {
+            get
+            {
+                return this.errorMessageCodeFieldSpecified;
+            }
+            set
+            {
+                this.errorMessageCodeFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string ErrorType
+        {
+            get
+            {
+                return this.errorTypeField;
+            }
+            set
+            {
+                this.errorTypeField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Note
+        {
+            get
+            {
+                return this.noteField;
+            }
+            set
+            {
+                this.noteField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "https://e-usluge.hzzo.hr/ews/finance")]
     public partial class SpecificationInvoiceRecap
     {
@@ -284,7 +765,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         private bool vatRate5FieldSpecified;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
         public decimal Amount1
         {
             get
@@ -312,7 +792,7 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Order = 1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
         public string BT10
         {
             get
@@ -326,7 +806,7 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Order = 2)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
         public string BT23
         {
             get
@@ -340,7 +820,7 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Order = 3)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
         public string DateReceived
         {
             get
@@ -354,7 +834,7 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Order = 4)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
         public string DocumentDate
         {
             get
@@ -368,7 +848,7 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true, Order = 5)]
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
         public SpecificationInvoiceRecapErrors[] Errors
         {
             get
@@ -382,7 +862,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 6)]
         public decimal GrossAmount2
         {
             get
@@ -410,7 +889,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 7)]
         public decimal GrossAmount3
         {
             get
@@ -438,7 +916,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 8)]
         public decimal GrossAmount4
         {
             get
@@ -466,7 +943,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 9)]
         public decimal GrossAmount5
         {
             get
@@ -494,7 +970,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 10)]
         public decimal GrossAmountAll
         {
             get
@@ -522,7 +997,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 11)]
         public decimal NetAmount2
         {
             get
@@ -550,7 +1024,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 12)]
         public decimal NetAmount3
         {
             get
@@ -578,7 +1051,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 13)]
         public decimal NetAmount4
         {
             get
@@ -606,7 +1078,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 14)]
         public decimal NetAmount5
         {
             get
@@ -634,7 +1105,7 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Order = 15)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
         public string Status
         {
             get
@@ -648,7 +1119,7 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Order = 16)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
         public string UnitCode
         {
             get
@@ -662,7 +1133,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 17)]
         public decimal VatAmount2
         {
             get
@@ -690,7 +1160,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 18)]
         public decimal VatAmount3
         {
             get
@@ -718,7 +1187,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 19)]
         public decimal VatAmount4
         {
             get
@@ -746,7 +1214,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 20)]
         public decimal VatAmount5
         {
             get
@@ -774,7 +1241,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 21)]
         public decimal VatRate2
         {
             get
@@ -802,7 +1268,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 22)]
         public decimal VatRate3
         {
             get
@@ -830,7 +1295,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 23)]
         public decimal VatRate4
         {
             get
@@ -858,7 +1322,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 24)]
         public decimal VatRate5
         {
             get
@@ -887,744 +1350,243 @@ namespace ECDSAClientServices.Wsdl.Fin
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "https://e-usluge.hzzo.hr/ews/finance")]
-    public partial class SpecificationInvoiceRecapErrors
+    public partial class SpecificationForInvoicesRecap
     {
 
-        private string errorMessageField;
+        private string deliveryCriteriaField;
 
-        private int errorMessageCodeField;
+        private string healthcareInstitutionCodeField;
 
-        private bool errorMessageCodeFieldSpecified;
+        private string identificationCertificateField;
 
-        private string errorTypeField;
+        private string identificationCertificateAbstractField;
 
-        private string noteField;
+        private SpecificationInvoiceRecap[] invoicesField;
+
+        private string requestedOnField;
+
+        private int responseCodeField;
+
+        private bool responseCodeFieldSpecified;
+
+        private string responseMessageField;
+
+        private SignatureType signatureField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Order = 0)]
-        public string ErrorMessage
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string DeliveryCriteria
         {
             get
             {
-                return this.errorMessageField;
+                return this.deliveryCriteriaField;
             }
             set
             {
-                this.errorMessageField = value;
+                this.deliveryCriteriaField = value;
             }
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 1)]
-        public int ErrorMessageCode
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string HealthcareInstitutionCode
         {
             get
             {
-                return this.errorMessageCodeField;
+                return this.healthcareInstitutionCodeField;
             }
             set
             {
-                this.errorMessageCodeField = value;
+                this.healthcareInstitutionCodeField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string IdentificationCertificate
+        {
+            get
+            {
+                return this.identificationCertificateField;
+            }
+            set
+            {
+                this.identificationCertificateField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string IdentificationCertificateAbstract
+        {
+            get
+            {
+                return this.identificationCertificateAbstractField;
+            }
+            set
+            {
+                this.identificationCertificateAbstractField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
+        public SpecificationInvoiceRecap[] Invoices
+        {
+            get
+            {
+                return this.invoicesField;
+            }
+            set
+            {
+                this.invoicesField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string RequestedOn
+        {
+            get
+            {
+                return this.requestedOnField;
+            }
+            set
+            {
+                this.requestedOnField = value;
+            }
+        }
+
+        /// <remarks/>
+        public int ResponseCode
+        {
+            get
+            {
+                return this.responseCodeField;
+            }
+            set
+            {
+                this.responseCodeField = value;
             }
         }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ErrorMessageCodeSpecified
+        public bool ResponseCodeSpecified
         {
             get
             {
-                return this.errorMessageCodeFieldSpecified;
+                return this.responseCodeFieldSpecified;
             }
             set
             {
-                this.errorMessageCodeFieldSpecified = value;
+                this.responseCodeFieldSpecified = value;
             }
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Order = 2)]
-        public string ErrorType
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string ResponseMessage
         {
             get
             {
-                return this.errorTypeField;
+                return this.responseMessageField;
             }
             set
             {
-                this.errorTypeField = value;
+                this.responseMessageField = value;
             }
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Order = 3)]
-        public string Note
+        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+        public SignatureType Signature
         {
             get
             {
-                return this.noteField;
+                return this.signatureField;
             }
             set
             {
-                this.noteField = value;
+                this.signatureField = value;
             }
         }
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
-    public partial class ObjectType
+    public partial class SignatureType
     {
 
-        private System.Xml.XmlNode[] anyField;
+        private SignedInfoType signedInfoField;
 
-        private string idField;
+        private SignatureValueType signatureValueField;
 
-        private string mimeTypeField;
+        private KeyInfoType keyInfoField;
 
-        private string encodingField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order = 0)]
-        public System.Xml.XmlNode[] Any
-        {
-            get
-            {
-                return this.anyField;
-            }
-            set
-            {
-                this.anyField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "ID")]
-        public string Id
-        {
-            get
-            {
-                return this.idField;
-            }
-            set
-            {
-                this.idField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string MimeType
-        {
-            get
-            {
-                return this.mimeTypeField;
-            }
-            set
-            {
-                this.mimeTypeField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
-        public string Encoding
-        {
-            get
-            {
-                return this.encodingField;
-            }
-            set
-            {
-                this.encodingField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
-    public partial class SPKIDataType
-    {
-
-        private object[] itemsField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute("SPKISexp", typeof(byte[]), DataType = "base64Binary", Order = 0)]
-        public object[] Items
-        {
-            get
-            {
-                return this.itemsField;
-            }
-            set
-            {
-                this.itemsField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
-    public partial class PGPDataType
-    {
-
-        private object[] itemsField;
-
-        private ItemsChoiceType1[] itemsElementNameField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute("PGPKeyID", typeof(byte[]), DataType = "base64Binary", Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute("PGPKeyPacket", typeof(byte[]), DataType = "base64Binary", Order = 0)]
-        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
-        public object[] Items
-        {
-            get
-            {
-                return this.itemsField;
-            }
-            set
-            {
-                this.itemsField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ItemsElementName", Order = 1)]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ItemsChoiceType1[] ItemsElementName
-        {
-            get
-            {
-                return this.itemsElementNameField;
-            }
-            set
-            {
-                this.itemsElementNameField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#", IncludeInSchema = false)]
-    public enum ItemsChoiceType1
-    {
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("##any:")]
-        Item,
-
-        /// <remarks/>
-        PGPKeyID,
-
-        /// <remarks/>
-        PGPKeyPacket,
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
-    public partial class X509IssuerSerialType
-    {
-
-        private string x509IssuerNameField;
-
-        private string x509SerialNumberField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
-        public string X509IssuerName
-        {
-            get
-            {
-                return this.x509IssuerNameField;
-            }
-            set
-            {
-                this.x509IssuerNameField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "integer", Order = 1)]
-        public string X509SerialNumber
-        {
-            get
-            {
-                return this.x509SerialNumberField;
-            }
-            set
-            {
-                this.x509SerialNumberField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
-    public partial class X509DataType
-    {
-
-        private object[] itemsField;
-
-        private ItemsChoiceType[] itemsElementNameField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute("X509CRL", typeof(byte[]), DataType = "base64Binary", Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute("X509Certificate", typeof(byte[]), DataType = "base64Binary", Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute("X509IssuerSerial", typeof(X509IssuerSerialType), Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute("X509SKI", typeof(byte[]), DataType = "base64Binary", Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute("X509SubjectName", typeof(string), Order = 0)]
-        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
-        public object[] Items
-        {
-            get
-            {
-                return this.itemsField;
-            }
-            set
-            {
-                this.itemsField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ItemsElementName", Order = 1)]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ItemsChoiceType[] ItemsElementName
-        {
-            get
-            {
-                return this.itemsElementNameField;
-            }
-            set
-            {
-                this.itemsElementNameField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#", IncludeInSchema = false)]
-    public enum ItemsChoiceType
-    {
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("##any:")]
-        Item,
-
-        /// <remarks/>
-        X509CRL,
-
-        /// <remarks/>
-        X509Certificate,
-
-        /// <remarks/>
-        X509IssuerSerial,
-
-        /// <remarks/>
-        X509SKI,
-
-        /// <remarks/>
-        X509SubjectName,
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
-    public partial class RetrievalMethodType
-    {
-
-        private TransformType[] transformsField;
-
-        private string uRIField;
-
-        private string typeField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Order = 0)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("Transform", IsNullable = false)]
-        public TransformType[] Transforms
-        {
-            get
-            {
-                return this.transformsField;
-            }
-            set
-            {
-                this.transformsField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
-        public string URI
-        {
-            get
-            {
-                return this.uRIField;
-            }
-            set
-            {
-                this.uRIField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
-        public string Type
-        {
-            get
-            {
-                return this.typeField;
-            }
-            set
-            {
-                this.typeField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
-    public partial class TransformType
-    {
-
-        private object[] itemsField;
-
-        private string[] textField;
-
-        private string algorithmField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute("XPath", typeof(string), Order = 0)]
-        public object[] Items
-        {
-            get
-            {
-                return this.itemsField;
-            }
-            set
-            {
-                this.itemsField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text
-        {
-            get
-            {
-                return this.textField;
-            }
-            set
-            {
-                this.textField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
-        public string Algorithm
-        {
-            get
-            {
-                return this.algorithmField;
-            }
-            set
-            {
-                this.algorithmField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
-    public partial class RSAKeyValueType
-    {
-
-        private byte[] modulusField;
-
-        private byte[] exponentField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary", Order = 0)]
-        public byte[] Modulus
-        {
-            get
-            {
-                return this.modulusField;
-            }
-            set
-            {
-                this.modulusField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary", Order = 1)]
-        public byte[] Exponent
-        {
-            get
-            {
-                return this.exponentField;
-            }
-            set
-            {
-                this.exponentField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
-    public partial class DSAKeyValueType
-    {
-
-        private byte[] pField;
-
-        private byte[] qField;
-
-        private byte[] gField;
-
-        private byte[] yField;
-
-        private byte[] jField;
-
-        private byte[] seedField;
-
-        private byte[] pgenCounterField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary", Order = 0)]
-        public byte[] P
-        {
-            get
-            {
-                return this.pField;
-            }
-            set
-            {
-                this.pField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary", Order = 1)]
-        public byte[] Q
-        {
-            get
-            {
-                return this.qField;
-            }
-            set
-            {
-                this.qField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary", Order = 2)]
-        public byte[] G
-        {
-            get
-            {
-                return this.gField;
-            }
-            set
-            {
-                this.gField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary", Order = 3)]
-        public byte[] Y
-        {
-            get
-            {
-                return this.yField;
-            }
-            set
-            {
-                this.yField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary", Order = 4)]
-        public byte[] J
-        {
-            get
-            {
-                return this.jField;
-            }
-            set
-            {
-                this.jField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary", Order = 5)]
-        public byte[] Seed
-        {
-            get
-            {
-                return this.seedField;
-            }
-            set
-            {
-                this.seedField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary", Order = 6)]
-        public byte[] PgenCounter
-        {
-            get
-            {
-                return this.pgenCounterField;
-            }
-            set
-            {
-                this.pgenCounterField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
-    public partial class KeyValueType
-    {
-
-        private object itemField;
-
-        private string[] textField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute("DSAKeyValue", typeof(DSAKeyValueType), Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute("RSAKeyValue", typeof(RSAKeyValueType), Order = 0)]
-        public object Item
-        {
-            get
-            {
-                return this.itemField;
-            }
-            set
-            {
-                this.itemField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text
-        {
-            get
-            {
-                return this.textField;
-            }
-            set
-            {
-                this.textField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
-    public partial class KeyInfoType
-    {
-
-        private object[] itemsField;
-
-        private ItemsChoiceType2[] itemsElementNameField;
-
-        private string[] textField;
+        private ObjectType[] objectField;
 
         private string idField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute("KeyName", typeof(string), Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute("KeyValue", typeof(KeyValueType), Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute("MgmtData", typeof(string), Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute("PGPData", typeof(PGPDataType), Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute("RetrievalMethod", typeof(RetrievalMethodType), Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute("SPKIData", typeof(SPKIDataType), Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute("X509Data", typeof(X509DataType), Order = 0)]
-        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
-        public object[] Items
+        public SignedInfoType SignedInfo
         {
             get
             {
-                return this.itemsField;
+                return this.signedInfoField;
             }
             set
             {
-                this.itemsField = value;
+                this.signedInfoField = value;
             }
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ItemsElementName", Order = 1)]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ItemsChoiceType2[] ItemsElementName
+        public SignatureValueType SignatureValue
         {
             get
             {
-                return this.itemsElementNameField;
+                return this.signatureValueField;
             }
             set
             {
-                this.itemsElementNameField = value;
+                this.signatureValueField = value;
             }
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text
+        public KeyInfoType KeyInfo
         {
             get
             {
-                return this.textField;
+                return this.keyInfoField;
             }
             set
             {
-                this.textField = value;
+                this.keyInfoField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Object")]
+        public ObjectType[] Object
+        {
+            get
+            {
+                return this.objectField;
+            }
+            set
+            {
+                this.objectField = value;
             }
         }
 
@@ -1644,47 +1606,61 @@ namespace ECDSAClientServices.Wsdl.Fin
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#", IncludeInSchema = false)]
-    public enum ItemsChoiceType2
-    {
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("##any:")]
-        Item,
-
-        /// <remarks/>
-        KeyName,
-
-        /// <remarks/>
-        KeyValue,
-
-        /// <remarks/>
-        MgmtData,
-
-        /// <remarks/>
-        PGPData,
-
-        /// <remarks/>
-        RetrievalMethod,
-
-        /// <remarks/>
-        SPKIData,
-
-        /// <remarks/>
-        X509Data,
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
-    public partial class SignatureValueType
+    public partial class SignedInfoType
     {
+
+        private CanonicalizationMethodType canonicalizationMethodField;
+
+        private SignatureMethodType signatureMethodField;
+
+        private ReferenceType[] referenceField;
 
         private string idField;
 
-        private byte[] valueField;
+        /// <remarks/>
+        public CanonicalizationMethodType CanonicalizationMethod
+        {
+            get
+            {
+                return this.canonicalizationMethodField;
+            }
+            set
+            {
+                this.canonicalizationMethodField = value;
+            }
+        }
+
+        /// <remarks/>
+        public SignatureMethodType SignatureMethod
+        {
+            get
+            {
+                return this.signatureMethodField;
+            }
+            set
+            {
+                this.signatureMethodField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Reference")]
+        public ReferenceType[] Reference
+        {
+            get
+            {
+                return this.referenceField;
+            }
+            set
+            {
+                this.referenceField = value;
+            }
+        }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute(DataType = "ID")]
@@ -1699,27 +1675,15 @@ namespace ECDSAClientServices.Wsdl.Fin
                 this.idField = value;
             }
         }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute(DataType = "base64Binary")]
-        public byte[] Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
-    public partial class DigestMethodType
+    public partial class CanonicalizationMethodType
     {
 
         private System.Xml.XmlNode[] anyField;
@@ -1728,7 +1692,7 @@ namespace ECDSAClientServices.Wsdl.Fin
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order = 0)]
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
         public System.Xml.XmlNode[] Any
         {
             get
@@ -1757,8 +1721,69 @@ namespace ECDSAClientServices.Wsdl.Fin
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    public partial class SignatureMethodType
+    {
+
+        private string hMACOutputLengthField;
+
+        private System.Xml.XmlNode[] anyField;
+
+        private string algorithmField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
+        public string HMACOutputLength
+        {
+            get
+            {
+                return this.hMACOutputLengthField;
+            }
+            set
+            {
+                this.hMACOutputLengthField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlNode[] Any
+        {
+            get
+            {
+                return this.anyField;
+            }
+            set
+            {
+                this.anyField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        public string Algorithm
+        {
+            get
+            {
+                return this.algorithmField;
+            }
+            set
+            {
+                this.algorithmField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
     public partial class ReferenceType
     {
@@ -1776,7 +1801,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         private string typeField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Order = 0)]
         [System.Xml.Serialization.XmlArrayItemAttribute("Transform", IsNullable = false)]
         public TransformType[] Transforms
         {
@@ -1791,7 +1815,6 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 1)]
         public DigestMethodType DigestMethod
         {
             get
@@ -1805,7 +1828,7 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary", Order = 2)]
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
         public byte[] DigestValue
         {
             get
@@ -1862,35 +1885,80 @@ namespace ECDSAClientServices.Wsdl.Fin
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
-    public partial class SignatureMethodType
+    public partial class TransformType
     {
 
-        private string hMACOutputLengthField;
+        private object[] itemsField;
+
+        private string[] textField;
+
+        private string algorithmField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        [System.Xml.Serialization.XmlElementAttribute("XPath", typeof(string))]
+        public object[] Items
+        {
+            get
+            {
+                return this.itemsField;
+            }
+            set
+            {
+                this.itemsField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text
+        {
+            get
+            {
+                return this.textField;
+            }
+            set
+            {
+                this.textField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        public string Algorithm
+        {
+            get
+            {
+                return this.algorithmField;
+            }
+            set
+            {
+                this.algorithmField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    public partial class DigestMethodType
+    {
 
         private System.Xml.XmlNode[] anyField;
 
         private string algorithmField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "integer", Order = 0)]
-        public string HMACOutputLength
-        {
-            get
-            {
-                return this.hMACOutputLengthField;
-            }
-            set
-            {
-                this.hMACOutputLengthField = value;
-            }
-        }
-
-        /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order = 1)]
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
         public System.Xml.XmlNode[] Any
         {
             get
@@ -1919,19 +1987,672 @@ namespace ECDSAClientServices.Wsdl.Fin
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
-    public partial class CanonicalizationMethodType
+    public partial class SignatureValueType
+    {
+
+        private string idField;
+
+        private byte[] valueField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "ID")]
+        public string Id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute(DataType = "base64Binary")]
+        public byte[] Value
+        {
+            get
+            {
+                return this.valueField;
+            }
+            set
+            {
+                this.valueField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    public partial class KeyInfoType
+    {
+
+        private object[] itemsField;
+
+        private ItemsChoiceType2[] itemsElementNameField;
+
+        private string[] textField;
+
+        private string idField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        [System.Xml.Serialization.XmlElementAttribute("KeyName", typeof(string))]
+        [System.Xml.Serialization.XmlElementAttribute("KeyValue", typeof(KeyValueType))]
+        [System.Xml.Serialization.XmlElementAttribute("MgmtData", typeof(string))]
+        [System.Xml.Serialization.XmlElementAttribute("PGPData", typeof(PGPDataType))]
+        [System.Xml.Serialization.XmlElementAttribute("RetrievalMethod", typeof(RetrievalMethodType))]
+        [System.Xml.Serialization.XmlElementAttribute("SPKIData", typeof(SPKIDataType))]
+        [System.Xml.Serialization.XmlElementAttribute("X509Data", typeof(X509DataType))]
+        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
+        public object[] Items
+        {
+            get
+            {
+                return this.itemsField;
+            }
+            set
+            {
+                this.itemsField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ItemsElementName")]
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public ItemsChoiceType2[] ItemsElementName
+        {
+            get
+            {
+                return this.itemsElementNameField;
+            }
+            set
+            {
+                this.itemsElementNameField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text
+        {
+            get
+            {
+                return this.textField;
+            }
+            set
+            {
+                this.textField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "ID")]
+        public string Id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    public partial class KeyValueType
+    {
+
+        private object itemField;
+
+        private string[] textField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        [System.Xml.Serialization.XmlElementAttribute("DSAKeyValue", typeof(DSAKeyValueType))]
+        [System.Xml.Serialization.XmlElementAttribute("RSAKeyValue", typeof(RSAKeyValueType))]
+        public object Item
+        {
+            get
+            {
+                return this.itemField;
+            }
+            set
+            {
+                this.itemField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text
+        {
+            get
+            {
+                return this.textField;
+            }
+            set
+            {
+                this.textField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    public partial class DSAKeyValueType
+    {
+
+        private byte[] pField;
+
+        private byte[] qField;
+
+        private byte[] gField;
+
+        private byte[] yField;
+
+        private byte[] jField;
+
+        private byte[] seedField;
+
+        private byte[] pgenCounterField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] P
+        {
+            get
+            {
+                return this.pField;
+            }
+            set
+            {
+                this.pField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] Q
+        {
+            get
+            {
+                return this.qField;
+            }
+            set
+            {
+                this.qField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] G
+        {
+            get
+            {
+                return this.gField;
+            }
+            set
+            {
+                this.gField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] Y
+        {
+            get
+            {
+                return this.yField;
+            }
+            set
+            {
+                this.yField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] J
+        {
+            get
+            {
+                return this.jField;
+            }
+            set
+            {
+                this.jField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] Seed
+        {
+            get
+            {
+                return this.seedField;
+            }
+            set
+            {
+                this.seedField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] PgenCounter
+        {
+            get
+            {
+                return this.pgenCounterField;
+            }
+            set
+            {
+                this.pgenCounterField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    public partial class RSAKeyValueType
+    {
+
+        private byte[] modulusField;
+
+        private byte[] exponentField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] Modulus
+        {
+            get
+            {
+                return this.modulusField;
+            }
+            set
+            {
+                this.modulusField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] Exponent
+        {
+            get
+            {
+                return this.exponentField;
+            }
+            set
+            {
+                this.exponentField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    public partial class PGPDataType
+    {
+
+        private object[] itemsField;
+
+        private ItemsChoiceType1[] itemsElementNameField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        [System.Xml.Serialization.XmlElementAttribute("PGPKeyID", typeof(byte[]), DataType = "base64Binary")]
+        [System.Xml.Serialization.XmlElementAttribute("PGPKeyPacket", typeof(byte[]), DataType = "base64Binary")]
+        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
+        public object[] Items
+        {
+            get
+            {
+                return this.itemsField;
+            }
+            set
+            {
+                this.itemsField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ItemsElementName")]
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public ItemsChoiceType1[] ItemsElementName
+        {
+            get
+            {
+                return this.itemsElementNameField;
+            }
+            set
+            {
+                this.itemsElementNameField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#", IncludeInSchema = false)]
+    public enum ItemsChoiceType1
+    {
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("##any:")]
+        Item,
+
+        /// <remarks/>
+        PGPKeyID,
+
+        /// <remarks/>
+        PGPKeyPacket,
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    public partial class RetrievalMethodType
+    {
+
+        private TransformType[] transformsField;
+
+        private string uRIField;
+
+        private string typeField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute("Transform", IsNullable = false)]
+        public TransformType[] Transforms
+        {
+            get
+            {
+                return this.transformsField;
+            }
+            set
+            {
+                this.transformsField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        public string URI
+        {
+            get
+            {
+                return this.uRIField;
+            }
+            set
+            {
+                this.uRIField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        public string Type
+        {
+            get
+            {
+                return this.typeField;
+            }
+            set
+            {
+                this.typeField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    public partial class SPKIDataType
+    {
+
+        private byte[][] sPKISexpField;
+
+        private System.Xml.XmlElement anyField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SPKISexp", DataType = "base64Binary")]
+        public byte[][] SPKISexp
+        {
+            get
+            {
+                return this.sPKISexpField;
+            }
+            set
+            {
+                this.sPKISexpField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlElement Any
+        {
+            get
+            {
+                return this.anyField;
+            }
+            set
+            {
+                this.anyField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    public partial class X509DataType
+    {
+
+        private object[] itemsField;
+
+        private ItemsChoiceType[] itemsElementNameField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        [System.Xml.Serialization.XmlElementAttribute("X509CRL", typeof(byte[]), DataType = "base64Binary")]
+        [System.Xml.Serialization.XmlElementAttribute("X509Certificate", typeof(byte[]), DataType = "base64Binary")]
+        [System.Xml.Serialization.XmlElementAttribute("X509IssuerSerial", typeof(X509IssuerSerialType))]
+        [System.Xml.Serialization.XmlElementAttribute("X509SKI", typeof(byte[]), DataType = "base64Binary")]
+        [System.Xml.Serialization.XmlElementAttribute("X509SubjectName", typeof(string))]
+        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
+        public object[] Items
+        {
+            get
+            {
+                return this.itemsField;
+            }
+            set
+            {
+                this.itemsField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ItemsElementName")]
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public ItemsChoiceType[] ItemsElementName
+        {
+            get
+            {
+                return this.itemsElementNameField;
+            }
+            set
+            {
+                this.itemsElementNameField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    public partial class X509IssuerSerialType
+    {
+
+        private string x509IssuerNameField;
+
+        private string x509SerialNumberField;
+
+        /// <remarks/>
+        public string X509IssuerName
+        {
+            get
+            {
+                return this.x509IssuerNameField;
+            }
+            set
+            {
+                this.x509IssuerNameField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "integer")]
+        public string X509SerialNumber
+        {
+            get
+            {
+                return this.x509SerialNumberField;
+            }
+            set
+            {
+                this.x509SerialNumberField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#", IncludeInSchema = false)]
+    public enum ItemsChoiceType
+    {
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("##any:")]
+        Item,
+
+        /// <remarks/>
+        X509CRL,
+
+        /// <remarks/>
+        X509Certificate,
+
+        /// <remarks/>
+        X509IssuerSerial,
+
+        /// <remarks/>
+        X509SKI,
+
+        /// <remarks/>
+        X509SubjectName,
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#", IncludeInSchema = false)]
+    public enum ItemsChoiceType2
+    {
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("##any:")]
+        Item,
+
+        /// <remarks/>
+        KeyName,
+
+        /// <remarks/>
+        KeyValue,
+
+        /// <remarks/>
+        MgmtData,
+
+        /// <remarks/>
+        PGPData,
+
+        /// <remarks/>
+        RetrievalMethod,
+
+        /// <remarks/>
+        SPKIData,
+
+        /// <remarks/>
+        X509Data,
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    public partial class ObjectType
     {
 
         private System.Xml.XmlNode[] anyField;
 
-        private string algorithmField;
+        private string idField;
+
+        private string mimeTypeField;
+
+        private string encodingField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order = 0)]
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
         public System.Xml.XmlNode[] Any
         {
             get
@@ -1945,351 +2666,106 @@ namespace ECDSAClientServices.Wsdl.Fin
         }
 
         /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "ID")]
+        public string Id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string MimeType
+        {
+            get
+            {
+                return this.mimeTypeField;
+            }
+            set
+            {
+                this.mimeTypeField = value;
+            }
+        }
+
+        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
-        public string Algorithm
+        public string Encoding
         {
             get
             {
-                return this.algorithmField;
+                return this.encodingField;
             }
             set
             {
-                this.algorithmField = value;
+                this.encodingField = value;
             }
         }
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    public delegate void GetCapitationCalculationsCompletedEventHandler(object sender, GetCapitationCalculationsCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
-    public partial class SignedInfoType
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetCapitationCalculationsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
 
-        private CanonicalizationMethodType canonicalizationMethodField;
+        private object[] results;
 
-        private SignatureMethodType signatureMethodField;
-
-        private ReferenceType[] referenceField;
-
-        private string idField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
-        public CanonicalizationMethodType CanonicalizationMethod
+        internal GetCapitationCalculationsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+                base(exception, cancelled, userState)
         {
-            get
-            {
-                return this.canonicalizationMethodField;
-            }
-            set
-            {
-                this.canonicalizationMethodField = value;
-            }
+            this.results = results;
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 1)]
-        public SignatureMethodType SignatureMethod
+        public CapitationCalculations Result
         {
             get
             {
-                return this.signatureMethodField;
-            }
-            set
-            {
-                this.signatureMethodField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Reference", Order = 2)]
-        public ReferenceType[] Reference
-        {
-            get
-            {
-                return this.referenceField;
-            }
-            set
-            {
-                this.referenceField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "ID")]
-        public string Id
-        {
-            get
-            {
-                return this.idField;
-            }
-            set
-            {
-                this.idField = value;
+                this.RaiseExceptionIfNecessary();
+                return ((CapitationCalculations)(this.results[0]));
             }
         }
     }
 
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
+    public delegate void GetSpecificationForInvoiceRecapCompletedEventHandler(object sender, GetSpecificationForInvoiceRecapCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.8.3928.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
-    public partial class SignatureType
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetSpecificationForInvoiceRecapCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
 
-        private SignedInfoType signedInfoField;
+        private object[] results;
 
-        private SignatureValueType signatureValueField;
-
-        private KeyInfoType keyInfoField;
-
-        private ObjectType[] objectField;
-
-        private string idField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
-        public SignedInfoType SignedInfo
+        internal GetSpecificationForInvoiceRecapCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+                base(exception, cancelled, userState)
         {
-            get
-            {
-                return this.signedInfoField;
-            }
-            set
-            {
-                this.signedInfoField = value;
-            }
+            this.results = results;
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 1)]
-        public SignatureValueType SignatureValue
+        public SpecificationForInvoicesRecap Result
         {
             get
             {
-                return this.signatureValueField;
-            }
-            set
-            {
-                this.signatureValueField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order = 2)]
-        public KeyInfoType KeyInfo
-        {
-            get
-            {
-                return this.keyInfoField;
-            }
-            set
-            {
-                this.keyInfoField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Object", Order = 3)]
-        public ObjectType[] Object
-        {
-            get
-            {
-                return this.objectField;
-            }
-            set
-            {
-                this.objectField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "ID")]
-        public string Id
-        {
-            get
-            {
-                return this.idField;
-            }
-            set
-            {
-                this.idField = value;
+                this.RaiseExceptionIfNecessary();
+                return ((SpecificationForInvoicesRecap)(this.results[0]));
             }
         }
     }
 
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName = "GetSpecificationForInvoiceRecap", WrapperNamespace = "https://e-usluge.hzzo.hr/ews/finance", IsWrapped = true)]
-    public partial class GetSpecificationForInvoiceRecapRequest
-    {
-
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "https://e-usluge.hzzo.hr/ews/finance", Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-        public string HealthcareInstitutionCode;
-
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "https://e-usluge.hzzo.hr/ews/finance", Order = 1)]
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-        public string UnitCode;
-
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "https://e-usluge.hzzo.hr/ews/finance", Order = 2)]
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-        public string DateReceivedFrom;
-
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "https://e-usluge.hzzo.hr/ews/finance", Order = 3)]
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-        public string DateReceivedTo;
-
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "https://e-usluge.hzzo.hr/ews/finance", Order = 4)]
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-        public string InvoiceType;
-
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "https://e-usluge.hzzo.hr/ews/finance", Order = 5)]
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-        public string InvoiceNumber;
-
-        public GetSpecificationForInvoiceRecapRequest()
-        {
-        }
-
-        public GetSpecificationForInvoiceRecapRequest(string HealthcareInstitutionCode, string UnitCode, string DateReceivedFrom, string DateReceivedTo, string InvoiceType, string InvoiceNumber)
-        {
-            this.HealthcareInstitutionCode = HealthcareInstitutionCode;
-            this.UnitCode = UnitCode;
-            this.DateReceivedFrom = DateReceivedFrom;
-            this.DateReceivedTo = DateReceivedTo;
-            this.InvoiceType = InvoiceType;
-            this.InvoiceNumber = InvoiceNumber;
-        }
-    }
-
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName = "GetSpecificationForInvoiceRecapResponse", WrapperNamespace = "https://e-usluge.hzzo.hr/ews/finance", IsWrapped = true)]
-    public partial class GetSpecificationForInvoiceRecapResponse
-    {
-
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "https://e-usluge.hzzo.hr/ews/finance", Order = 0)]
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
-        public Fin.SpecificationForInvoicesRecap GetSpecificationForInvoiceRecapResult;
-
-        public GetSpecificationForInvoiceRecapResponse()
-        {
-        }
-
-        public GetSpecificationForInvoiceRecapResponse(Fin.SpecificationForInvoicesRecap GetSpecificationForInvoiceRecapResult)
-        {
-            this.GetSpecificationForInvoiceRecapResult = GetSpecificationForInvoiceRecapResult;
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    public interface IFinChannel : Fin.IFin, System.ServiceModel.IClientChannel
-    {
-    }
-
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    public partial class FinClient : System.ServiceModel.ClientBase<Fin.IFin>, Fin.IFin
-    {
-
-        /// <summary>
-        /// Implement this partial method to configure the service endpoint.
-        /// </summary>
-        /// <param name="serviceEndpoint">The endpoint to configure</param>
-        /// <param name="clientCredentials">The client credentials</param>
-        static partial void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
-
-        public FinClient() :
-                base(FinClient.GetDefaultBinding(), FinClient.GetDefaultEndpointAddress())
-        {
-            this.Endpoint.Name = EndpointConfiguration.BasicHttpBinding_IFin.ToString();
-            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
-        }
-
-        public FinClient(EndpointConfiguration endpointConfiguration) :
-                base(FinClient.GetBindingForEndpoint(endpointConfiguration), FinClient.GetEndpointAddress(endpointConfiguration))
-        {
-            this.Endpoint.Name = endpointConfiguration.ToString();
-            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
-        }
-
-        public FinClient(EndpointConfiguration endpointConfiguration, string remoteAddress) :
-                base(FinClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
-        {
-            this.Endpoint.Name = endpointConfiguration.ToString();
-            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
-        }
-
-        public FinClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) :
-                base(FinClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
-        {
-            this.Endpoint.Name = endpointConfiguration.ToString();
-            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
-        }
-
-        public FinClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) :
-                base(binding, remoteAddress)
-        {
-        }
-
-        public System.Threading.Tasks.Task<Fin.GetSpecificationForInvoiceRecapResponse> GetSpecificationForInvoiceRecapAsync(Fin.GetSpecificationForInvoiceRecapRequest request)
-        {
-            return base.Channel.GetSpecificationForInvoiceRecapAsync(request);
-        }
-
-        public virtual System.Threading.Tasks.Task OpenAsync()
-        {
-            return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndOpen));
-        }
-
-#if !NET6_0_OR_GREATER
-        public virtual System.Threading.Tasks.Task CloseAsync()
-        {
-            return System.Threading.Tasks.Task.Factory.FromAsync(((System.ServiceModel.ICommunicationObject)(this)).BeginClose(null, null), new System.Action<System.IAsyncResult>(((System.ServiceModel.ICommunicationObject)(this)).EndClose));
-        }
-#endif
-
-        private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
-        {
-            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IFin))
-            {
-                System.ServiceModel.BasicHttpBinding result = new System.ServiceModel.BasicHttpBinding();
-                result.MaxBufferSize = int.MaxValue;
-                result.ReaderQuotas = System.Xml.XmlDictionaryReaderQuotas.Max;
-                result.MaxReceivedMessageSize = int.MaxValue;
-                result.AllowCookies = true;
-                result.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
-                result.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Certificate;
-                return result;
-            }
-            throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
-        }
-
-        private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration)
-        {
-            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IFin))
-            {
-                return new System.ServiceModel.EndpointAddress("https://e-usluge.hzzo.hr/testws/ews/Fin.svc");
-            }
-            throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
-        }
-
-        private static System.ServiceModel.Channels.Binding GetDefaultBinding()
-        {
-            return FinClient.GetBindingForEndpoint(EndpointConfiguration.BasicHttpBinding_IFin);
-        }
-
-        private static System.ServiceModel.EndpointAddress GetDefaultEndpointAddress()
-        {
-            return FinClient.GetEndpointAddress(EndpointConfiguration.BasicHttpBinding_IFin);
-        }
-
-        public enum EndpointConfiguration
-        {
-
-            BasicHttpBinding_IFin,
-        }
-    }
 }
